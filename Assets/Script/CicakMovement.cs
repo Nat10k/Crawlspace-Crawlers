@@ -8,9 +8,10 @@ public class CicakMovement : MonoBehaviour
     PInput pInput;
     InputAction move, tongueAction, tail, look, rightClick;
     Rigidbody rb;
-    const float moveSpeed = 0.5f, lookSpeed = 1f, gravityForce = 9.81f;
+    const float moveSpeed = 1f, lookSpeed = 1f, gravityForce = 9.81f, tongueSpeed = 10;
     float tongueLength = 40;
     [SerializeField] Tongue tongue;
+    Coroutine tongueFire;
     Vector3 gravityDir;
     private void Awake()
     {
@@ -29,6 +30,7 @@ public class CicakMovement : MonoBehaviour
         rightClick.performed += LockCursor;
         rightClick.canceled += ReleaseCursor;
         tongueAction.performed += ShootTongue;
+        tongueAction.canceled += ReleaseTongue;
         move.Enable();
         tongueAction.Enable();
         look.Enable();
@@ -40,6 +42,7 @@ public class CicakMovement : MonoBehaviour
         rightClick.performed -= LockCursor;
         rightClick.canceled -= ReleaseCursor;
         tongueAction.performed -= ShootTongue;
+        tongueAction.canceled -= ReleaseTongue;
         move.Disable();
         tongueAction.Disable();
         look.Disable();
@@ -48,11 +51,6 @@ public class CicakMovement : MonoBehaviour
 
     private void ShootTongue(InputAction.CallbackContext ctx)
     {
-        StartCoroutine(ExtendTongue());
-    }
-
-    IEnumerator ExtendTongue()
-    {
         tongue.gameObject.SetActive(true);
         tongue.enabled = true;
         Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
@@ -60,26 +58,22 @@ public class CicakMovement : MonoBehaviour
         if (Physics.Raycast(ray, out RaycastHit hit))
         {
             shootPos = hit.point;
-        } else
+        }
+        else
         {
             shootPos = ray.origin + ray.direction * tongueLength;
         }
-        tongue.transform.LookAt(shootPos);
-        while (tongueAction.IsPressed())
+        tongueFire = StartCoroutine(tongue.ShootTongue(shootPos));
+    }
+
+    private void ReleaseTongue(InputAction.CallbackContext ctx)
+    {
+        if (tongueFire != null)
         {
-            if (tongue.GetHitWall())
-            {
-                rb.velocity = tongue.transform.forward;
-            } else
-            {
-                tongue.transform.localPosition += 2.5f * Time.deltaTime * transform.InverseTransformDirection(tongue.transform.forward);
-                tongue.transform.localScale += new Vector3(0, 0, 5*Time.deltaTime);
-            }
-            yield return null;
+            StopCoroutine(tongueFire);
         }
-        tongue.ResetTongue();
-        tongue.enabled = false;
         tongue.gameObject.SetActive(false);
+        tongue.enabled = false;
     }
 
     private void LockCursor(InputAction.CallbackContext ctx)
@@ -96,7 +90,14 @@ public class CicakMovement : MonoBehaviour
     private void FixedUpdate()
     {
         Vector2 moveInput = move.ReadValue<Vector2>() * moveSpeed;
-        rb.MovePosition(transform.position + (transform.forward * moveInput.y + transform.right * moveInput.x) * Time.fixedDeltaTime);
+        if (tongue.enabled && tongue.GetHitWall())
+        {
+            rb.velocity += transform.forward * moveInput.y + transform.right * moveInput.x;
+        }
+        else
+        {
+            rb.velocity = transform.forward * moveInput.y + transform.right * moveInput.x;
+        }
         if (rightClick.IsPressed())
         {
             transform.Rotate(new Vector3(0, look.ReadValue<Vector2>().x * lookSpeed, 0));
@@ -104,14 +105,31 @@ public class CicakMovement : MonoBehaviour
         rb.AddForce(gravityDir * gravityForce);
     }
 
+    IEnumerator ClimbAnim(Vector3 newUp)
+    {
+        while (Vector3.Distance(transform.up, newUp) > 0.001f)
+        {
+            transform.up = Vector3.MoveTowards(transform.up, newUp, 3*Time.deltaTime);
+            yield return null;
+        }
+        transform.up = newUp;
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Wall") || collision.gameObject.CompareTag("Floor"))
         {
+            if (tongueFire != null)
+            {
+                StopCoroutine(tongueFire);
+                tongue.ResetTongue();
+                tongue.enabled = false;
+                tongue.gameObject.SetActive(false);
+                tongueFire = null;
+            }
             ContactPoint cp = collision.GetContact(0);
-            transform.up = cp.normal;
-            Debug.Log(transform.up);
-            gravityDir = transform.up * -1;
+            StartCoroutine(ClimbAnim(cp.normal));
+            gravityDir = cp.normal * -1;
         }
     }
 }
