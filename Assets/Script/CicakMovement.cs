@@ -8,7 +8,7 @@ public class CicakMovement : MonoBehaviour
     PInput pInput;
     InputAction move, tongueAction, tail, look, rightClick;
     Rigidbody rb;
-    const float moveSpeed = 1f, lookSpeed = 1f, gravityForce = 9.81f, tongueSpeed = 10;
+    const float moveSpeed = 1f, lookSpeed = 1f, gravityForce = 9.81f;
     float tongueLength = 40;
     [SerializeField] Tongue tongue;
     Coroutine tongueFire, climbAnim;
@@ -55,7 +55,7 @@ public class CicakMovement : MonoBehaviour
         tongue.enabled = true;
         Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
         Vector3 shootPos;
-        if (Physics.Raycast(ray, out RaycastHit hit))
+        if (Physics.Raycast(ray, out RaycastHit hit, tongueLength))
         {
             shootPos = hit.point;
         }
@@ -71,9 +71,8 @@ public class CicakMovement : MonoBehaviour
         if (tongueFire != null)
         {
             StopCoroutine(tongueFire);
+            StartCoroutine(tongue.RetractTongue());
         }
-        tongue.gameObject.SetActive(false);
-        tongue.enabled = false;
     }
 
     private void LockCursor(InputAction.CallbackContext ctx)
@@ -134,12 +133,10 @@ public class CicakMovement : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Wall") || collision.gameObject.CompareTag("Floor"))
         {
-            if (tongueFire != null)
+            if (tongueFire != null && tongue.GetHitWall())
             {
                 StopCoroutine(tongueFire);
-                tongue.enabled = false;
-                tongue.gameObject.SetActive(false);
-                tongueFire = null;
+                StartCoroutine(tongue.RetractTongue());
             }
             ContactPoint cp = collision.GetContact(0);
             if (climbAnim != null)

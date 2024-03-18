@@ -7,30 +7,27 @@ public class Tongue : MonoBehaviour
 {
     bool hitWall, hitObject;
     LineRenderer line;
-    CapsuleCollider cc;
     InputAction tongueAction;
     PInput pInput;
     [SerializeField] Transform cicak;
+    Transform heldObj;
     Rigidbody cicakRB;
 
     private void Awake()
     {
         line = GetComponent<LineRenderer>();
-        cc = GetComponent<CapsuleCollider>();
         cicakRB = cicak.GetComponent<Rigidbody>();
         pInput = new PInput();
     }
 
     private void OnEnable()
     {
-        cc.enabled = true;
         tongueAction = pInput.Player.Fire;
         tongueAction.Enable();
     }
 
     private void OnDisable()
     {
-        cc.enabled = false;
         hitWall = false;
         hitObject = false;
         tongueAction.Disable();
@@ -45,25 +42,45 @@ public class Tongue : MonoBehaviour
         {
             line.SetPosition(0, cicak.position);
             Vector3 tongueEndPos = line.GetPosition(1);
-            if (Vector3.Distance(tongueEndPos,dest) > 0.01f)
+            if (Vector3.Distance(tongueEndPos,dest) > 0.01f && !hitWall && !hitObject)
             {
                 line.SetPosition(1, Vector3.MoveTowards(tongueEndPos, dest, 10 * Time.deltaTime));
-                transform.position = line.GetPosition(1);
             } else
             {
-                cicakRB.velocity = (dest-cicak.position).normalized * 2;
+                if (hitWall)
+                {
+                    cicakRB.velocity = (dest - cicak.position).normalized * 2;
+                } else if (hitObject)
+                {
+                    line.SetPosition(1, heldObj.position);
+                }
             }
+            transform.position = line.GetPosition(1);
             yield return null;
         }
     }
 
+    public IEnumerator RetractTongue()
+    {
+        while(line.GetPosition(1) != line.GetPosition(0))
+        {
+            line.SetPosition(0, cicak.position);
+            line.SetPosition(1, Vector3.MoveTowards(line.GetPosition(1), cicak.position, 10 * Time.deltaTime));
+            transform.position = line.GetPosition(1);
+            yield return null;
+        }
+        gameObject.SetActive(false);
+        enabled = false;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Wall") || other.gameObject.CompareTag("Floor"))
+        if ((other.gameObject.CompareTag("Wall") || other.gameObject.CompareTag("Floor")) && !hitObject)
         {
             hitWall = true;
-        } else if (other.gameObject.CompareTag("Movable"))
+        } else if (other.gameObject.CompareTag("Movable") && !hitWall)
         {
+            heldObj = other.transform;
             hitObject = true;
         }
     }
@@ -76,5 +93,10 @@ public class Tongue : MonoBehaviour
     public bool GetHitObject()
     {
         return hitObject;
+    }
+
+    public Transform GetCicak()
+    {
+        return cicak;
     }
 }
