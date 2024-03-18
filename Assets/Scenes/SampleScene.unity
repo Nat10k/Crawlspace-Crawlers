@@ -829,7 +829,7 @@ Transform:
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.38, z: -2.45}
+  m_LocalPosition: {x: 0, y: -0.18, z: -3.75}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1190,7 +1190,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 963194228}
-  - {fileID: 2100321937}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &1952698162
@@ -1245,6 +1244,7 @@ GameObject:
   - component: {fileID: 2100321938}
   - component: {fileID: 2100321939}
   - component: {fileID: 2100321940}
+  - component: {fileID: 2100321941}
   m_Layer: 0
   m_Name: Tongue
   m_TagString: Untagged
@@ -1260,12 +1260,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2100321936}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.31, z: 0.166}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1952698161}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!120 &2100321938
 LineRenderer:
@@ -1390,10 +1390,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 20
-  m_Height: 30
+  m_Radius: 1
+  m_Height: 0
   m_Direction: 2
-  m_Center: {x: 0, y: -3.1, z: 3.3400002}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &2100321940
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1406,6 +1406,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b19be8e31d9f7b44bbc060b09e2db61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cicak: {fileID: 1952698161}
+--- !u!54 &2100321941
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2100321936}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -1413,3 +1441,4 @@ SceneRoots:
   - {fileID: 705507995}
   - {fileID: 1490506064}
   - {fileID: 1952698161}
+  - {fileID: 2100321937}

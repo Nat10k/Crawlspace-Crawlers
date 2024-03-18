@@ -10,43 +10,48 @@ public class Tongue : MonoBehaviour
     CapsuleCollider cc;
     InputAction tongueAction;
     PInput pInput;
+    [SerializeField] Transform cicak;
+    Rigidbody cicakRB;
 
     private void Awake()
     {
         line = GetComponent<LineRenderer>();
         cc = GetComponent<CapsuleCollider>();
-        cc.radius = line.startWidth;
+        cicakRB = cicak.GetComponent<Rigidbody>();
         pInput = new PInput();
     }
 
     private void OnEnable()
     {
+        cc.enabled = true;
         tongueAction = pInput.Player.Fire;
         tongueAction.Enable();
     }
 
     private void OnDisable()
     {
+        cc.enabled = false;
         hitWall = false;
         hitObject = false;
         tongueAction.Disable();
-        ResetTongue();
     }
 
     public IEnumerator ShootTongue(Vector3 dest)
     {
-        line.SetPosition(0, transform.parent.position);
-        line.SetPosition(1, transform.parent.position);
+        line.SetPosition(0, cicak.position);
+        line.SetPosition(1, cicak.position);
+        transform.position = cicak.position;
         while (true)
         {
-            line.SetPosition(0, transform.parent.position);
+            line.SetPosition(0, cicak.position);
             Vector3 tongueEndPos = line.GetPosition(1);
             if (Vector3.Distance(tongueEndPos,dest) > 0.01f)
             {
-                line.SetPosition(1, Vector3.MoveTowards(tongueEndPos,dest,10*Time.deltaTime));
-                transform.LookAt(tongueEndPos);
-                cc.transform.localPosition = tongueEndPos / 2;
-                cc.height = Vector3.Distance(transform.parent.position, tongueEndPos);
+                line.SetPosition(1, Vector3.MoveTowards(tongueEndPos, dest, 10 * Time.deltaTime));
+                transform.position = line.GetPosition(1);
+            } else
+            {
+                cicakRB.velocity = (dest-cicak.position).normalized * 2;
             }
             yield return null;
         }
@@ -71,11 +76,5 @@ public class Tongue : MonoBehaviour
     public bool GetHitObject()
     {
         return hitObject;
-    }
-
-    public void ResetTongue()
-    {
-        transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
-        cc.height = 0;
     }
 }

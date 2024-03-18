@@ -11,7 +11,7 @@ public class CicakMovement : MonoBehaviour
     const float moveSpeed = 1f, lookSpeed = 1f, gravityForce = 9.81f, tongueSpeed = 10;
     float tongueLength = 40;
     [SerializeField] Tongue tongue;
-    Coroutine tongueFire;
+    Coroutine tongueFire, climbAnim;
     Vector3 gravityDir;
     private void Awake()
     {
@@ -107,10 +107,25 @@ public class CicakMovement : MonoBehaviour
 
     IEnumerator ClimbAnim(Vector3 newUp)
     {
-        while (Vector3.Distance(transform.up, newUp) > 0.001f)
+        if (Vector3.Angle(transform.up, newUp) == 180)
         {
-            transform.up = Vector3.MoveTowards(transform.up, newUp, 3*Time.deltaTime);
-            yield return null;
+            while (Vector3.Angle(transform.up,newUp) > 90)
+            {
+                transform.up = Vector3.MoveTowards(transform.up, transform.right, 5 * Time.deltaTime);
+                yield return null;
+            }
+            while (Vector3.Distance(transform.up, newUp) > 0.001f)
+            {
+                transform.up = Vector3.MoveTowards(transform.up, newUp / 2, 5 * Time.deltaTime);
+                yield return null;
+            }
+        } else
+        {
+            while (Vector3.Distance(transform.up, newUp) > 0.001f)
+            {
+                transform.up = Vector3.MoveTowards(transform.up, newUp, 5 * Time.deltaTime);
+                yield return null;
+            }
         }
         transform.up = newUp;
     }
@@ -122,13 +137,17 @@ public class CicakMovement : MonoBehaviour
             if (tongueFire != null)
             {
                 StopCoroutine(tongueFire);
-                tongue.ResetTongue();
                 tongue.enabled = false;
                 tongue.gameObject.SetActive(false);
                 tongueFire = null;
             }
             ContactPoint cp = collision.GetContact(0);
-            StartCoroutine(ClimbAnim(cp.normal));
+            if (climbAnim != null)
+            {
+                StopCoroutine(climbAnim);
+                climbAnim = null;
+            }
+            climbAnim = StartCoroutine(ClimbAnim(cp.normal));
             gravityDir = cp.normal * -1;
         }
     }
