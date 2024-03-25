@@ -6,12 +6,13 @@ using UnityEngine;
 public class MovableObject : MonoBehaviour
 {
     SpringJoint joint;
+    Tongue tongueScript;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Tongue"))
         {
-            Tongue tongueScript = other.gameObject.GetComponent<Tongue>();
+            tongueScript = other.gameObject.GetComponent<Tongue>();
             if (!tongueScript.GetHitWall())
             {
                 joint = this.AddComponent<SpringJoint>();
@@ -19,6 +20,17 @@ public class MovableObject : MonoBehaviour
                 joint.connectedBody = cicak.GetComponent<Rigidbody>();
                 joint.spring = 30;
                 joint.tolerance = 0;
+            }
+        }
+    }
+
+    private void Update()
+    {
+        if (tongueScript != null && !tongueScript.enabled)
+        {
+            if (joint != null)
+            {
+                Destroy(joint);
             }
         }
     }

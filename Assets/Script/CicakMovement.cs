@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -8,7 +10,8 @@ public class CicakMovement : MonoBehaviour
     PInput pInput;
     InputAction move, tongueAction, tail, look, rightClick;
     Rigidbody rb;
-    const float moveSpeed = 1f, lookSpeed = 1f, gravityForce = 9.81f;
+    Ray frontRay, leftRay, backRay, rightRay, upRay;
+    const float moveSpeed = 1f, lookSpeed = 1f, gravityForce = 9.81f, wallDetectDist = 0.1f;
     float tongueLength = 40;
     [SerializeField] Tongue tongue;
     Coroutine tongueFire, climbAnim;
@@ -88,6 +91,47 @@ public class CicakMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        frontRay = new Ray(transform.position, transform.forward);
+        backRay = new Ray(transform.position, transform.forward * -1);
+        leftRay = new Ray(transform.position, transform.right * -1);
+        rightRay = new Ray(transform.position, transform.right);
+        upRay = new Ray(transform.position, transform.up);
+        RaycastHit hit;
+        if (Physics.Raycast(frontRay, out hit, wallDetectDist))
+        {
+            if (hit.transform.CompareTag("Wall") || hit.transform.CompareTag("Floor"))
+            {
+                ClimbWall(hit.normal, transform.up);
+            }
+        }
+        else if (Physics.Raycast(backRay, out hit, wallDetectDist))
+        {
+            if (hit.transform.CompareTag("Wall") || hit.transform.CompareTag("Floor"))
+            {
+                ClimbWall(hit.normal, transform.up * -1);
+            }
+        }
+        else if (Physics.Raycast(leftRay, out hit, wallDetectDist))
+        {
+            if (hit.transform.CompareTag("Wall") || hit.transform.CompareTag("Floor"))
+            {
+                ClimbWall(hit.normal, transform.forward);
+            }
+        }
+        else if (Physics.Raycast(rightRay, out hit, wallDetectDist))
+        {
+            if (hit.transform.CompareTag("Wall") || hit.transform.CompareTag("Floor"))
+            {
+                ClimbWall(hit.normal, transform.forward);
+            }
+        }
+        else if (Physics.Raycast(upRay, out hit, wallDetectDist))
+        {
+            if (hit.transform.CompareTag("Wall") || hit.transform.CompareTag("Floor"))
+            {
+                ClimbWall(hit.normal, transform.forward);
+            }
+        }
         Vector2 moveInput = move.ReadValue<Vector2>() * moveSpeed;
         if (tongue.enabled && tongue.GetHitWall())
         {
@@ -104,48 +148,67 @@ public class CicakMovement : MonoBehaviour
         rb.AddForce(gravityDir * gravityForce);
     }
 
-    IEnumerator ClimbAnim(Vector3 newUp)
+    IEnumerator ClimbAnim(Vector3 hitNormal, Vector3 newForward)
     {
-        if (Vector3.Angle(transform.up, newUp) == 180)
+        // Rotate the character to look at the wall while maintaining upwards direction
+        Quaternion newRot = Quaternion.LookRotation(newForward, hitNormal);
+        while (Quaternion.Angle(rb.rotation, newRot) > 10f)
         {
-            while (Vector3.Angle(transform.up,newUp) > 90)
-            {
-                transform.up = Vector3.MoveTowards(transform.up, transform.right, 5 * Time.deltaTime);
-                yield return null;
-            }
-            while (Vector3.Distance(transform.up, newUp) > 0.001f)
-            {
-                transform.up = Vector3.MoveTowards(transform.up, newUp / 2, 5 * Time.deltaTime);
-                yield return null;
-            }
-        } else
-        {
-            while (Vector3.Distance(transform.up, newUp) > 0.001f)
-            {
-                transform.up = Vector3.MoveTowards(transform.up, newUp, 5 * Time.deltaTime);
-                yield return null;
-            }
+            rb.MoveRotation(Quaternion.Lerp(rb.rotation, newRot, Time.fixedDeltaTime * 5));
+            yield return new WaitForFixedUpdate();
         }
-        transform.up = newUp;
+        rb.MoveRotation(newRot);
+        climbAnim = null;
+        //if (Vector3.Angle(transform.up, newUp) == 180)
+        //{
+        //    while (Vector3.Angle(transform.up,newUp) > 90)
+        //    {
+        //        transform.up = Vector3.MoveTowards(transform.up, transform.right, 5 * Time.deltaTime);
+        //        yield return null;
+        //    }
+        //    while (Vector3.Distance(transform.up, newUp) > 0.001f)
+        //    {
+        //        transform.up = Vector3.MoveTowards(transform.up, newUp / 2, 5 * Time.deltaTime);
+        //        yield return null;
+        //    }
+        //} else
+        //{
+        //    while (Vector3.Distance(transform.up, newUp) > 0.001f)
+        //    {
+        //        transform.up = Vector3.MoveTowards(transform.up, newUp / 2, 5 * Time.deltaTime);
+        //        yield return null;
+        //    }
+        //}
+        //transform.up = newUp;
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void ClimbWall(Vector3 hitNormal, Vector3 newForward)
     {
-        if (collision.gameObject.CompareTag("Wall") || collision.gameObject.CompareTag("Floor"))
+        if (climbAnim != null)
         {
-            if (tongueFire != null && tongue.GetHitWall())
-            {
-                StopCoroutine(tongueFire);
-                StartCoroutine(tongue.RetractTongue());
-            }
-            ContactPoint cp = collision.GetContact(0);
-            if (climbAnim != null)
-            {
-                StopCoroutine(climbAnim);
-                climbAnim = null;
-            }
-            climbAnim = StartCoroutine(ClimbAnim(cp.normal));
-            gravityDir = cp.normal * -1;
+            return;
         }
+        climbAnim = StartCoroutine(ClimbAnim(hitNormal, newForward));
+        gravityDir = hitNormal * -1;
     }
+
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    if (collision.gameObject.CompareTag("Wall") || collision.gameObject.CompareTag("Floor"))
+    //    {
+    //        if (tongueFire != null && tongue.GetHitWall())
+    //        {
+    //            StopCoroutine(tongueFire);
+    //            StartCoroutine(tongue.RetractTongue());
+    //        }
+    //        ContactPoint cp = collision.GetContact(0);
+    //        if (climbAnim != null)
+    //        {
+    //            StopCoroutine(climbAnim);
+    //            climbAnim = null;
+    //        }
+    //        climbAnim = StartCoroutine(ClimbAnim(cp.normal));
+    //        gravityDir = cp.normal * -1;
+    //    }
+    //}
 }
