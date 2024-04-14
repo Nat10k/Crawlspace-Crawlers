@@ -93,8 +93,6 @@ public class CicakMovement : MonoBehaviour
     {
         frontRay = new Ray(transform.position, transform.forward);
         backRay = new Ray(transform.position, transform.forward * -1);
-        leftRay = new Ray(transform.position, transform.right * -1);
-        rightRay = new Ray(transform.position, transform.right);
         upRay = new Ray(transform.position, transform.up);
         RaycastHit hit;
         if (Physics.Raycast(frontRay, out hit, wallDetectDist))
@@ -111,40 +109,27 @@ public class CicakMovement : MonoBehaviour
                 ClimbWall(hit.normal, transform.up * -1);
             }
         }
-        else if (Physics.Raycast(leftRay, out hit, wallDetectDist))
-        {
-            if (hit.transform.CompareTag("Wall") || hit.transform.CompareTag("Floor"))
-            {
-                ClimbWall(hit.normal, transform.forward);
-            }
-        }
-        else if (Physics.Raycast(rightRay, out hit, wallDetectDist))
-        {
-            if (hit.transform.CompareTag("Wall") || hit.transform.CompareTag("Floor"))
-            {
-                ClimbWall(hit.normal, transform.forward);
-            }
-        }
         else if (Physics.Raycast(upRay, out hit, wallDetectDist))
         {
             if (hit.transform.CompareTag("Wall") || hit.transform.CompareTag("Floor"))
             {
-                ClimbWall(hit.normal, transform.forward);
+                ClimbWall(hit.normal, new Vector3(0, transform.forward.z));
             }
         }
         Vector2 moveInput = move.ReadValue<Vector2>() * moveSpeed;
+        transform.Rotate(new Vector3(0, moveInput.x * lookSpeed * 2, 0));
         if (tongue.enabled && tongue.GetHitWall())
         {
             rb.velocity += transform.forward * moveInput.y + transform.right * moveInput.x;
         }
         else
         {
-            rb.velocity = transform.forward * moveInput.y + transform.right * moveInput.x;
+            rb.velocity = transform.forward * moveInput.y;
         }
-        if (rightClick.IsPressed())
-        {
-            transform.Rotate(new Vector3(0, look.ReadValue<Vector2>().x * lookSpeed, 0));
-        }
+        //if (rightClick.IsPressed())
+        //{
+        //    transform.Rotate(new Vector3(0, look.ReadValue<Vector2>().x * lookSpeed, 0));
+        //}
         rb.AddForce(gravityDir * gravityForce);
     }
 

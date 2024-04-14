@@ -12,6 +12,7 @@ public class Tongue : MonoBehaviour
     [SerializeField] Transform cicak;
     Transform heldObj;
     Rigidbody cicakRB;
+    float maxTongueLength = 2;
 
     private void Awake()
     {
@@ -42,6 +43,12 @@ public class Tongue : MonoBehaviour
         {
             line.SetPosition(0, cicak.position);
             Vector3 tongueEndPos = line.GetPosition(1);
+            if (Vector3.Distance(cicak.position, tongueEndPos) > maxTongueLength)
+            {
+                // Kalau lidah terlalu panjang, tarik kembali
+                StartCoroutine(RetractTongue());
+                yield break;
+            }
             if (Vector3.Distance(tongueEndPos,dest) > 0.01f && !hitWall && !hitObject)
             {
                 line.SetPosition(1, Vector3.MoveTowards(tongueEndPos, dest, 10 * Time.deltaTime));
@@ -50,6 +57,9 @@ public class Tongue : MonoBehaviour
                 if (hitWall)
                 {
                     cicakRB.velocity = (dest - cicak.position).normalized * 2;
+                    cicakRB.transform.LookAt(dest);
+                    cicakRB.transform.rotation = Quaternion.Euler(new Vector3(0, cicakRB.transform.rotation.y,
+                        0));
                 } else if (hitObject)
                 {
                     line.SetPosition(1, heldObj.position);
