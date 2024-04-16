@@ -11,20 +11,26 @@ public class CicakMovement : MonoBehaviour
     InputAction move, tongueAction, tailInput, look, rightClick;
     Rigidbody rb;
     Ray frontRay, backRay, upRay;
-    const float moveSpeed = 1f, lookSpeed = 1f, gravityForce = 9.81f, wallDetectDist = 0.1f;
-    float tongueLength = 40;
-    bool justClimbed = true;
+    const float lookSpeed = 1f, gravityForce = 9.81f, wallDetectDist = 0.1f;
+    float tongueLength = 40, moveSpeed = 1f, tailCooldown = 15f;
+    bool justClimbed, hasTail;
     [SerializeField] Tongue tongue;
     [SerializeField] Transform tailObj;
+    [SerializeField] Material cicakMaterial;
     HingeJoint tailJoint;
     Coroutine tongueFire, rotateAnim;
-    Vector3 gravityDir;
+    Vector3 gravityDir, initTailPos;
+    Quaternion initTailRot;
     private void Awake()
     {
         pInput = new PInput();
         rb = GetComponent<Rigidbody>();
         tailJoint = GetComponent<HingeJoint>();
         gravityDir = transform.up * -1;
+        justClimbed = true;
+        hasTail = true;
+        initTailPos = tailObj.localPosition;
+        initTailRot = tailObj.localRotation;
     }
 
     private void OnEnable()
@@ -63,8 +69,33 @@ public class CicakMovement : MonoBehaviour
 
     private void SeperateTail(InputAction.CallbackContext ctx)
     {
-        Destroy(tailJoint);
-        tailObj.parent = null;
+        if (hasTail)
+        {
+            hasTail = false;
+            Destroy(tailJoint);
+            tailObj.parent = null;
+            StartCoroutine(TailBoost());
+        }
+    }
+
+    IEnumerator TailBoost()
+    {
+        // Speed boost for 3 seconds after deattaching tail
+        moveSpeed *= 2;
+        cicakMaterial.color = new Color(cicakMaterial.color.r, cicakMaterial.color.g, cicakMaterial.color.b, 125);
+        yield return new WaitForSeconds(3);
+        moveSpeed /= 2;
+        cicakMaterial.color = new Color(cicakMaterial.color.r, cicakMaterial.color.g, cicakMaterial.color.b, 255);
+        tailObj.gameObject.SetActive(false);
+        yield return new WaitForSeconds(tailCooldown);
+        // Reattach tail after cooldown
+        tailObj.gameObject.SetActive(true);
+        tailObj.parent = transform;
+        tailObj.localPosition = initTailPos;
+        tailObj.localRotation = initTailRot;
+        tailJoint = gameObject.AddComponent(typeof(HingeJoint)) as HingeJoint;
+        tailJoint.connectedBody = tailObj.GetComponent<Rigidbody>();
+        hasTail = true;
     }
 
     private void ShootTongue(InputAction.CallbackContext ctx)

@@ -765,6 +765,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tongue: {fileID: 2100321940}
   tailObj: {fileID: 2046889479}
+  cicakMaterial: {fileID: 2100000, guid: ba377fe24cd1ec745b01f229652ce07f, type: 2}
 --- !u!59 &1952698164
 HingeJoint:
   m_ObjectHideFlags: 0
