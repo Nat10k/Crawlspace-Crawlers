@@ -63,6 +63,7 @@ public class Tongue : MonoBehaviour
                     if (!startedAnim)
                     {
                         Vector3 dir = (dest - cicak.position).normalized;
+                        dir = Vector3.ProjectOnPlane(dir, cicak.up);
                         Quaternion newRot = Quaternion.LookRotation(dir, cicak.up);
                         cicakMove.StartRotateAnim(cicakRB.rotation, newRot);
                         startedAnim = true;

@@ -12,7 +12,7 @@ public class CicakMovement : MonoBehaviour
     Rigidbody rb;
     Ray frontRay, backRay, upRay;
     const float lookSpeed = 1f, gravityForce = 9.81f, wallDetectDist = 0.15f, scaleSpeed = 0.5f;
-    float tongueLength = 40, moveSpeed = 1f, tailCooldown = 15f;
+    float shootLength = 40, moveSpeed = 2f, tailCooldown = 15f;
     bool justClimbed, hasTail;
     [SerializeField] Tongue tongue;
     [SerializeField] Transform tailObj;
@@ -115,13 +115,13 @@ public class CicakMovement : MonoBehaviour
         tongue.enabled = true;
         Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
         Vector3 shootPos;
-        if (Physics.Raycast(ray, out RaycastHit hit, tongueLength))
+        if (Physics.Raycast(ray, out RaycastHit hit, shootLength))
         {
             shootPos = hit.point;
         }
         else
         {
-            shootPos = ray.origin + ray.direction * tongueLength;
+            shootPos = ray.origin + ray.direction * shootLength;
         }
         tongueFire = StartCoroutine(tongue.ShootTongue(shootPos));
     }
@@ -151,11 +151,13 @@ public class CicakMovement : MonoBehaviour
         frontRay = new Ray(transform.position, transform.forward);
         backRay = new Ray(transform.position, transform.forward * -1);
         upRay = new Ray(transform.position, transform.up);
+        bool justHit = false;
         RaycastHit hit;
         if (Physics.Raycast(frontRay, out hit, wallDetectDist))
         {
             if (hit.transform.CompareTag("Wall") || hit.transform.CompareTag("Floor"))
             {
+                justHit = true;
                 ClimbWall(hit.normal, transform.up);
             }
         }
@@ -163,6 +165,7 @@ public class CicakMovement : MonoBehaviour
         {
             if (hit.transform.CompareTag("Wall") || hit.transform.CompareTag("Floor"))
             {
+                justHit = true;
                 ClimbWall(hit.normal, transform.up * -1);
             }
         }
@@ -170,11 +173,20 @@ public class CicakMovement : MonoBehaviour
         {
             if (hit.transform.CompareTag("Wall") || hit.transform.CompareTag("Floor"))
             {
-                ClimbWall(hit.normal, new Vector3(0, transform.forward.z));
+                justHit = true;
+                ClimbWall(hit.normal, transform.forward);
             }
         } else
         {
             justClimbed = false;
+        }
+        if (justHit)
+        {
+            if (tongueFire != null && tongue.GetHitWall())
+            {
+                StopCoroutine(tongueFire);
+                StartCoroutine(tongue.RetractTongue());
+            }
         }
         Vector2 moveInput = move.ReadValue<Vector2>() * moveSpeed;
         transform.Rotate(new Vector3(0, moveInput.x * lookSpeed * 2, 0));
@@ -188,40 +200,6 @@ public class CicakMovement : MonoBehaviour
         }
         rb.AddForce(gravityDir * gravityForce);
     }
-
-    //IEnumerator ClimbAnim(Vector3 hitNormal, Vector3 newForward)
-    //{
-    //    // Rotate the character to look at the wall while maintaining upwards direction
-    //    Quaternion newRot = Quaternion.LookRotation(newForward, hitNormal);
-    //    while (Quaternion.Angle(rb.rotation, newRot) > 10f)
-    //    {
-    //        rb.MoveRotation(Quaternion.Lerp(rb.rotation, newRot, Time.fixedDeltaTime * 5));
-    //        yield return new WaitForFixedUpdate();
-    //    }
-    //    rb.MoveRotation(newRot);
-    //    rotateAnim = null;
-    //    //if (Vector3.Angle(transform.up, newUp) == 180)
-    //    //{
-    //    //    while (Vector3.Angle(transform.up,newUp) > 90)
-    //    //    {
-    //    //        transform.up = Vector3.MoveTowards(transform.up, transform.right, 5 * Time.deltaTime);
-    //    //        yield return null;
-    //    //    }
-    //    //    while (Vector3.Distance(transform.up, newUp) > 0.001f)
-    //    //    {
-    //    //        transform.up = Vector3.MoveTowards(transform.up, newUp / 2, 5 * Time.deltaTime);
-    //    //        yield return null;
-    //    //    }
-    //    //} else
-    //    //{
-    //    //    while (Vector3.Distance(transform.up, newUp) > 0.001f)
-    //    //    {
-    //    //        transform.up = Vector3.MoveTowards(transform.up, newUp / 2, 5 * Time.deltaTime);
-    //    //        yield return null;
-    //    //    }
-    //    //}
-    //    //transform.up = newUp;
-    //}
 
     private IEnumerator RotateAnim(Quaternion initRotation, Quaternion endRotation)
     {
@@ -255,24 +233,4 @@ public class CicakMovement : MonoBehaviour
         rotateAnim = StartCoroutine(RotateAnim(rb.rotation, newRot));
         gravityDir = hitNormal * -1;
     }
-
-    //private void OnCollisionEnter(Collision collision)
-    //{
-    //    if (collision.gameObject.CompareTag("Wall") || collision.gameObject.CompareTag("Floor"))
-    //    {
-    //        if (tongueFire != null && tongue.GetHitWall())
-    //        {
-    //            StopCoroutine(tongueFire);
-    //            StartCoroutine(tongue.RetractTongue());
-    //        }
-    //        ContactPoint cp = collision.GetContact(0);
-    //        if (climbAnim != null)
-    //        {
-    //            StopCoroutine(climbAnim);
-    //            climbAnim = null;
-    //        }
-    //        climbAnim = StartCoroutine(ClimbAnim(cp.normal));
-    //        gravityDir = cp.normal * -1;
-    //    }
-    //}
 }
