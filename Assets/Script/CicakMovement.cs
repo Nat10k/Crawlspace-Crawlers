@@ -11,25 +11,26 @@ public class CicakMovement : MonoBehaviour
     InputAction move, tongueAction, tailInput, look, rightClick;
     Rigidbody rb;
     Ray frontRay, backRay, upRay;
-    const float lookSpeed = 1f, gravityForce = 9.81f, wallDetectDist = 0.1f;
+    const float lookSpeed = 1f, gravityForce = 9.81f, wallDetectDist = 0.15f, scaleSpeed = 0.5f;
     float tongueLength = 40, moveSpeed = 1f, tailCooldown = 15f;
     bool justClimbed, hasTail;
     [SerializeField] Tongue tongue;
     [SerializeField] Transform tailObj;
     [SerializeField] Material cicakMaterial;
-    HingeJoint tailJoint;
+    FixedJoint tailJoint;
     Coroutine tongueFire, rotateAnim;
-    Vector3 gravityDir, initTailPos;
+    Vector3 gravityDir, initTailPos, initTailScale;
     Quaternion initTailRot;
     private void Awake()
     {
         pInput = new PInput();
         rb = GetComponent<Rigidbody>();
-        tailJoint = GetComponent<HingeJoint>();
+        tailJoint = GetComponent<FixedJoint>();
         gravityDir = transform.up * -1;
         justClimbed = true;
         hasTail = true;
         initTailPos = tailObj.localPosition;
+        initTailScale = tailObj.localScale;
         initTailRot = tailObj.localRotation;
     }
 
@@ -86,16 +87,26 @@ public class CicakMovement : MonoBehaviour
         yield return new WaitForSeconds(3);
         moveSpeed /= 2;
         cicakMaterial.color = new Color(cicakMaterial.color.r, cicakMaterial.color.g, cicakMaterial.color.b, 255);
-        tailObj.gameObject.SetActive(false);
+        StartCoroutine(ScaleTail(Vector3.zero));
         yield return new WaitForSeconds(tailCooldown);
         // Reattach tail after cooldown
-        tailObj.gameObject.SetActive(true);
+        StartCoroutine(ScaleTail(initTailScale));
         tailObj.parent = transform;
         tailObj.localPosition = initTailPos;
         tailObj.localRotation = initTailRot;
-        tailJoint = gameObject.AddComponent(typeof(HingeJoint)) as HingeJoint;
+        tailJoint = gameObject.AddComponent(typeof(FixedJoint)) as FixedJoint;
         tailJoint.connectedBody = tailObj.GetComponent<Rigidbody>();
         hasTail = true;
+    }
+
+    IEnumerator ScaleTail(Vector3 newScale)
+    {
+        while (tailObj.localScale != newScale)
+        {
+            tailObj.localScale = Vector3.MoveTowards(tailObj.localScale, newScale, scaleSpeed * Time.deltaTime);
+            yield return null;
+        }
+        tailObj.localScale = newScale;
     }
 
     private void ShootTongue(InputAction.CallbackContext ctx)

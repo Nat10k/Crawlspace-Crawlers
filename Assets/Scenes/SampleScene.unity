@@ -766,8 +766,8 @@ MonoBehaviour:
   tongue: {fileID: 2100321940}
   tailObj: {fileID: 2046889479}
   cicakMaterial: {fileID: 2100000, guid: ba377fe24cd1ec745b01f229652ce07f, type: 2}
---- !u!59 &1952698164
-HingeJoint:
+--- !u!138 &1952698164
+FixedJoint:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -775,30 +775,6 @@ HingeJoint:
   m_GameObject: {fileID: 1952698157}
   m_ConnectedBody: {fileID: 2046889483}
   m_ConnectedArticulationBody: {fileID: 0}
-  m_Anchor: {x: 0, y: 0.5, z: 0}
-  m_Axis: {x: 1, y: 0, z: 0}
-  m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: 0, z: 0}
-  serializedVersion: 2
-  m_UseSpring: 0
-  m_Spring:
-    spring: 0
-    damper: 0
-    targetPosition: 0
-  m_UseMotor: 0
-  m_Motor:
-    targetVelocity: 0
-    force: 0
-    freeSpin: 0
-  m_UseLimits: 0
-  m_ExtendedLimits: 0
-  m_UseAcceleration: 0
-  m_Limits:
-    min: 0
-    max: 0
-    bounciness: 0
-    bounceMinVelocity: 0.2
-    contactDistance: 0
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_EnableCollision: 0
