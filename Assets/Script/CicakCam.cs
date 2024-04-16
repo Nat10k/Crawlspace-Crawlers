@@ -35,7 +35,7 @@ public class CicakCam : MonoBehaviour
         if (rightClick.IsPressed())
         {
             verticalAngle -= look.ReadValue<Vector2>().y * lookSpeed;
-            verticalAngle = Mathf.Clamp(verticalAngle, -90, 90);
+            verticalAngle = Mathf.Clamp(verticalAngle, -30, 90);
             transform.localEulerAngles = new Vector3(verticalAngle, transform.localEulerAngles.y, transform.localEulerAngles.z);
         }
     }

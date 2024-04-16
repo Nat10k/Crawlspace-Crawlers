@@ -8,18 +8,22 @@ using UnityEngine.InputSystem;
 public class CicakMovement : MonoBehaviour
 {
     PInput pInput;
-    InputAction move, tongueAction, tail, look, rightClick;
+    InputAction move, tongueAction, tailInput, look, rightClick;
     Rigidbody rb;
-    Ray frontRay, leftRay, backRay, rightRay, upRay;
+    Ray frontRay, backRay, upRay;
     const float moveSpeed = 1f, lookSpeed = 1f, gravityForce = 9.81f, wallDetectDist = 0.1f;
     float tongueLength = 40;
+    bool justClimbed = true;
     [SerializeField] Tongue tongue;
-    Coroutine tongueFire, climbAnim;
+    [SerializeField] Transform tailObj;
+    HingeJoint tailJoint;
+    Coroutine tongueFire, rotateAnim;
     Vector3 gravityDir;
     private void Awake()
     {
         pInput = new PInput();
         rb = GetComponent<Rigidbody>();
+        tailJoint = GetComponent<HingeJoint>();
         gravityDir = transform.up * -1;
     }
 
@@ -29,15 +33,18 @@ public class CicakMovement : MonoBehaviour
         tongueAction = pInput.Player.Fire;
         look = pInput.Player.Look;
         rightClick = pInput.Player.RightClick;
+        tailInput = pInput.Player.Tail;
 
         rightClick.performed += LockCursor;
         rightClick.canceled += ReleaseCursor;
         tongueAction.performed += ShootTongue;
         tongueAction.canceled += ReleaseTongue;
+        tailInput.performed += SeperateTail;
         move.Enable();
         tongueAction.Enable();
         look.Enable();
         rightClick.Enable();
+        tailInput.Enable();
     }
 
     private void OnDisable()
@@ -46,10 +53,18 @@ public class CicakMovement : MonoBehaviour
         rightClick.canceled -= ReleaseCursor;
         tongueAction.performed -= ShootTongue;
         tongueAction.canceled -= ReleaseTongue;
+        tailInput.performed -= SeperateTail;
         move.Disable();
         tongueAction.Disable();
         look.Disable();
         rightClick.Disable();
+        tailInput.Disable();
+    }
+
+    private void SeperateTail(InputAction.CallbackContext ctx)
+    {
+        Destroy(tailJoint);
+        tailObj.parent = null;
     }
 
     private void ShootTongue(InputAction.CallbackContext ctx)
@@ -115,6 +130,9 @@ public class CicakMovement : MonoBehaviour
             {
                 ClimbWall(hit.normal, new Vector3(0, transform.forward.z));
             }
+        } else
+        {
+            justClimbed = false;
         }
         Vector2 moveInput = move.ReadValue<Vector2>() * moveSpeed;
         transform.Rotate(new Vector3(0, moveInput.x * lookSpeed * 2, 0));
@@ -126,54 +144,73 @@ public class CicakMovement : MonoBehaviour
         {
             rb.velocity = transform.forward * moveInput.y;
         }
-        //if (rightClick.IsPressed())
-        //{
-        //    transform.Rotate(new Vector3(0, look.ReadValue<Vector2>().x * lookSpeed, 0));
-        //}
         rb.AddForce(gravityDir * gravityForce);
     }
 
-    IEnumerator ClimbAnim(Vector3 hitNormal, Vector3 newForward)
+    //IEnumerator ClimbAnim(Vector3 hitNormal, Vector3 newForward)
+    //{
+    //    // Rotate the character to look at the wall while maintaining upwards direction
+    //    Quaternion newRot = Quaternion.LookRotation(newForward, hitNormal);
+    //    while (Quaternion.Angle(rb.rotation, newRot) > 10f)
+    //    {
+    //        rb.MoveRotation(Quaternion.Lerp(rb.rotation, newRot, Time.fixedDeltaTime * 5));
+    //        yield return new WaitForFixedUpdate();
+    //    }
+    //    rb.MoveRotation(newRot);
+    //    rotateAnim = null;
+    //    //if (Vector3.Angle(transform.up, newUp) == 180)
+    //    //{
+    //    //    while (Vector3.Angle(transform.up,newUp) > 90)
+    //    //    {
+    //    //        transform.up = Vector3.MoveTowards(transform.up, transform.right, 5 * Time.deltaTime);
+    //    //        yield return null;
+    //    //    }
+    //    //    while (Vector3.Distance(transform.up, newUp) > 0.001f)
+    //    //    {
+    //    //        transform.up = Vector3.MoveTowards(transform.up, newUp / 2, 5 * Time.deltaTime);
+    //    //        yield return null;
+    //    //    }
+    //    //} else
+    //    //{
+    //    //    while (Vector3.Distance(transform.up, newUp) > 0.001f)
+    //    //    {
+    //    //        transform.up = Vector3.MoveTowards(transform.up, newUp / 2, 5 * Time.deltaTime);
+    //    //        yield return null;
+    //    //    }
+    //    //}
+    //    //transform.up = newUp;
+    //}
+
+    private IEnumerator RotateAnim(Quaternion initRotation, Quaternion endRotation)
     {
-        // Rotate the character to look at the wall while maintaining upwards direction
-        Quaternion newRot = Quaternion.LookRotation(newForward, hitNormal);
-        while (Quaternion.Angle(rb.rotation, newRot) > 10f)
+        float rotationProgress = 0;
+        while (rotationProgress < 1)
         {
-            rb.MoveRotation(Quaternion.Lerp(rb.rotation, newRot, Time.fixedDeltaTime * 5));
+            rotationProgress += Time.fixedDeltaTime * 2;
+            rb.MoveRotation(Quaternion.Lerp(initRotation, endRotation, rotationProgress));
             yield return new WaitForFixedUpdate();
         }
-        rb.MoveRotation(newRot);
-        climbAnim = null;
-        //if (Vector3.Angle(transform.up, newUp) == 180)
-        //{
-        //    while (Vector3.Angle(transform.up,newUp) > 90)
-        //    {
-        //        transform.up = Vector3.MoveTowards(transform.up, transform.right, 5 * Time.deltaTime);
-        //        yield return null;
-        //    }
-        //    while (Vector3.Distance(transform.up, newUp) > 0.001f)
-        //    {
-        //        transform.up = Vector3.MoveTowards(transform.up, newUp / 2, 5 * Time.deltaTime);
-        //        yield return null;
-        //    }
-        //} else
-        //{
-        //    while (Vector3.Distance(transform.up, newUp) > 0.001f)
-        //    {
-        //        transform.up = Vector3.MoveTowards(transform.up, newUp / 2, 5 * Time.deltaTime);
-        //        yield return null;
-        //    }
-        //}
-        //transform.up = newUp;
+        rotateAnim = null;
+    }
+
+    public void StartRotateAnim(Quaternion initRotation, Quaternion endRotation)
+    {
+        if (rotateAnim != null)
+        {
+            return;
+        }
+        rotateAnim = StartCoroutine(RotateAnim(initRotation, endRotation));
     }
 
     private void ClimbWall(Vector3 hitNormal, Vector3 newForward)
     {
-        if (climbAnim != null)
+        if (rotateAnim != null || justClimbed)
         {
             return;
         }
-        climbAnim = StartCoroutine(ClimbAnim(hitNormal, newForward));
+        justClimbed = true;
+        Quaternion newRot = Quaternion.LookRotation(newForward, hitNormal);
+        rotateAnim = StartCoroutine(RotateAnim(rb.rotation, newRot));
         gravityDir = hitNormal * -1;
     }
 

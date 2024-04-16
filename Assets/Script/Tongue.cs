@@ -5,11 +5,12 @@ using UnityEngine.InputSystem;
 
 public class Tongue : MonoBehaviour
 {
-    bool hitWall, hitObject;
+    bool hitWall, hitObject, startedAnim;
     LineRenderer line;
     InputAction tongueAction;
     PInput pInput;
     [SerializeField] Transform cicak;
+    CicakMovement cicakMove;
     Transform heldObj;
     Rigidbody cicakRB;
     float maxTongueLength = 2;
@@ -18,7 +19,9 @@ public class Tongue : MonoBehaviour
     {
         line = GetComponent<LineRenderer>();
         cicakRB = cicak.GetComponent<Rigidbody>();
+        cicakMove = cicak.GetComponent<CicakMovement>();
         pInput = new PInput();
+        startedAnim = false;
     }
 
     private void OnEnable()
@@ -57,9 +60,13 @@ public class Tongue : MonoBehaviour
                 if (hitWall)
                 {
                     cicakRB.velocity = (dest - cicak.position).normalized * 2;
-                    cicakRB.transform.LookAt(dest);
-                    cicakRB.transform.rotation = Quaternion.Euler(new Vector3(0, cicakRB.transform.rotation.y,
-                        0));
+                    if (!startedAnim)
+                    {
+                        Vector3 dir = (dest - cicak.position).normalized;
+                        Quaternion newRot = Quaternion.LookRotation(dir, cicak.up);
+                        cicakMove.StartRotateAnim(cicakRB.rotation, newRot);
+                        startedAnim = true;
+                    }
                 } else if (hitObject)
                 {
                     line.SetPosition(1, heldObj.position);
@@ -81,6 +88,7 @@ public class Tongue : MonoBehaviour
         }
         gameObject.SetActive(false);
         enabled = false;
+        startedAnim = false;
     }
 
     private void OnTriggerEnter(Collider other)
