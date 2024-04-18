@@ -12,6 +12,7 @@ public class MovableObject : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Tongue"))
         {
+            gameObject.layer = 2;
             tongueScript = other.gameObject.GetComponent<Tongue>();
             if (!tongueScript.GetHitWall())
             {
@@ -39,6 +40,7 @@ public class MovableObject : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Tongue"))
         {
+            gameObject.layer = 1;
             Destroy(joint);
         }
     }

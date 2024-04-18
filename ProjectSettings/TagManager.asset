@@ -8,6 +8,7 @@ TagManager:
   - Floor
   - Movable
   - Tongue
+  - Enemy
   layers:
   - Default
   - TransparentFX
