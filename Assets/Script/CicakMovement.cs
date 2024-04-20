@@ -1,7 +1,4 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -10,10 +7,10 @@ public class CicakMovement : MonoBehaviour
     PInput pInput;
     InputAction move, tongueAction, tailInput, look, rightClick;
     Rigidbody rb;
-    Ray frontRay, backRay, upRay;
-    const float lookSpeed = 1f, gravityForce = 9.81f, wallDetectDist = 0.15f, scaleSpeed = 0.5f;
+    Ray frontRay, backRay, upRay, downRay;
+    const float lookSpeed = 1f, gravityForce = 9.81f, wallDetectDist = 0.1f, scaleSpeed = 0.5f;
     float shootLength = 40, moveSpeed = 2f, tailCooldown = 15f;
-    bool justClimbed, hasTail;
+    bool justClimbed, hasTail, isGrounded;
     [SerializeField] Tongue tongue;
     [SerializeField] Transform tailObj;
     [SerializeField] Material cicakMaterial;
@@ -27,8 +24,9 @@ public class CicakMovement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         tailJoint = GetComponent<FixedJoint>();
         gravityDir = transform.up * -1;
-        justClimbed = true;
+        justClimbed = false;
         hasTail = true;
+        isGrounded = true;
         initTailPos = tailObj.localPosition;
         initTailScale = tailObj.localScale;
         initTailRot = tailObj.localRotation;
@@ -151,6 +149,7 @@ public class CicakMovement : MonoBehaviour
         frontRay = new Ray(transform.position, transform.forward);
         backRay = new Ray(transform.position, transform.forward * -1);
         upRay = new Ray(transform.position, transform.up);
+        downRay = new Ray(transform.position, transform.up * -1);
         bool justHit = false;
         RaycastHit hit;
         if (Physics.Raycast(frontRay, out hit, wallDetectDist))
@@ -161,7 +160,7 @@ public class CicakMovement : MonoBehaviour
                 ClimbWall(hit.normal, transform.up);
             }
         }
-        else if (Physics.Raycast(backRay, out hit, wallDetectDist))
+        else if (Physics.Raycast(backRay, out hit, wallDetectDist + 0.02f))
         {
             if (hit.transform.CompareTag("Wall") || hit.transform.CompareTag("Floor"))
             {
@@ -180,6 +179,25 @@ public class CicakMovement : MonoBehaviour
         {
             justClimbed = false;
         }
+
+        if (!Physics.Raycast(downRay, out hit, wallDetectDist)) // Doesn't hit ground
+        {
+            if (transform.eulerAngles.x != 0 && !tongue.GetHitWall())
+            {
+                ClimbWall(Vector3.up, transform.up * -1);
+            }
+            else
+            {
+                justClimbed = false;
+            }
+            isGrounded = false;
+            moveSpeed = 1f;
+        } else
+        {
+            isGrounded = true;
+            moveSpeed = 2f;
+            justClimbed = false;
+        } 
         if (justHit)
         {
             if (tongueFire != null && tongue.GetHitWall())
