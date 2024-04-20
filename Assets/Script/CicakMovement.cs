@@ -71,6 +71,11 @@ public class CicakMovement : MonoBehaviour
     {
         if (hasTail)
         {
+            if (tailScaleAnim != null)
+            {
+                StopCoroutine(tailScaleAnim);
+                tailScaleAnim = null;
+            }
             hasTail = false;
             Destroy(tailJoint);
             tailObj.parent = null;
@@ -86,19 +91,9 @@ public class CicakMovement : MonoBehaviour
         yield return new WaitForSeconds(3);
         moveSpeed /= 2;
         cicakMaterial.color = new Color(cicakMaterial.color.r, cicakMaterial.color.g, cicakMaterial.color.b, 255);
-        if (tailScaleAnim != null)
-        {
-            StopCoroutine(tailScaleAnim);
-            tailScaleAnim = null;
-        }
         tailScaleAnim = StartCoroutine(ScaleTail(Vector3.zero));
         yield return new WaitForSeconds(tailCooldown);
         // Reattach tail after cooldown
-        if (tailScaleAnim != null)
-        {
-            StopCoroutine(tailScaleAnim);
-            tailScaleAnim = null;
-        }
         tailScaleAnim = StartCoroutine(ScaleTail(initTailScale));
         tailObj.parent = transform;
         tailObj.localPosition = initTailPos;

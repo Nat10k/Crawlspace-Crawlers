@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Toilet.unity
+    guid: 3e973e61d64da1f4f86a2624ce5af19f
   m_configObjects: {}
