@@ -919,7 +919,7 @@ LineRenderer:
   - {x: 0, y: 0, z: 1}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 0.05
+    widthMultiplier: 0.02
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -995,7 +995,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.2
+  m_Radius: 0.1
   m_Height: 0
   m_Direction: 2
   m_Center: {x: 0, y: 0, z: 0}
@@ -1118,14 +1118,49 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4185354635834838251, guid: 3463f255e7394f34f93fc30e360f3e60, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.29
+      objectReference: {fileID: 0}
     - target: {fileID: 4358809086171341215, guid: 3463f255e7394f34f93fc30e360f3e60, type: 3}
       propertyPath: m_Name
       value: kamar mandi tengah
       objectReference: {fileID: 0}
+    - target: {fileID: 5052661309229936201, guid: 3463f255e7394f34f93fc30e360f3e60, type: 3}
+      propertyPath: m_Convex
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6665058884148873529, guid: 3463f255e7394f34f93fc30e360f3e60, type: 3}
+      propertyPath: m_Size.x
+      value: 0.019801738
+      objectReference: {fileID: 0}
+    - target: {fileID: 6665058884148873529, guid: 3463f255e7394f34f93fc30e360f3e60, type: 3}
+      propertyPath: m_Size.y
+      value: 0.020870697
+      objectReference: {fileID: 0}
+    - target: {fileID: 6665058884148873529, guid: 3463f255e7394f34f93fc30e360f3e60, type: 3}
+      propertyPath: m_Size.z
+      value: 0.021977134
+      objectReference: {fileID: 0}
+    - target: {fileID: 6665058884148873529, guid: 3463f255e7394f34f93fc30e360f3e60, type: 3}
+      propertyPath: m_Center.x
+      value: -0.00019511352
+      objectReference: {fileID: 0}
+    - target: {fileID: 6665058884148873529, guid: 3463f255e7394f34f93fc30e360f3e60, type: 3}
+      propertyPath: m_Center.y
+      value: 0.000009673173
+      objectReference: {fileID: 0}
+    - target: {fileID: 6665058884148873529, guid: 3463f255e7394f34f93fc30e360f3e60, type: 3}
+      propertyPath: m_Center.z
+      value: 0.00093253626
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6405346203648551971, guid: 3463f255e7394f34f93fc30e360f3e60, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5704263233425538854}
   m_SourcePrefab: {fileID: 100100000, guid: 3463f255e7394f34f93fc30e360f3e60, type: 3}
 --- !u!4 &543450653270520086 stripped
 Transform:
@@ -1434,7 +1469,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5200618079981019181, guid: e611854016d262144807a160661383ab, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.895
+      value: 0.936
       objectReference: {fileID: 0}
     - target: {fileID: 5200618079981019181, guid: e611854016d262144807a160661383ab, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1481,6 +1516,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e611854016d262144807a160661383ab, type: 3}
+--- !u!1 &5309987234501570763 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6405346203648551971, guid: 3463f255e7394f34f93fc30e360f3e60, type: 3}
+  m_PrefabInstance: {fileID: 398694868339231580}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5636996964129266832
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1542,6 +1582,27 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7fd87c2189dd62442aa5cc5ffc808b58, type: 3}
+--- !u!65 &5704263233425538854
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5309987234501570763}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.017763238, y: 0.013207693, z: 0.0038238838}
+  m_Center: {x: 0.00011814224, y: 0.0033958047, z: -0.012644528}
 --- !u!1001 &8988661735928636978
 PrefabInstance:
   m_ObjectHideFlags: 0
