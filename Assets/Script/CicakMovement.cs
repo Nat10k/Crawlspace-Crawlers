@@ -8,7 +8,7 @@ public class CicakMovement : MonoBehaviour
     InputAction move, tongueAction, tailInput, look, rightClick;
     Rigidbody rb;
     Ray frontRay, backRay, upRay, downRay;
-    const float lookSpeed = 1f, gravityForce = 9.81f, wallDetectDist = 0.1f, scaleSpeed = 0.5f;
+    const float lookSpeed = 1f, gravityForce = 9.81f, wallDetectDist = 0.1f, scaleSpeed = 2f;
     float shootLength = 40, moveSpeed = 2f, tailCooldown = 15f;
     bool justClimbed, hasTail, isGrounded;
     [SerializeField] Tongue tongue;
@@ -16,7 +16,7 @@ public class CicakMovement : MonoBehaviour
     [SerializeField] Material cicakMaterial;
     [SerializeField] LevelManager lm;
     FixedJoint tailJoint;
-    Coroutine tongueFire, rotateAnim;
+    Coroutine tongueFire, rotateAnim, tailScaleAnim;
     Vector3 gravityDir, initTailPos, initTailScale;
     Quaternion initTailRot;
     private void Awake()
@@ -86,10 +86,20 @@ public class CicakMovement : MonoBehaviour
         yield return new WaitForSeconds(3);
         moveSpeed /= 2;
         cicakMaterial.color = new Color(cicakMaterial.color.r, cicakMaterial.color.g, cicakMaterial.color.b, 255);
-        StartCoroutine(ScaleTail(Vector3.zero));
+        if (tailScaleAnim != null)
+        {
+            StopCoroutine(tailScaleAnim);
+            tailScaleAnim = null;
+        }
+        tailScaleAnim = StartCoroutine(ScaleTail(Vector3.zero));
         yield return new WaitForSeconds(tailCooldown);
         // Reattach tail after cooldown
-        StartCoroutine(ScaleTail(initTailScale));
+        if (tailScaleAnim != null)
+        {
+            StopCoroutine(tailScaleAnim);
+            tailScaleAnim = null;
+        }
+        tailScaleAnim = StartCoroutine(ScaleTail(initTailScale));
         tailObj.parent = transform;
         tailObj.localPosition = initTailPos;
         tailObj.localRotation = initTailRot;
@@ -100,12 +110,13 @@ public class CicakMovement : MonoBehaviour
 
     IEnumerator ScaleTail(Vector3 newScale)
     {
-        while (tailObj.localScale != newScale)
+        while (tailObj.localScale.magnitude < newScale.magnitude)
         {
             tailObj.localScale = Vector3.MoveTowards(tailObj.localScale, newScale, scaleSpeed * Time.deltaTime);
             yield return null;
         }
         tailObj.localScale = newScale;
+        tailScaleAnim = null;
     }
 
     private void ShootTongue(InputAction.CallbackContext ctx)
