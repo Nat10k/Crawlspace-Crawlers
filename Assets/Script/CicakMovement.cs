@@ -184,7 +184,7 @@ public class CicakMovement : MonoBehaviour
         {
             if (transform.eulerAngles.x != 0 && !tongue.GetHitWall())
             {
-                ClimbWall(Vector3.up, transform.up * -1);
+                ClimbWall(Vector3.up, Vector3.ProjectOnPlane(transform.forward, Vector3.up));
             }
             else
             {
