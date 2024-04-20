@@ -99,7 +99,7 @@ GameObject:
   - component: {fileID: 4166613083469061643}
   m_Layer: 0
   m_Name: soap dispenser
-  m_TagString: Movable
+  m_TagString: Finish
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

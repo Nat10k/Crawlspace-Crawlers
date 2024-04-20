@@ -14,6 +14,7 @@ public class CicakMovement : MonoBehaviour
     [SerializeField] Tongue tongue;
     [SerializeField] Transform tailObj;
     [SerializeField] Material cicakMaterial;
+    [SerializeField] LevelManager lm;
     FixedJoint tailJoint;
     Coroutine tongueFire, rotateAnim;
     Vector3 gravityDir, initTailPos, initTailScale;
@@ -250,5 +251,13 @@ public class CicakMovement : MonoBehaviour
         Quaternion newRot = Quaternion.LookRotation(newForward, hitNormal);
         rotateAnim = StartCoroutine(RotateAnim(rb.rotation, newRot));
         gravityDir = hitNormal * -1;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Finish"))
+        {
+            lm.LevelFinish();
+        }
     }
 }
