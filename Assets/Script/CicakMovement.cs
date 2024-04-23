@@ -18,6 +18,7 @@ public class CicakMovement : MonoBehaviour
     FixedJoint tailJoint;
     Coroutine tongueFire, rotateAnim, tailScaleAnim;
     Vector3 gravityDir, initTailPos, initTailScale;
+    Vector3[] allAxis = { Vector3.forward, Vector3.back, Vector3.right, Vector3.left, Vector3.up, Vector3.down };
     Quaternion initTailRot;
     private void Awake()
     {
@@ -189,13 +190,17 @@ public class CicakMovement : MonoBehaviour
 
         if (!Physics.Raycast(downRay, out hit, wallDetectDist)) // Doesn't hit ground
         {
-            if (transform.eulerAngles.x != 0 && !tongue.GetHitWall())
+            if (!justClimbed && !tongue.GetHitWall())
             {
-                ClimbWall(Vector3.up, Vector3.ProjectOnPlane(transform.forward, Vector3.up));
-            }
-            else
-            {
-                justClimbed = false;
+                if (isGrounded)
+                {
+                    Vector3 currAxis = SearchAxis(transform.right);
+                    ClimbWall(Vector3.ProjectOnPlane(transform.forward, currAxis), transform.up * -1);
+                }
+                else if (transform.eulerAngles.x != 0)
+                {
+                    ClimbWall(Vector3.up, Vector3.ProjectOnPlane(transform.forward, Vector3.up));
+                }
             }
             isGrounded = false;
             moveSpeed = 1f;
@@ -236,6 +241,21 @@ public class CicakMovement : MonoBehaviour
             yield return new WaitForFixedUpdate();
         }
         rotateAnim = null;
+    }
+
+    private Vector3 SearchAxis(Vector3 v)
+    {
+        Vector3 axis = Vector3.up;
+        float minAngle = Vector3.Angle(v, axis);
+        foreach(Vector3 u in allAxis)
+        {
+            if (Vector3.Angle(v, u) < minAngle)
+            {
+                axis = u;
+                minAngle = Vector3.Angle(v, u);
+            }
+        }
+        return axis;
     }
 
     public void StartRotateAnim(Quaternion initRotation, Quaternion endRotation)

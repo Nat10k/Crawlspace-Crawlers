@@ -10,6 +10,7 @@ public class Emak : Enemy
     private Coroutine shootSandal;
     private bool cicakVisible;
     private int currPatrolIdx;
+    public float detectRange, stopDistance;
 
     private void Start()
     {
@@ -21,7 +22,7 @@ public class Emak : Enemy
     {
         Ray cicakRay = new Ray(transform.position, cicak.position - transform.position);
         cicakVisible = false;
-        if (Physics.Raycast(cicakRay, out RaycastHit hit, 2))
+        if (Physics.Raycast(cicakRay, out RaycastHit hit, detectRange))
         {
             if (hit.collider.CompareTag("Player"))
             {
@@ -30,12 +31,11 @@ public class Emak : Enemy
         }
         if (cicakVisible)
         {
-            Debug.Log("Visible");
             if (shootSandal == null)
             {
                 shootSandal = StartCoroutine(ShootSandal());
             }
-            if (Vector3.Distance(cicak.position, transform.position) <= 0.5)
+            if (Vector3.Distance(cicak.position, transform.position) <= stopDistance)
             {
                 agent.destination = transform.position;
                 transform.LookAt(cicak);
@@ -48,7 +48,6 @@ public class Emak : Enemy
         }
         else
         {
-            Debug.Log("Not visible");
             if (shootSandal != null)
             {
                 StopCoroutine(shootSandal);
