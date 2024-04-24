@@ -15,7 +15,6 @@ public class CicakMovement : MonoBehaviour
     [SerializeField] Transform tailObj;
     [SerializeField] Material cicakMaterial;
     [SerializeField] LevelManager lm;
-    FixedJoint tailJoint;
     Coroutine tongueFire, rotateAnim, tailScaleAnim;
     Vector3 gravityDir, initTailPos, initTailScale;
     Vector3[] allAxis = { Vector3.forward, Vector3.back, Vector3.right, Vector3.left, Vector3.up, Vector3.down };
@@ -24,7 +23,6 @@ public class CicakMovement : MonoBehaviour
     {
         pInput = new PInput();
         rb = GetComponent<Rigidbody>();
-        tailJoint = GetComponent<FixedJoint>();
         gravityDir = transform.up * -1;
         justClimbed = false;
         hasTail = true;
@@ -78,7 +76,6 @@ public class CicakMovement : MonoBehaviour
                 tailScaleAnim = null;
             }
             hasTail = false;
-            Destroy(tailJoint);
             tailObj.parent = null;
             StartCoroutine(TailBoost());
         }
@@ -99,8 +96,6 @@ public class CicakMovement : MonoBehaviour
         tailObj.parent = transform;
         tailObj.localPosition = initTailPos;
         tailObj.localRotation = initTailRot;
-        tailJoint = gameObject.AddComponent(typeof(FixedJoint)) as FixedJoint;
-        tailJoint.connectedBody = tailObj.GetComponent<Rigidbody>();
         hasTail = true;
     }
 
@@ -183,12 +178,7 @@ public class CicakMovement : MonoBehaviour
                 justHit = true;
                 ClimbWall(hit.normal, transform.forward);
             }
-        } else
-        {
-            justClimbed = false;
-        }
-
-        if (!Physics.Raycast(downRay, out hit, wallDetectDist)) // Doesn't hit ground
+        } else if (!Physics.Raycast(downRay, out hit, wallDetectDist)) // Doesn't hit ground
         {
             if (!justClimbed && !tongue.GetHitWall())
             {
@@ -196,10 +186,6 @@ public class CicakMovement : MonoBehaviour
                 {
                     Vector3 currAxis = SearchAxis(transform.right);
                     ClimbWall(Vector3.ProjectOnPlane(transform.forward, currAxis), transform.up * -1);
-                }
-                else if (transform.eulerAngles.x != 0)
-                {
-                    ClimbWall(Vector3.up, Vector3.ProjectOnPlane(transform.forward, Vector3.up));
                 }
             }
             isGrounded = false;
