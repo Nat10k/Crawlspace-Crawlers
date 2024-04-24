@@ -272,4 +272,12 @@ public class CicakMovement : MonoBehaviour
             lm.LevelFinish();
         }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Enemy"))
+        {
+            lm.GameOver();
+        }
+    }
 }

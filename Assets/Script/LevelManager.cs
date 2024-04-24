@@ -7,7 +7,7 @@ public class LevelManager : MonoBehaviour
 {
     PInput pInput;
     InputAction reset;
-    [SerializeField] GameObject levelFinishedCanvas;
+    [SerializeField] GameObject levelFinishedCanvas, gameOverCanvas;
     [SerializeField] Transform cicak;
     private void Awake()
     {
@@ -23,6 +23,12 @@ public class LevelManager : MonoBehaviour
     {
         levelFinishedCanvas.SetActive(true);
         Time.timeScale = 0;
+    }
+
+    public void GameOver()
+    {
+        gameOverCanvas.SetActive(true);
+        Time .timeScale = 0;
     }
 
     private void ResetLevel(InputAction.CallbackContext ctx)
