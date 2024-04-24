@@ -155,6 +155,7 @@ public class CicakMovement : MonoBehaviour
         downRay = new Ray(transform.position, transform.up * -1);
         bool justHit = false;
         RaycastHit hit;
+        Vector2 moveInput = move.ReadValue<Vector2>() * moveSpeed;
         if (Physics.Raycast(frontRay, out hit, wallDetectDist))
         {
             if (hit.transform.CompareTag("Wall") || hit.transform.CompareTag("Floor"))
@@ -163,7 +164,7 @@ public class CicakMovement : MonoBehaviour
                 ClimbWall(hit.normal, transform.up);
             }
         }
-        else if (Physics.Raycast(backRay, out hit, wallDetectDist + 0.02f))
+        else if (Physics.Raycast(backRay, out hit, wallDetectDist + 0.5f))
         {
             if (hit.transform.CompareTag("Wall") || hit.transform.CompareTag("Floor"))
             {
@@ -185,7 +186,7 @@ public class CicakMovement : MonoBehaviour
                 if (isGrounded)
                 {
                     Vector3 currAxis = SearchAxis(transform.right);
-                    ClimbWall(Vector3.ProjectOnPlane(transform.forward, currAxis), transform.up * -1);
+                    ClimbWall(Vector3.ProjectOnPlane(transform.forward * Mathf.Sign(moveInput.y), currAxis), transform.up * Mathf.Sign(moveInput.y) * -1);
                 }
             }
             isGrounded = false;
@@ -204,7 +205,6 @@ public class CicakMovement : MonoBehaviour
                 StartCoroutine(tongue.RetractTongue());
             }
         }
-        Vector2 moveInput = move.ReadValue<Vector2>() * moveSpeed;
         transform.Rotate(new Vector3(0, moveInput.x * lookSpeed * 2, 0));
         if (tongue.enabled && tongue.GetHitWall())
         {
@@ -214,7 +214,7 @@ public class CicakMovement : MonoBehaviour
         {
             rb.velocity = transform.forward * moveInput.y;
         }
-        rb.AddForce(gravityDir * gravityForce);
+        rb.AddForce(gravityDir * gravityForce * rb.mass);
     }
 
     private IEnumerator RotateAnim(Quaternion initRotation, Quaternion endRotation)
