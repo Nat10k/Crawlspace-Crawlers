@@ -10,10 +10,11 @@ public class Tongue : MonoBehaviour
     InputAction tongueAction;
     PInput pInput;
     [SerializeField] Transform cicak;
+    [SerializeField] CicakCam cicakCam;
     CicakMovement cicakMove;
     Transform heldObj;
     Rigidbody cicakRB;
-    float maxTongueLength = 2;
+    float maxTongueLength = 3 ,boostFactor = 2;
 
     private void Awake()
     {
@@ -59,7 +60,7 @@ public class Tongue : MonoBehaviour
             {
                 if (hitWall)
                 {
-                    cicakRB.velocity = (dest - cicak.position).normalized * 2;
+                    cicakRB.velocity = (dest - cicak.position).normalized * boostFactor;
                     if (!startedAnim)
                     {
                         Vector3 dir = (dest - cicak.position).normalized;
@@ -80,16 +81,29 @@ public class Tongue : MonoBehaviour
 
     public IEnumerator RetractTongue()
     {
-        while(line.GetPosition(1) != line.GetPosition(0))
+        while (line.GetPosition(1) != line.GetPosition(0))
         {
             line.SetPosition(0, cicak.position);
             line.SetPosition(1, Vector3.MoveTowards(line.GetPosition(1), cicak.position, 10 * Time.deltaTime));
             transform.position = line.GetPosition(1);
+            if (Camera.main.fieldOfView < 80)
+            {
+                Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, 80, 5 * Time.deltaTime);
+                yield return null;
+            }
             yield return null;
         }
+        boostFactor = 2;
         gameObject.SetActive(false);
         enabled = false;
         startedAnim = false;
+    }
+
+    IEnumerator TongueBoost()
+    {
+        yield return new WaitForSeconds(0.2f);
+        boostFactor *= 2;
+        StartCoroutine(cicakCam.BoostCam());
     }
 
     private void OnTriggerEnter(Collider other)
@@ -97,6 +111,7 @@ public class Tongue : MonoBehaviour
         if ((other.gameObject.CompareTag("Wall") || other.gameObject.CompareTag("Floor")) && !hitObject)
         {
             hitWall = true;
+            StartCoroutine(TongueBoost());
         } else if (other.gameObject.CompareTag("Movable") && !hitWall)
         {
             heldObj = other.transform;

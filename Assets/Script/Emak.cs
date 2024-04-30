@@ -69,8 +69,10 @@ public class Emak : Enemy
         {
             GameObject currSandal = Instantiate(sandal, transform.position, Quaternion.identity);
             Rigidbody sandalBody = currSandal.GetComponent<Rigidbody>();
-            sandalBody.velocity = (cicak.position - currSandal.transform.position).normalized * 10;
-            sandalBody.angularVelocity = sandalBody.transform.forward * 10;
+            sandalBody.velocity = (cicak.position - currSandal.transform.position).normalized * 5;
+            sandalBody.angularVelocity = sandalBody.transform.forward * 5;
+            yield return new WaitForSeconds(0.5f);
+            sandalBody.velocity += (cicak.position - currSandal.transform.position).normalized * 8;
             yield return new WaitForSeconds(3);
             Destroy(currSandal);
         }

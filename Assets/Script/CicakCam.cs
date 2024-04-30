@@ -7,14 +7,17 @@ public class CicakCam : MonoBehaviour
 {
     PInput input;
     InputAction look, rightClick;
+    Camera cam;
     const float lookSpeed = 0.5f;
     float verticalAngle, horizontalAngle;
+    const float initCamFOV = 60, boostCamFOV = 80;
 
     private void Awake()
     {
         input = new PInput();
         verticalAngle = 0;
         horizontalAngle = 0;
+        cam = GetComponent<Camera>();
     }
 
     private void OnEnable()
@@ -36,6 +39,25 @@ public class CicakCam : MonoBehaviour
     {
         horizontalAngle = 0;
         transform.localEulerAngles = new Vector3(verticalAngle, horizontalAngle, transform.localEulerAngles.z);
+    }
+
+    public IEnumerator BoostCam()
+    {
+        while (cam.fieldOfView < boostCamFOV)
+        {
+            cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, boostCamFOV, 5 * Time.deltaTime);
+            yield return null;
+        }
+    }
+
+    public IEnumerator ResetFOV()
+    {
+        while (cam.fieldOfView > initCamFOV)
+        {
+            cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, initCamFOV, 5 * Time.deltaTime);
+            yield return null;
+        }
+        cam.fieldOfView = initCamFOV;
     }
 
     private void Update()

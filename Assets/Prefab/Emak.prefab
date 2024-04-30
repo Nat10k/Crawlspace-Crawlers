@@ -66,6 +66,7 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: ca7b42c2b7c341747864cb3e9bf8e9cd, type: 2}
+  - {fileID: 2100000, guid: 43a8d7024b74ee14292990d9e7c35183, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -107,7 +108,7 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5000001
-  m_Height: 2
+  m_Height: 2.2
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!54 &3790313378995796310
@@ -146,16 +147,16 @@ NavMeshAgent:
   m_GameObject: {fileID: 1257000128473049952}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.1
-  m_Speed: 3.5
-  m_Acceleration: 8
+  m_Radius: 1
+  m_Speed: 1
+  m_Acceleration: 0.5
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 0.5
+  m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
-  m_Height: 0.1
+  m_Height: 1
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
@@ -179,5 +180,5 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  detectRange: 0
-  stopDistance: 0
+  detectRange: 15
+  stopDistance: 5

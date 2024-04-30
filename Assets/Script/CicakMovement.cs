@@ -84,10 +84,10 @@ public class CicakMovement : MonoBehaviour
     IEnumerator TailBoost()
     {
         // Speed boost for 3 seconds after deattaching tail
-        moveSpeed *= 2;
+        moveSpeed *= 4;
         cicakMaterial.color = new Color(cicakMaterial.color.r, cicakMaterial.color.g, cicakMaterial.color.b, 125);
         yield return new WaitForSeconds(3);
-        moveSpeed /= 2;
+        moveSpeed /= 4;
         cicakMaterial.color = new Color(cicakMaterial.color.r, cicakMaterial.color.g, cicakMaterial.color.b, 255);
         tailScaleAnim = StartCoroutine(ScaleTail(Vector3.zero));
         yield return new WaitForSeconds(tailCooldown);
@@ -164,7 +164,7 @@ public class CicakMovement : MonoBehaviour
                 ClimbWall(hit.normal, transform.up);
             }
         }
-        else if (Physics.Raycast(backRay, out hit, wallDetectDist + 0.5f))
+        else if (Physics.Raycast(backRay, out hit, wallDetectDist + 0.2f))
         {
             if (hit.transform.CompareTag("Wall") || hit.transform.CompareTag("Floor"))
             {
@@ -219,6 +219,7 @@ public class CicakMovement : MonoBehaviour
 
     private IEnumerator RotateAnim(Quaternion initRotation, Quaternion endRotation)
     {
+        moveSpeed /= 4f;
         float rotationProgress = 0;
         while (rotationProgress < 1)
         {
@@ -226,6 +227,7 @@ public class CicakMovement : MonoBehaviour
             rb.MoveRotation(Quaternion.Lerp(initRotation, endRotation, rotationProgress));
             yield return new WaitForFixedUpdate();
         }
+        moveSpeed *= 4f;
         rotateAnim = null;
     }
 
@@ -273,11 +275,11 @@ public class CicakMovement : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Enemy"))
-        {
-            lm.GameOver();
-        }
-    }
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.CompareTag("Enemy"))
+    //    {
+    //        lm.GameOver();
+    //    }
+    //}
 }
