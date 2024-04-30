@@ -179,7 +179,7 @@ Transform:
   m_GameObject: {fileID: 100130218}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.3459413, y: 0.116, z: -1.7381397}
+  m_LocalPosition: {x: 2.3459413, y: 0.33, z: -1.7381397}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2843,6 +2843,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 832130705}
   m_SourcePrefab: {fileID: 100100000, guid: e3978e74ea07ba64db304278a2831127, type: 3}
+--- !u!4 &3382692957633257111 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1882784445827731500, guid: e3978e74ea07ba64db304278a2831127, type: 3}
+  m_PrefabInstance: {fileID: 3382692957633257110}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3532519688992980575
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2921,18 +2926,6 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5549090524374670904, guid: db5375de2288272489b1adfa07feb792, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5549090524374670904, guid: db5375de2288272489b1adfa07feb792, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 5549090524374670904, guid: db5375de2288272489b1adfa07feb792, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5549090524374670904, guid: db5375de2288272489b1adfa07feb792, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.98
       objectReference: {fileID: 0}
@@ -2972,6 +2965,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7163762649926425145, guid: db5375de2288272489b1adfa07feb792, type: 3}
+      propertyPath: tail
+      value: 
+      objectReference: {fileID: 3382692957633257111}
     - target: {fileID: 7163762649926425145, guid: db5375de2288272489b1adfa07feb792, type: 3}
       propertyPath: cicak
       value: 

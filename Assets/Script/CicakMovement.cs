@@ -83,11 +83,11 @@ public class CicakMovement : MonoBehaviour
 
     IEnumerator TailBoost()
     {
-        // Speed boost for 3 seconds after deattaching tail
-        moveSpeed *= 4;
+        // Speed boost for 5 seconds after deattaching tail
+        moveSpeed *= 8;
         cicakMaterial.color = new Color(cicakMaterial.color.r, cicakMaterial.color.g, cicakMaterial.color.b, 125);
-        yield return new WaitForSeconds(3);
-        moveSpeed /= 4;
+        yield return new WaitForSeconds(5);
+        moveSpeed /= 8;
         cicakMaterial.color = new Color(cicakMaterial.color.r, cicakMaterial.color.g, cicakMaterial.color.b, 255);
         tailScaleAnim = StartCoroutine(ScaleTail(Vector3.zero));
         yield return new WaitForSeconds(tailCooldown);
