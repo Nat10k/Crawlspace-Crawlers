@@ -14,6 +14,7 @@ public class Tongue : MonoBehaviour
     CicakMovement cicakMove;
     Transform heldObj;
     Rigidbody cicakRB;
+    Vector3 hitPos;
     float maxTongueLength = 3 ,boostFactor = 2;
 
     private void Awake()
@@ -60,10 +61,10 @@ public class Tongue : MonoBehaviour
             {
                 if (hitWall)
                 {
-                    cicakRB.velocity = (dest - cicak.position).normalized * boostFactor;
+                    cicakRB.velocity = (hitPos - cicak.position).normalized * boostFactor;
                     if (!startedAnim)
                     {
-                        Vector3 dir = (dest - cicak.position).normalized;
+                        Vector3 dir = (hitPos - cicak.position).normalized;
                         dir = Vector3.ProjectOnPlane(dir, cicak.up);
                         Quaternion newRot = Quaternion.LookRotation(dir, cicak.up);
                         cicakMove.StartRotateAnim(cicakRB.rotation, newRot);
@@ -71,7 +72,7 @@ public class Tongue : MonoBehaviour
                     }
                 } else if (hitObject)
                 {
-                    line.SetPosition(1, heldObj.position);
+                    line.SetPosition(1, heldObj.TransformPoint(hitPos));
                 }
             }
             transform.position = line.GetPosition(1);
@@ -108,6 +109,7 @@ public class Tongue : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        hitPos = other.ClosestPoint(line.GetPosition(1));
         if ((other.gameObject.CompareTag("Wall") || other.gameObject.CompareTag("Floor")) && !hitObject)
         {
             hitWall = true;
@@ -115,6 +117,8 @@ public class Tongue : MonoBehaviour
         } else if (other.gameObject.CompareTag("Movable") && !hitWall)
         {
             heldObj = other.transform;
+            hitPos = heldObj.InverseTransformPoint(hitPos);
+            line.SetPosition(1, heldObj.TransformPoint(hitPos));
             hitObject = true;
         }
     }
