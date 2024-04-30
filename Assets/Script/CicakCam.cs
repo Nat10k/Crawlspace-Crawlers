@@ -9,14 +9,13 @@ public class CicakCam : MonoBehaviour
     InputAction look, rightClick;
     Camera cam;
     const float lookSpeed = 0.5f;
-    float verticalAngle, horizontalAngle;
+    float verticalAngle;
     const float initCamFOV = 60, boostCamFOV = 80;
 
     private void Awake()
     {
         input = new PInput();
         verticalAngle = 0;
-        horizontalAngle = 0;
         cam = GetComponent<Camera>();
     }
 
@@ -24,7 +23,6 @@ public class CicakCam : MonoBehaviour
     {
         look = input.Player.Look;
         rightClick = input.Player.RightClick;
-        rightClick.canceled += ResetHorizontalAngle;
         look.Enable();
         rightClick.Enable();
     }
@@ -33,12 +31,6 @@ public class CicakCam : MonoBehaviour
     {
         look.Disable();
         rightClick.Disable();
-    }
-
-    private void ResetHorizontalAngle(InputAction.CallbackContext ctx)
-    {
-        horizontalAngle = 0;
-        transform.localEulerAngles = new Vector3(verticalAngle, horizontalAngle, transform.localEulerAngles.z);
     }
 
     public IEnumerator BoostCam()
@@ -65,9 +57,8 @@ public class CicakCam : MonoBehaviour
         if (rightClick.IsPressed())
         {
             verticalAngle -= look.ReadValue<Vector2>().y * lookSpeed;
-            horizontalAngle += look.ReadValue<Vector2>().x * lookSpeed;
             verticalAngle = Mathf.Clamp(verticalAngle, -90, 90);
-            transform.localEulerAngles = new Vector3(verticalAngle, horizontalAngle, transform.localEulerAngles.z);
+            transform.localEulerAngles = new Vector3(verticalAngle, transform.localEulerAngles.y, transform.localEulerAngles.z);
         }
     }
 }

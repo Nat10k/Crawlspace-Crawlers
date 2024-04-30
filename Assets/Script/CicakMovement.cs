@@ -205,14 +205,17 @@ public class CicakMovement : MonoBehaviour
                 StartCoroutine(tongue.RetractTongue());
             }
         }
-        transform.Rotate(new Vector3(0, moveInput.x * lookSpeed * 2, 0));
+        if (rightClick.IsPressed())
+        {
+            transform.Rotate(new Vector3(0, look.ReadValue<Vector2>().x * lookSpeed, 0));
+        }
         if (tongue.enabled && tongue.GetHitWall())
         {
             rb.velocity += transform.forward * moveInput.y + transform.right * moveInput.x;
         }
         else
         {
-            rb.velocity = transform.forward * moveInput.y;
+            rb.velocity = transform.forward * moveInput.y + transform.right * moveInput.x;
         }
         rb.AddForce(gravityDir * gravityForce * rb.mass);
     }
