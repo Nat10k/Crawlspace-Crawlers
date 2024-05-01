@@ -7,8 +7,7 @@ public class CicakMovement : MonoBehaviour
     PInput pInput;
     InputAction move, tongueAction, tailInput, look, rightClick;
     Rigidbody rb;
-    Ray frontRay, backRay, upRay, downRay;
-    const float lookSpeed = 1f, gravityForce = 9.81f, wallDetectDist = 0.1f, scaleSpeed = 2f;
+    const float lookSpeed = 1f, gravityForce = 20f, wallDetectDist = 0.1f, scaleSpeed = 2f;
     float shootLength = 40, moveSpeed = 2f, tailCooldown = 15f;
     bool justClimbed, hasTail, isGrounded;
     [SerializeField] Tongue tongue;
@@ -149,10 +148,12 @@ public class CicakMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        frontRay = new Ray(transform.position, transform.forward);
-        backRay = new Ray(transform.position, transform.forward * -1);
-        upRay = new Ray(transform.position, transform.up);
-        downRay = new Ray(transform.position, transform.up * -1);
+        Ray frontRay = new Ray(transform.position, transform.forward);
+        Ray backRay = new Ray(transform.position, transform.forward * -1);
+        Ray upRay = new Ray(transform.position, transform.up);
+        Ray downRay = new Ray(transform.position, transform.up * -1);
+        Ray rightRay = new Ray(transform.position, transform.right);
+        Ray leftRay = new Ray(transform.position, transform.right * -1);
         bool justHit = false;
         RaycastHit hit;
         Vector2 moveInput = move.ReadValue<Vector2>() * moveSpeed;
@@ -179,17 +180,34 @@ public class CicakMovement : MonoBehaviour
                 justHit = true;
                 ClimbWall(hit.normal, transform.forward);
             }
-        } else
+        }
+        else if (Physics.Raycast(rightRay, out hit, wallDetectDist))
         {
-            if (Physics.Raycast(downRay, out hit, wallDetectDist)) // Hits ground
+            if (hit.transform.CompareTag("Wall") || hit.transform.CompareTag("Floor"))
+            {
+                justHit = true;
+                ClimbWall(hit.normal, transform.forward);
+            }
+        }
+        else if (Physics.Raycast(leftRay, out hit, wallDetectDist))
+        {
+            if (hit.transform.CompareTag("Wall") || hit.transform.CompareTag("Floor"))
+            {
+                justHit = true;
+                ClimbWall(hit.normal, transform.forward);
+            }
+        }
+        else
+        {
+            justClimbed = false;
+            if (Physics.Raycast(downRay, out hit, wallDetectDist + 2)) // Hits ground
             {
                 isGrounded = true;
                 moveSpeed = 2f;
-                justClimbed = false;
-            } else
+            }
+            else // Doesn't hit ground
             {
-                justHit = true;
-                if (!justClimbed && !tongue.GetHitWall())
+                if (!tongue.GetHitWall())
                 {
                     if (isGrounded)
                     {
