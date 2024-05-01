@@ -87,11 +87,7 @@ public class Tongue : MonoBehaviour
             line.SetPosition(0, cicak.position);
             line.SetPosition(1, Vector3.MoveTowards(line.GetPosition(1), cicak.position, 10 * Time.deltaTime));
             transform.position = line.GetPosition(1);
-            if (Camera.main.fieldOfView < 80)
-            {
-                Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, 80, 5 * Time.deltaTime);
-                yield return null;
-            }
+            cicakCam.ResetFOV();
             yield return null;
         }
         boostFactor = 2;
@@ -104,7 +100,7 @@ public class Tongue : MonoBehaviour
     {
         yield return new WaitForSeconds(0.2f);
         boostFactor *= 2;
-        StartCoroutine(cicakCam.BoostCam());
+        cicakCam.BoostCam();
     }
 
     private void OnTriggerEnter(Collider other)

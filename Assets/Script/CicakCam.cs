@@ -8,9 +8,10 @@ public class CicakCam : MonoBehaviour
     PInput input;
     InputAction look, rightClick;
     Camera cam;
+    Coroutine camRoutine;
     const float lookSpeed = 0.5f;
     float verticalAngle;
-    const float initCamFOV = 60, boostCamFOV = 80;
+    const float initCamFOV = 80, boostCamFOV = 100;
 
     private void Awake()
     {
@@ -33,7 +34,25 @@ public class CicakCam : MonoBehaviour
         rightClick.Disable();
     }
 
-    public IEnumerator BoostCam()
+    public void BoostCam()
+    {
+        if (camRoutine != null)
+        {
+            StopCoroutine(camRoutine);
+        }
+        camRoutine = StartCoroutine(BoostCamRoutine());
+    }
+
+    public void ResetFOV()
+    {
+        if (camRoutine != null)
+        {
+            StopCoroutine(camRoutine);
+        }
+        camRoutine = StartCoroutine(ResetFOVRoutine());
+    }
+
+    public IEnumerator BoostCamRoutine()
     {
         while (cam.fieldOfView < boostCamFOV)
         {
@@ -42,7 +61,7 @@ public class CicakCam : MonoBehaviour
         }
     }
 
-    public IEnumerator ResetFOV()
+    public IEnumerator ResetFOVRoutine()
     {
         while (cam.fieldOfView > initCamFOV)
         {

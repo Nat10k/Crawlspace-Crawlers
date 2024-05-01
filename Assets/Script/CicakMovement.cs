@@ -14,6 +14,7 @@ public class CicakMovement : MonoBehaviour
     [SerializeField] Transform tailObj;
     [SerializeField] Material cicakMaterial;
     [SerializeField] LevelManager lm;
+    CicakCam cicakCam;
     Coroutine tongueFire, rotateAnim, tailScaleAnim;
     Vector3 gravityDir, initTailPos, initTailScale;
     readonly Vector3[] allAxis = { Vector3.forward, Vector3.back, Vector3.right, Vector3.left, Vector3.up, Vector3.down };
@@ -22,6 +23,7 @@ public class CicakMovement : MonoBehaviour
     {
         pInput = new PInput();
         rb = GetComponent<Rigidbody>();
+        cicakCam = Camera.main.GetComponent<CicakCam>();
         gravityDir = transform.up * -1;
         justClimbed = false;
         hasTail = true;
@@ -83,9 +85,11 @@ public class CicakMovement : MonoBehaviour
     IEnumerator TailBoost()
     {
         // Speed boost for 5 seconds after detaching tail
+        cicakCam.BoostCam();
         moveSpeed *= 8;
         cicakMaterial.color = new Color(cicakMaterial.color.r, cicakMaterial.color.g, cicakMaterial.color.b, 125);
         yield return new WaitForSeconds(5);
+        cicakCam.ResetFOV();
         moveSpeed /= 8;
         cicakMaterial.color = new Color(cicakMaterial.color.r, cicakMaterial.color.g, cicakMaterial.color.b, 255);
         tailScaleAnim = StartCoroutine(ScaleTail(Vector3.zero));
