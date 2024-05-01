@@ -16,7 +16,7 @@ public class CicakMovement : MonoBehaviour
     [SerializeField] LevelManager lm;
     Coroutine tongueFire, rotateAnim, tailScaleAnim;
     Vector3 gravityDir, initTailPos, initTailScale;
-    Vector3[] allAxis = { Vector3.forward, Vector3.back, Vector3.right, Vector3.left, Vector3.up, Vector3.down };
+    readonly Vector3[] allAxis = { Vector3.forward, Vector3.back, Vector3.right, Vector3.left, Vector3.up, Vector3.down };
     Quaternion initTailRot;
     private void Awake()
     {
@@ -43,7 +43,7 @@ public class CicakMovement : MonoBehaviour
         rightClick.canceled += ReleaseCursor;
         tongueAction.performed += ShootTongue;
         tongueAction.canceled += ReleaseTongue;
-        tailInput.performed += SeperateTail;
+        tailInput.performed += SeparateTail;
         move.Enable();
         tongueAction.Enable();
         look.Enable();
@@ -57,7 +57,7 @@ public class CicakMovement : MonoBehaviour
         rightClick.canceled -= ReleaseCursor;
         tongueAction.performed -= ShootTongue;
         tongueAction.canceled -= ReleaseTongue;
-        tailInput.performed -= SeperateTail;
+        tailInput.performed -= SeparateTail;
         move.Disable();
         tongueAction.Disable();
         look.Disable();
@@ -65,7 +65,7 @@ public class CicakMovement : MonoBehaviour
         tailInput.Disable();
     }
 
-    private void SeperateTail(InputAction.CallbackContext ctx)
+    private void SeparateTail(InputAction.CallbackContext ctx)
     {
         if (hasTail)
         {
@@ -82,7 +82,7 @@ public class CicakMovement : MonoBehaviour
 
     IEnumerator TailBoost()
     {
-        // Speed boost for 5 seconds after deattaching tail
+        // Speed boost for 5 seconds after detaching tail
         moveSpeed *= 8;
         cicakMaterial.color = new Color(cicakMaterial.color.r, cicakMaterial.color.g, cicakMaterial.color.b, 125);
         yield return new WaitForSeconds(5);
@@ -173,37 +173,26 @@ public class CicakMovement : MonoBehaviour
                 ClimbWall(hit.normal, transform.up * -1);
             }
         }
-        else if (Physics.Raycast(upRay, out hit, wallDetectDist))
+        else if (Physics.Raycast(upRay, out hit, wallDetectDist) || Physics.Raycast(rightRay, out hit, wallDetectDist) ||
+            Physics.Raycast(leftRay, out hit, wallDetectDist))
         {
             if (hit.transform.CompareTag("Wall") || hit.transform.CompareTag("Floor"))
             {
                 justHit = true;
-                ClimbWall(hit.normal, transform.forward);
-            }
-        }
-        else if (Physics.Raycast(rightRay, out hit, wallDetectDist))
-        {
-            if (hit.transform.CompareTag("Wall") || hit.transform.CompareTag("Floor"))
-            {
-                justHit = true;
-                ClimbWall(hit.normal, transform.forward);
-            }
-        }
-        else if (Physics.Raycast(leftRay, out hit, wallDetectDist))
-        {
-            if (hit.transform.CompareTag("Wall") || hit.transform.CompareTag("Floor"))
-            {
-                justHit = true;
-                ClimbWall(hit.normal, transform.forward);
+                ClimbWall(hit.normal, Vector3.ProjectOnPlane(transform.forward, hit.normal));
             }
         }
         else
         {
             justClimbed = false;
-            if (Physics.Raycast(downRay, out hit, wallDetectDist + 2)) // Hits ground
+            if (Physics.Raycast(downRay, out hit, wallDetectDist + 1)) // Hits ground
             {
                 isGrounded = true;
                 moveSpeed = 2f;
+                if (transform.up != hit.normal)
+                {
+                    ClimbWall(hit.normal, Vector3.ProjectOnPlane(transform.forward, hit.normal));
+                }
             }
             else // Doesn't hit ground
             {
@@ -213,12 +202,13 @@ public class CicakMovement : MonoBehaviour
                     {
                         if (moveInput.x != 0)
                         {
-                            Vector3 currAxis = SearchAxis(transform.forward);
+                            Vector3 currAxis = SearchAxis(transform.up);
                             ClimbWall(Vector3.ProjectOnPlane(transform.right * Mathf.Sign(moveInput.x), currAxis), transform.forward);
-                        } else
+                        }
+                        else
                         {
                             Vector3 currAxis = SearchAxis(transform.right);
-                            ClimbWall(Vector3.ProjectOnPlane(transform.forward * Mathf.Sign(moveInput.y), currAxis), transform.up * Mathf.Sign(moveInput.y) * -1);
+                            ClimbWall(Vector3.ProjectOnPlane(transform.forward * Mathf.Sign(moveInput.y), currAxis), -1 * Mathf.Sign(moveInput.y) * transform.up);
                         }
                     }
                 }
@@ -226,6 +216,7 @@ public class CicakMovement : MonoBehaviour
                 moveSpeed = 1f;
             }
         }
+
 
         if (justHit)
         {
@@ -252,7 +243,7 @@ public class CicakMovement : MonoBehaviour
 
     private IEnumerator RotateAnim(Quaternion initRotation, Quaternion endRotation)
     {
-        moveSpeed /= 4f;
+        moveSpeed = 0;
         float rotationProgress = 0;
         while (rotationProgress < 1)
         {
@@ -260,7 +251,7 @@ public class CicakMovement : MonoBehaviour
             rb.MoveRotation(Quaternion.Lerp(initRotation, endRotation, rotationProgress));
             yield return new WaitForFixedUpdate();
         }
-        moveSpeed *= 4f;
+        moveSpeed = 2;
         rotateAnim = null;
     }
 
