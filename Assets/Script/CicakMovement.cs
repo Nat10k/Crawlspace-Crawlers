@@ -179,24 +179,36 @@ public class CicakMovement : MonoBehaviour
                 justHit = true;
                 ClimbWall(hit.normal, transform.forward);
             }
-        } else if (!Physics.Raycast(downRay, out hit, wallDetectDist)) // Doesn't hit ground
-        {
-            if (!justClimbed && !tongue.GetHitWall())
-            {
-                if (isGrounded)
-                {
-                    Vector3 currAxis = SearchAxis(transform.right);
-                    ClimbWall(Vector3.ProjectOnPlane(transform.forward * Mathf.Sign(moveInput.y), currAxis), transform.up * Mathf.Sign(moveInput.y) * -1);
-                }
-            }
-            isGrounded = false;
-            moveSpeed = 1f;
         } else
         {
-            isGrounded = true;
-            moveSpeed = 2f;
-            justClimbed = false;
-        } 
+            if (Physics.Raycast(downRay, out hit, wallDetectDist)) // Hits ground
+            {
+                isGrounded = true;
+                moveSpeed = 2f;
+                justClimbed = false;
+            } else
+            {
+                justHit = true;
+                if (!justClimbed && !tongue.GetHitWall())
+                {
+                    if (isGrounded)
+                    {
+                        if (moveInput.x != 0)
+                        {
+                            Vector3 currAxis = SearchAxis(transform.forward);
+                            ClimbWall(Vector3.ProjectOnPlane(transform.right * Mathf.Sign(moveInput.x), currAxis), transform.forward);
+                        } else
+                        {
+                            Vector3 currAxis = SearchAxis(transform.right);
+                            ClimbWall(Vector3.ProjectOnPlane(transform.forward * Mathf.Sign(moveInput.y), currAxis), transform.up * Mathf.Sign(moveInput.y) * -1);
+                        }
+                    }
+                }
+                isGrounded = false;
+                moveSpeed = 1f;
+            }
+        }
+
         if (justHit)
         {
             if (tongueFire != null && tongue.GetHitWall())
@@ -236,6 +248,7 @@ public class CicakMovement : MonoBehaviour
 
     private Vector3 SearchAxis(Vector3 v)
     {
+        // Search current rotation axis
         Vector3 axis = Vector3.up;
         float minAngle = Vector3.Angle(v, axis);
         foreach(Vector3 u in allAxis)
