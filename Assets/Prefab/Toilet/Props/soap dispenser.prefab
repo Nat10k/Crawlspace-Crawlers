@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 342777561609021941}
   - component: {fileID: 8469472328933140772}
   - component: {fileID: 2718605552568143937}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: FinishItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4839,7 +4839,7 @@ GameObject:
   - component: {fileID: 2342229014679467200}
   - component: {fileID: 23915620085812040}
   - component: {fileID: 3897822935234725234}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4925,7 +4925,7 @@ GameObject:
   - component: {fileID: 8334722094453550736}
   - component: {fileID: 7433273926353249920}
   - component: {fileID: 4166613083469061643}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: soap dispenser
   m_TagString: Finish
   m_Icon: {fileID: 0}

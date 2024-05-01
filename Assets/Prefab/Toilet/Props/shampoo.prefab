@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1596948263704142281}
   - component: {fileID: 3023595265962240773}
   - component: {fileID: 365325968350662817}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: shampoo
   m_TagString: Movable
   m_Icon: {fileID: 0}
@@ -106,7 +106,7 @@ GameObject:
   - component: {fileID: 5405373396420351217}
   - component: {fileID: 2373081889793951005}
   - component: {fileID: 1876091127747062880}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cube.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}

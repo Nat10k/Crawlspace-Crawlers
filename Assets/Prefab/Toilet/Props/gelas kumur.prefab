@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2654605353220839678}
   - component: {fileID: 5350624627707885884}
   - component: {fileID: 4311775411752032442}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 8273222319474599104}
   - component: {fileID: 2184136232469987683}
   - component: {fileID: 2674383706821113096}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: gelas kumur
   m_TagString: Movable
   m_Icon: {fileID: 0}

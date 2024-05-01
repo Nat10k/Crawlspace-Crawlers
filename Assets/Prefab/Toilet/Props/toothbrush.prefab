@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4602567874878851131}
   - component: {fileID: 672183467119242325}
   - component: {fileID: 510419094592776349}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: default
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 7023182118738768788}
   - component: {fileID: 4985536854029361764}
   - component: {fileID: 8937288455511673631}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: toothbrush
   m_TagString: Movable
   m_Icon: {fileID: 0}
