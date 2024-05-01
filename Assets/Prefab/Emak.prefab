@@ -66,7 +66,6 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: ca7b42c2b7c341747864cb3e9bf8e9cd, type: 2}
-  - {fileID: 2100000, guid: 43a8d7024b74ee14292990d9e7c35183, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -174,6 +173,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cicak: {fileID: 0}
   tail: {fileID: 0}
+  detectRange: 15
+  stopDistance: 5
+  target: {fileID: 0}
   agent: {fileID: 0}
   sandal: {fileID: 7998690324726398476, guid: 11da8759f71012248a751af617452bad, type: 3}
   patrolPos:
@@ -181,5 +183,4 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  detectRange: 15
-  stopDistance: 5
+  currPatrolIdx: 0

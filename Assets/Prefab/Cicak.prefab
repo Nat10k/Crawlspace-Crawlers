@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1882784445827731500}
   - component: {fileID: 1989465151983416015}
   - component: {fileID: 7761096620299233530}
-  m_Layer: 2
+  m_Layer: 3
   m_Name: Tail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 1675308750686939604}
   - component: {fileID: 2702969407793602437}
   - component: {fileID: 1602587358893560172}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: default
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -178,7 +178,7 @@ GameObject:
   - component: {fileID: 6127302067174154307}
   - component: {fileID: 4947781781199244559}
   - component: {fileID: 7159350603065336468}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cicak
   m_TagString: Player
   m_Icon: {fileID: 0}
