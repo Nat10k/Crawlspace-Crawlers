@@ -230,7 +230,7 @@ public class CicakMovement : MonoBehaviour
         {
             transform.Rotate(new Vector3(0, look.ReadValue<Vector2>().x * lookSpeed, 0));
         }
-        if (tongue.enabled && tongue.GetHitWall())
+        if (tongue.enabled && tongue.GetHitWall() || !isGrounded)
         {
             rb.velocity += transform.forward * moveInput.y + transform.right * moveInput.x;
         }
