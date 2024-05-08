@@ -9,25 +9,28 @@ public class CicakMovement : MonoBehaviour
     Rigidbody rb;
     const float lookSpeed = 1f, gravityForce = 9.81f, wallDetectDist = 0.1f, scaleSpeed = 2f;
     float shootLength = 40, moveSpeed = 2f, tailCooldown = 15f, stdMoveSpeed = 2f;
-    bool justClimbed, hasTail, isGrounded;
+    bool justClimbed, hasTail, isGrounded, canMove;
     [SerializeField] Tongue tongue;
     [SerializeField] Transform tailObj;
     [SerializeField] Material cicakMaterial;
-    [SerializeField] LevelManager lm;
     CicakCam cicakCam;
     Coroutine tongueFire, rotateAnim, tailScaleAnim;
     Vector3 gravityDir, initTailPos, initTailScale;
     readonly Vector3[] allAxis = { Vector3.forward, Vector3.back, Vector3.right, Vector3.left, Vector3.up, Vector3.down };
     Quaternion initTailRot;
+
     private void Awake()
     {
         pInput = new PInput();
         rb = GetComponent<Rigidbody>();
         cicakCam = Camera.main.GetComponent<CicakCam>();
+
         gravityDir = transform.up * -1;
         justClimbed = false;
         hasTail = true;
         isGrounded = true;
+        canMove = true;
+
         initTailPos = tailObj.localPosition;
         initTailScale = tailObj.localScale;
         initTailRot = tailObj.localRotation;
@@ -152,100 +155,107 @@ public class CicakMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Ray frontRay = new Ray(transform.position, transform.forward);
-        Ray backRay = new Ray(transform.position, transform.forward * -1);
-        Ray upRay = new Ray(transform.position, transform.up);
-        Ray downRay = new Ray(transform.position, transform.up * -1);
-        Ray rightRay = new Ray(transform.position, transform.right);
-        Ray leftRay = new Ray(transform.position, transform.right * -1);
-        bool justHit = false;
-        RaycastHit hit;
-        Vector2 moveInput = move.ReadValue<Vector2>() * moveSpeed;
-        if (Physics.Raycast(frontRay, out hit, wallDetectDist))
+        if (canMove)
         {
-            if (hit.transform.CompareTag("Wall") || hit.transform.CompareTag("Floor"))
+            Ray frontRay = new Ray(transform.position, transform.forward);
+            Ray backRay = new Ray(transform.position, transform.forward * -1);
+            Ray upRay = new Ray(transform.position, transform.up);
+            Ray downRay = new Ray(transform.position, transform.up * -1);
+            Ray rightRay = new Ray(transform.position, transform.right);
+            Ray leftRay = new Ray(transform.position, transform.right * -1);
+            bool justHit = false;
+            RaycastHit hit;
+            Vector2 moveInput = move.ReadValue<Vector2>() * moveSpeed;
+            if (Physics.Raycast(frontRay, out hit, wallDetectDist))
             {
-                justHit = true;
-                ClimbWall(hit.normal, transform.up);
-            }
-        }
-        else if (Physics.Raycast(backRay, out hit, wallDetectDist + 0.2f))
-        {
-            if (hit.transform.CompareTag("Wall") || hit.transform.CompareTag("Floor"))
-            {
-                justHit = true;
-                ClimbWall(hit.normal, transform.up * -1);
-            }
-        }
-        else if (Physics.Raycast(upRay, out hit, wallDetectDist) || Physics.Raycast(rightRay, out hit, wallDetectDist) ||
-            Physics.Raycast(leftRay, out hit, wallDetectDist))
-        {
-            if (hit.transform.CompareTag("Wall") || hit.transform.CompareTag("Floor"))
-            {
-                justHit = true;
-                ClimbWall(hit.normal, Vector3.ProjectOnPlane(transform.forward, hit.normal));
-            }
-        }
-        else
-        {
-            justClimbed = false;
-            if (Physics.Raycast(downRay, out hit, wallDetectDist + 0.5f)) // Hits ground
-            {
-                isGrounded = true;
-                if (moveSpeed < stdMoveSpeed && rotateAnim == null)
+                if (hit.transform.CompareTag("Wall") || hit.transform.CompareTag("Floor"))
                 {
-                    moveSpeed = stdMoveSpeed;
+                    justHit = true;
+                    ClimbWall(hit.normal, transform.up);
                 }
-                if (transform.up != hit.normal)
+            }
+            else if (Physics.Raycast(backRay, out hit, wallDetectDist + 0.2f))
+            {
+                if (hit.transform.CompareTag("Wall") || hit.transform.CompareTag("Floor"))
                 {
+                    justHit = true;
+                    ClimbWall(hit.normal, transform.up * -1);
+                }
+            }
+            else if (Physics.Raycast(upRay, out hit, wallDetectDist) || Physics.Raycast(rightRay, out hit, wallDetectDist) ||
+                Physics.Raycast(leftRay, out hit, wallDetectDist))
+            {
+                if (hit.transform.CompareTag("Wall") || hit.transform.CompareTag("Floor"))
+                {
+                    justHit = true;
                     ClimbWall(hit.normal, Vector3.ProjectOnPlane(transform.forward, hit.normal));
                 }
             }
-            else // Doesn't hit ground
+            else
             {
-                moveSpeed = 0.5f;
-                if (!tongue.GetHitWall())
+                justClimbed = false;
+                if (Physics.Raycast(downRay, out hit, wallDetectDist + 0.5f)) // Hits ground
                 {
-                    if (isGrounded)
+                    isGrounded = true;
+                    if (moveSpeed < stdMoveSpeed && rotateAnim == null)
                     {
-                        if (moveInput.x != 0)
-                        {
-                            Vector3 currAxis = SearchAxis(transform.up);
-                            ClimbWall(Vector3.ProjectOnPlane(transform.right * Mathf.Sign(moveInput.x), currAxis), transform.forward);
-                        }
-                        else
-                        {
-                            Vector3 currAxis = SearchAxis(transform.right);
-                            ClimbWall(Vector3.ProjectOnPlane(transform.forward * Mathf.Sign(moveInput.y), currAxis), -1 * Mathf.Sign(moveInput.y) * transform.up);
-                        }
+                        moveSpeed = stdMoveSpeed;
+                    }
+                    if (transform.up != hit.normal)
+                    {
+                        ClimbWall(hit.normal, Vector3.ProjectOnPlane(transform.forward, hit.normal));
                     }
                 }
-                isGrounded = false;
+                else // Doesn't hit ground
+                {
+                    moveSpeed = 0.5f;
+                    if (!tongue.GetHitWall())
+                    {
+                        if (isGrounded)
+                        {
+                            if (moveInput.x != 0)
+                            {
+                                Vector3 currAxis = SearchAxis(transform.up);
+                                ClimbWall(Vector3.ProjectOnPlane(transform.right * Mathf.Sign(moveInput.x), currAxis), transform.forward);
+                            }
+                            else
+                            {
+                                Vector3 currAxis = SearchAxis(transform.right);
+                                ClimbWall(Vector3.ProjectOnPlane(transform.forward * Mathf.Sign(moveInput.y), currAxis), -1 * Mathf.Sign(moveInput.y) * transform.up);
+                            }
+                        }
+                    }
+                    isGrounded = false;
+                }
             }
-        }
 
-
-        if (justHit)
-        {
-            if (tongueFire != null && tongue.GetHitWall())
+            if (justHit)
             {
-                StopCoroutine(tongueFire);
-                StartCoroutine(tongue.RetractTongue());
+                if (tongueFire != null && tongue.GetHitWall())
+                {
+                    StopCoroutine(tongueFire);
+                    StartCoroutine(tongue.RetractTongue());
+                }
             }
-        }
-        if (rightClick.IsPressed())
-        {
-            transform.Rotate(new Vector3(0, look.ReadValue<Vector2>().x * lookSpeed, 0));
-        }
-        if (tongue.enabled && tongue.GetHitWall() || !isGrounded)
-        {
-            rb.velocity += transform.forward * moveInput.y + transform.right * moveInput.x;
-        }
-        else
-        {
-            rb.velocity = transform.forward * moveInput.y + transform.right * moveInput.x;
+            if (rightClick.IsPressed())
+            {
+                transform.Rotate(new Vector3(0, look.ReadValue<Vector2>().x * lookSpeed, 0));
+            }
+            if (tongue.enabled && tongue.GetHitWall() || !isGrounded)
+            {
+                rb.velocity += transform.forward * moveInput.y + transform.right * moveInput.x;
+            }
+            else
+            {
+                rb.velocity = transform.forward * moveInput.y + transform.right * moveInput.x;
+            }
         }
         rb.AddForce(gravityDir * gravityForce * rb.mass);
+    }
+
+    public void StopMove()
+    {
+        canMove = false;
     }
 
     private IEnumerator RotateAnim(Quaternion initRotation, Quaternion endRotation)
@@ -300,20 +310,4 @@ public class CicakMovement : MonoBehaviour
         rotateAnim = StartCoroutine(RotateAnim(rb.rotation, newRot));
         gravityDir = hitNormal * -1;
     }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Finish"))
-        {
-            lm.LevelFinish();
-        }
-    }
-
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    if (other.CompareTag("Enemy"))
-    //    {
-    //        lm.GameOver();
-    //    }
-    //}
 }
