@@ -7,8 +7,8 @@ public class CicakMovement : MonoBehaviour
     PInput pInput;
     InputAction move, tongueAction, tailInput, look, rightClick;
     Rigidbody rb;
-    const float lookSpeed = 1f, gravityForce = 20f, wallDetectDist = 0.1f, scaleSpeed = 2f;
-    float shootLength = 40, moveSpeed = 2f, tailCooldown = 15f;
+    const float lookSpeed = 1f, gravityForce = 9.81f, wallDetectDist = 0.1f, scaleSpeed = 2f;
+    float shootLength = 40, moveSpeed = 2f, tailCooldown = 15f, stdMoveSpeed = 2f;
     bool justClimbed, hasTail, isGrounded;
     [SerializeField] Tongue tongue;
     [SerializeField] Transform tailObj;
@@ -86,11 +86,11 @@ public class CicakMovement : MonoBehaviour
     {
         // Speed boost for 5 seconds after detaching tail
         cicakCam.BoostCam();
-        moveSpeed *= 8;
+        moveSpeed *= 2;
         cicakMaterial.color = new Color(cicakMaterial.color.r, cicakMaterial.color.g, cicakMaterial.color.b, 125);
         yield return new WaitForSeconds(5);
         cicakCam.ResetFOV();
-        moveSpeed /= 8;
+        moveSpeed /= 2;
         cicakMaterial.color = new Color(cicakMaterial.color.r, cicakMaterial.color.g, cicakMaterial.color.b, 255);
         tailScaleAnim = StartCoroutine(ScaleTail(Vector3.zero));
         yield return new WaitForSeconds(tailCooldown);
@@ -189,10 +189,13 @@ public class CicakMovement : MonoBehaviour
         else
         {
             justClimbed = false;
-            if (Physics.Raycast(downRay, out hit, wallDetectDist + 1)) // Hits ground
+            if (Physics.Raycast(downRay, out hit, wallDetectDist + 0.5f)) // Hits ground
             {
                 isGrounded = true;
-                moveSpeed = 2f;
+                if (moveSpeed < stdMoveSpeed && rotateAnim == null)
+                {
+                    moveSpeed = stdMoveSpeed;
+                }
                 if (transform.up != hit.normal)
                 {
                     ClimbWall(hit.normal, Vector3.ProjectOnPlane(transform.forward, hit.normal));
@@ -200,6 +203,7 @@ public class CicakMovement : MonoBehaviour
             }
             else // Doesn't hit ground
             {
+                moveSpeed = 0.5f;
                 if (!tongue.GetHitWall())
                 {
                     if (isGrounded)
@@ -217,7 +221,6 @@ public class CicakMovement : MonoBehaviour
                     }
                 }
                 isGrounded = false;
-                moveSpeed = 1f;
             }
         }
 
@@ -247,15 +250,17 @@ public class CicakMovement : MonoBehaviour
 
     private IEnumerator RotateAnim(Quaternion initRotation, Quaternion endRotation)
     {
-        moveSpeed = 0;
+        float prevMoveSpeed = moveSpeed;
+        moveSpeed = 0.5f;
         float rotationProgress = 0;
         while (rotationProgress < 1)
         {
+            rb.velocity *= 0.1f;
             rotationProgress += Time.fixedDeltaTime * 2;
             rb.MoveRotation(Quaternion.Lerp(initRotation, endRotation, rotationProgress));
             yield return new WaitForFixedUpdate();
         }
-        moveSpeed = 2;
+        moveSpeed = prevMoveSpeed;
         rotateAnim = null;
     }
 

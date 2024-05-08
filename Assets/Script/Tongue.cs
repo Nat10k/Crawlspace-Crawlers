@@ -15,7 +15,7 @@ public class Tongue : MonoBehaviour
     Transform heldObj;
     Rigidbody cicakRB;
     Vector3 hitPos;
-    float maxTongueLength = 3 ,boostFactor = 2;
+    float maxTongueLength = 5 ,boostFactor = 2;
 
     private void Awake()
     {
