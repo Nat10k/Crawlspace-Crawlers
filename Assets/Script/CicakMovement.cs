@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 public class CicakMovement : MonoBehaviour
@@ -13,6 +14,7 @@ public class CicakMovement : MonoBehaviour
     [SerializeField] Tongue tongue;
     [SerializeField] Transform tailObj;
     [SerializeField] Material cicakMaterial;
+    [SerializeField] TutorialTrigger trigger;
     CicakCam cicakCam;
     Coroutine tongueFire, rotateAnim, tailScaleAnim;
     Vector3 gravityDir, initTailPos, initTailScale;
@@ -166,6 +168,11 @@ public class CicakMovement : MonoBehaviour
             bool justHit = false;
             RaycastHit hit;
             Vector2 moveInput = move.ReadValue<Vector2>() * moveSpeed;
+            if (trigger != null && moveInput != Vector2.zero)
+            {
+                trigger.TriggerEvent();
+                trigger = null;
+            }
             if (Physics.Raycast(frontRay, out hit, wallDetectDist))
             {
                 if (hit.transform.CompareTag("Wall") || hit.transform.CompareTag("Floor"))

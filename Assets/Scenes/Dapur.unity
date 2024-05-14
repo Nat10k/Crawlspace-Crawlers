@@ -1713,11 +1713,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1456569241}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &1477796026 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2747933274247698543, guid: e3978e74ea07ba64db304278a2831127, type: 3}
-  m_PrefabInstance: {fileID: 3382692957633257110}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1586774516
 GameObject:
   m_ObjectHideFlags: 0
@@ -2351,55 +2346,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3259839667481744677, guid: e3978e74ea07ba64db304278a2831127, type: 3}
   m_PrefabInstance: {fileID: 3382692957633257110}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &273870433898990519
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1477796026}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8be7db893e5d0da46937cdc829400c0c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  levelFinished:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1587045446}
-        m_TargetAssemblyTypeName: LevelManager, Assembly-CSharp
-        m_MethodName: LevelFinish
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  death:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1587045446}
-        m_TargetAssemblyTypeName: LevelManager, Assembly-CSharp
-        m_MethodName: GameOver
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  cicakMaterial: {fileID: 2100000, guid: ba377fe24cd1ec745b01f229652ce07f, type: 2}
 --- !u!114 &2955444115739815682 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 572631777613623700, guid: e3978e74ea07ba64db304278a2831127, type: 3}
   m_PrefabInstance: {fileID: 3382692957633257110}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 3382692957633257111}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 44492c4042f4a3440b0613923f7f6e95, type: 3}
@@ -2425,6 +2377,14 @@ PrefabInstance:
       propertyPath: m_CameraType
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 542099201971120228, guid: e3978e74ea07ba64db304278a2831127, type: 3}
+      propertyPath: death.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1587045446}
+    - target: {fileID: 542099201971120228, guid: e3978e74ea07ba64db304278a2831127, type: 3}
+      propertyPath: levelFinished.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1587045446}
     - target: {fileID: 1283861241043409684, guid: e3978e74ea07ba64db304278a2831127, type: 3}
       propertyPath: m_Layer
       value: 3
@@ -2501,6 +2461,10 @@ PrefabInstance:
       propertyPath: tongue
       value: 
       objectReference: {fileID: 2100321940}
+    - target: {fileID: 6153671955711382850, guid: e3978e74ea07ba64db304278a2831127, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6723663607433914759, guid: e3978e74ea07ba64db304278a2831127, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -2514,10 +2478,36 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 2747933274247698543, guid: e3978e74ea07ba64db304278a2831127, type: 3}
+    - targetCorrespondingSourceObject: {fileID: 6153671955711382850, guid: e3978e74ea07ba64db304278a2831127, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 273870433898990519}
+      addedObject: {fileID: 3382692957633257112}
   m_SourcePrefab: {fileID: 100100000, guid: e3978e74ea07ba64db304278a2831127, type: 3}
+--- !u!1 &3382692957633257111 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6153671955711382850, guid: e3978e74ea07ba64db304278a2831127, type: 3}
+  m_PrefabInstance: {fileID: 3382692957633257110}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &3382692957633257112
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3382692957633257111}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &3532519688992980575
 PrefabInstance:
   m_ObjectHideFlags: 0
