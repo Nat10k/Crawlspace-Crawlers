@@ -4,12 +4,20 @@ using UnityEngine.Events;
 public class TutorialTrigger : MonoBehaviour
 {
     [SerializeField] UnityEvent assignedEvent;
-    public bool checkPlayer, checkTongue;
+    [SerializeField] TutorialTrigger nextTrigger;
+    public bool checkPlayer, checkTongue, isActive;
 
     public void TriggerEvent()
     {
-        assignedEvent.Invoke();
-        Destroy(this);
+        if (isActive)
+        {
+            assignedEvent.Invoke();
+            if (nextTrigger != null)
+            {
+                nextTrigger.isActive = true;
+            }
+            Destroy(this);
+        }
     }
 
     private void OnCollisionEnter(Collision collision)

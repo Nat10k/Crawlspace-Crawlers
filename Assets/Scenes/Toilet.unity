@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -905,8 +905,10 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  nextTrigger: {fileID: 1746170432}
   checkPlayer: 0
   checkTongue: 1
+  isActive: 0
 --- !u!4 &455997206 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3259839667481744677, guid: e3978e74ea07ba64db304278a2831127, type: 3}
@@ -1188,8 +1190,10 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  nextTrigger: {fileID: 2073690352}
   checkPlayer: 0
   checkTongue: 0
+  isActive: 1
 --- !u!1 &834636283
 GameObject:
   m_ObjectHideFlags: 0
@@ -1841,12 +1845,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   instructions:
-  - Use WASD to move
-  - Go to a wall/surface to climb it
-  - Left click to shoot tongue. Shoot the highlighted surface to pull yourself to
-    it.
-  - Move the soap dispenser using your tongue.
-  - Touch the soap dispenser to finish the level.
+  - Pakai WASD untuk bergerak
+  - Dekati tembok untuk memanjat
+  - Klik untuk menembak lidah. Tembakkan lidah ke bak air.
+  - Tarik tempat sabun keluar dari gayung menggunakan lidah.
+  - Dekati tempat sabun untuk menyelesaikan tutorial.
   targets:
   - {fileID: 0}
   - {fileID: 2073690351}
@@ -1971,8 +1974,10 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  nextTrigger: {fileID: 0}
   checkPlayer: 0
   checkTongue: 1
+  isActive: 0
 --- !u!4 &2073690344 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1215272689717416468, guid: 005c1a19efc07854280b238ce796f06a, type: 3}
@@ -2015,9 +2020,11 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 1
+        m_CallState: 2
+  nextTrigger: {fileID: 407441699}
   checkPlayer: 1
   checkTongue: 0
+  isActive: 0
 --- !u!1 &899897589950331517 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4086176963853392603, guid: 3cf6ce0975d4c5f40abf1b0813a6d576, type: 3}
@@ -2431,19 +2438,27 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4803132495996988331, guid: a8c5e4f661fc34a40b57b2045a64c2c7, type: 3}
       propertyPath: m_LocalScale.x
-      value: 11.519742
+      value: 12.376655
+      objectReference: {fileID: 0}
+    - target: {fileID: 4803132495996988331, guid: a8c5e4f661fc34a40b57b2045a64c2c7, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 49.1646
+      objectReference: {fileID: 0}
+    - target: {fileID: 4803132495996988331, guid: a8c5e4f661fc34a40b57b2045a64c2c7, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 12.395068
       objectReference: {fileID: 0}
     - target: {fileID: 4803132495996988331, guid: a8c5e4f661fc34a40b57b2045a64c2c7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -12.43
+      value: -12.58
       objectReference: {fileID: 0}
     - target: {fileID: 4803132495996988331, guid: a8c5e4f661fc34a40b57b2045a64c2c7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.1949997
+      value: 1.22
       objectReference: {fileID: 0}
     - target: {fileID: 4803132495996988331, guid: a8c5e4f661fc34a40b57b2045a64c2c7, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.7399998
+      value: 2.77
       objectReference: {fileID: 0}
     - target: {fileID: 4803132495996988331, guid: a8c5e4f661fc34a40b57b2045a64c2c7, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2472,6 +2487,14 @@ PrefabInstance:
     - target: {fileID: 4803132495996988331, guid: a8c5e4f661fc34a40b57b2045a64c2c7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6921971896599858522, guid: a8c5e4f661fc34a40b57b2045a64c2c7, type: 3}
+      propertyPath: m_Convex
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8207820252336177906, guid: a8c5e4f661fc34a40b57b2045a64c2c7, type: 3}
+      propertyPath: m_IsKinematic
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8889564497319328912, guid: a8c5e4f661fc34a40b57b2045a64c2c7, type: 3}
       propertyPath: m_Name
@@ -2822,21 +2845,41 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7433273926353249920, guid: 7fd87c2189dd62442aa5cc5ffc808b58, type: 3}
+      propertyPath: m_Size.x
+      value: 0.21361351
+      objectReference: {fileID: 0}
+    - target: {fileID: 7433273926353249920, guid: 7fd87c2189dd62442aa5cc5ffc808b58, type: 3}
+      propertyPath: m_Size.z
+      value: 0.23693132
+      objectReference: {fileID: 0}
+    - target: {fileID: 7433273926353249920, guid: 7fd87c2189dd62442aa5cc5ffc808b58, type: 3}
+      propertyPath: m_Center.x
+      value: 0.0009794235
+      objectReference: {fileID: 0}
+    - target: {fileID: 7433273926353249920, guid: 7fd87c2189dd62442aa5cc5ffc808b58, type: 3}
+      propertyPath: m_Center.y
+      value: -0.008406982
+      objectReference: {fileID: 0}
+    - target: {fileID: 7433273926353249920, guid: 7fd87c2189dd62442aa5cc5ffc808b58, type: 3}
+      propertyPath: m_Center.z
+      value: 0.015223265
+      objectReference: {fileID: 0}
     - target: {fileID: 7592900290925080487, guid: 7fd87c2189dd62442aa5cc5ffc808b58, type: 3}
       propertyPath: m_Convex
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8474132593837493709, guid: 7fd87c2189dd62442aa5cc5ffc808b58, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10.71
+      value: -11.53
       objectReference: {fileID: 0}
     - target: {fileID: 8474132593837493709, guid: 7fd87c2189dd62442aa5cc5ffc808b58, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.422
+      value: -2.119
       objectReference: {fileID: 0}
     - target: {fileID: 8474132593837493709, guid: 7fd87c2189dd62442aa5cc5ffc808b58, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.508
+      value: 2.124
       objectReference: {fileID: 0}
     - target: {fileID: 8474132593837493709, guid: 7fd87c2189dd62442aa5cc5ffc808b58, type: 3}
       propertyPath: m_LocalRotation.w
