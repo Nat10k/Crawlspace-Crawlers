@@ -3270,26 +3270,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 7433273926353249920, guid: 7fd87c2189dd62442aa5cc5ffc808b58, type: 3}
-      propertyPath: m_Size.x
-      value: 0.21361351
-      objectReference: {fileID: 0}
-    - target: {fileID: 7433273926353249920, guid: 7fd87c2189dd62442aa5cc5ffc808b58, type: 3}
-      propertyPath: m_Size.z
-      value: 0.23693132
-      objectReference: {fileID: 0}
-    - target: {fileID: 7433273926353249920, guid: 7fd87c2189dd62442aa5cc5ffc808b58, type: 3}
-      propertyPath: m_Center.x
-      value: 0.0009794235
-      objectReference: {fileID: 0}
-    - target: {fileID: 7433273926353249920, guid: 7fd87c2189dd62442aa5cc5ffc808b58, type: 3}
-      propertyPath: m_Center.y
-      value: -0.008406982
-      objectReference: {fileID: 0}
-    - target: {fileID: 7433273926353249920, guid: 7fd87c2189dd62442aa5cc5ffc808b58, type: 3}
-      propertyPath: m_Center.z
-      value: 0.015223265
-      objectReference: {fileID: 0}
     - target: {fileID: 7592900290925080487, guid: 7fd87c2189dd62442aa5cc5ffc808b58, type: 3}
       propertyPath: m_Convex
       value: 0
