@@ -410,8 +410,8 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 20
-  m_Range: 44.2
+  m_Intensity: 21.27
+  m_Range: 53.3
   m_SpotAngle: 97.30401
   m_InnerSpotAngle: 0
   m_CookieSize: 10
@@ -3298,6 +3298,10 @@ PrefabInstance:
     - target: {fileID: 1310995517392968031, guid: 7fd87c2189dd62442aa5cc5ffc808b58, type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1310995517392968031, guid: 7fd87c2189dd62442aa5cc5ffc808b58, type: 3}
+      propertyPath: outlineMode
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1310995517392968031, guid: 7fd87c2189dd62442aa5cc5ffc808b58, type: 3}
       propertyPath: bakeKeys.Array.size

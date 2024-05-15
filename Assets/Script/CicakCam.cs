@@ -15,6 +15,7 @@ public class CicakCam : MonoBehaviour
 
     private void Awake()
     {
+        Cursor.lockState = CursorLockMode.Locked;
         input = new PInput();
         verticalAngle = 0;
         cam = GetComponent<Camera>();
@@ -73,11 +74,8 @@ public class CicakCam : MonoBehaviour
 
     private void Update()
     {
-        if (rightClick.IsPressed())
-        {
-            verticalAngle -= look.ReadValue<Vector2>().y * lookSpeed;
-            verticalAngle = Mathf.Clamp(verticalAngle, -90, 90);
-            transform.localEulerAngles = new Vector3(verticalAngle, transform.localEulerAngles.y, transform.localEulerAngles.z);
-        }
+        verticalAngle -= look.ReadValue<Vector2>().y * lookSpeed;
+        verticalAngle = Mathf.Clamp(verticalAngle, -90, 90);
+        transform.localEulerAngles = new Vector3(verticalAngle, transform.localEulerAngles.y, transform.localEulerAngles.z);
     }
 }
