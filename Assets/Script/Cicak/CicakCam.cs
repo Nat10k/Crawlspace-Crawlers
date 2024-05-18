@@ -5,7 +5,6 @@ using UnityEngine.InputSystem;
 
 public class CicakCam : MonoBehaviour
 {
-    PInput input;
     InputAction look, rightClick;
     Camera cam;
     Coroutine camRoutine;
@@ -16,15 +15,14 @@ public class CicakCam : MonoBehaviour
     private void Awake()
     {
         Cursor.lockState = CursorLockMode.Locked;
-        input = new PInput();
         verticalAngle = 0;
         cam = GetComponent<Camera>();
     }
 
     private void OnEnable()
     {
-        look = input.Player.Look;
-        rightClick = input.Player.RightClick;
+        look = InputHandler.inputs.Player.Look;
+        rightClick = InputHandler.inputs.Player.RightClick;
         look.Enable();
         rightClick.Enable();
     }

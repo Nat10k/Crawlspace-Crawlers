@@ -7,8 +7,6 @@ public class Tongue : MonoBehaviour
 {
     bool hitWall, hitObject, startedAnim;
     LineRenderer line;
-    InputAction tongueAction;
-    PInput pInput;
     [SerializeField] Transform cicak;
     [SerializeField] CicakCam cicakCam;
     CicakMovement cicakMove;
@@ -22,21 +20,13 @@ public class Tongue : MonoBehaviour
         line = GetComponent<LineRenderer>();
         cicakRB = cicak.GetComponent<Rigidbody>();
         cicakMove = cicak.GetComponent<CicakMovement>();
-        pInput = new PInput();
         startedAnim = false;
-    }
-
-    private void OnEnable()
-    {
-        tongueAction = pInput.Player.Fire;
-        tongueAction.Enable();
     }
 
     private void OnDisable()
     {
         hitWall = false;
         hitObject = false;
-        tongueAction.Disable();
     }
 
     public IEnumerator ShootTongue(Vector3 dest)

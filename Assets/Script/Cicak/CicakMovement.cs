@@ -5,7 +5,6 @@ using UnityEngine.InputSystem;
 
 public class CicakMovement : MonoBehaviour
 {
-    PInput pInput;
     InputAction move, tongueAction, tailInput, look, rightClick;
     Rigidbody rb;
     const float lookSpeed = 1f, gravityForce = 9.81f, wallDetectDist = 0.1f, scaleSpeed = 2f;
@@ -23,7 +22,6 @@ public class CicakMovement : MonoBehaviour
 
     private void Awake()
     {
-        pInput = new PInput();
         rb = GetComponent<Rigidbody>();
         cicakCam = Camera.main.GetComponent<CicakCam>();
 
@@ -40,11 +38,11 @@ public class CicakMovement : MonoBehaviour
 
     private void OnEnable()
     {
-        move = pInput.Player.Move;
-        tongueAction = pInput.Player.Fire;
-        look = pInput.Player.Look;
-        rightClick = pInput.Player.RightClick;
-        tailInput = pInput.Player.Tail;
+        move = InputHandler.inputs.Player.Move;
+        tongueAction = InputHandler.inputs.Player.Fire;
+        look = InputHandler.inputs.Player.Look;
+        rightClick = InputHandler.inputs.Player.RightClick;
+        tailInput = InputHandler.inputs.Player.Tail;
 
         rightClick.performed += LockCursor;
         rightClick.canceled += ReleaseCursor;

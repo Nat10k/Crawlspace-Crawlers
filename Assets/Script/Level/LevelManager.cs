@@ -5,17 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
-    PInput pInput;
     InputAction reset;
     [SerializeField] GameObject levelFinishedCanvas, gameOverCanvas;
     [SerializeField] Transform cicak;
-    private void Awake()
-    {
-        pInput = new PInput();
-    }
     private void OnEnable()
     {
-        reset = pInput.Player.Reset;
+        reset = InputHandler.inputs.Player.Reset;
         reset.performed += ResetLevel;
         reset.Enable();
     }

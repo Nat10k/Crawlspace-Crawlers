@@ -2265,7 +2265,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   instructions:
-  - Pakai WASD untuk bergerak
+  - Gerakkan mouse untuk melihat sekeliling. Pakai WASD untuk bergerak.
   - Dekati tembok untuk memanjat
   - Klik untuk menembak lidah. Tembakkan lidah ke bak air.
   - Tarik tempat sabun keluar dari gayung menggunakan lidah.
