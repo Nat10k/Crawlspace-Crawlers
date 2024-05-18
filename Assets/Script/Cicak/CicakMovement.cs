@@ -7,8 +7,8 @@ public class CicakMovement : MonoBehaviour
 {
     InputAction move, tongueAction, tailInput, look, rightClick;
     Rigidbody rb;
-    const float lookSpeed = 1f, gravityForce = 9.81f, wallDetectDist = 0.1f, scaleSpeed = 2f;
-    float shootLength = 40, moveSpeed = 2f, tailCooldown = 15f, stdMoveSpeed = 2f;
+    const float lookSpeed = 1f, gravityForce = 9.81f, wallDetectDist = 0.1f;
+    float shootLength = 40, moveSpeed = 2f, tailCooldown = 15f, stdMoveSpeed = 2f, scaleSpeed;
     bool justClimbed, hasTail, isGrounded, canMove;
     [SerializeField] Tongue tongue;
     [SerializeField] Transform tailObj;
@@ -34,6 +34,8 @@ public class CicakMovement : MonoBehaviour
         initTailPos = tailObj.localPosition;
         initTailScale = tailObj.localScale;
         initTailRot = tailObj.localRotation;
+
+        scaleSpeed = initTailScale.magnitude / 2;
     }
 
     private void OnEnable()
@@ -96,24 +98,25 @@ public class CicakMovement : MonoBehaviour
         moveSpeed /= 2;
         cicakMaterial.color = new Color(cicakMaterial.color.r, cicakMaterial.color.g, cicakMaterial.color.b, 255);
         tailScaleAnim = StartCoroutine(ScaleTail(Vector3.zero));
-        yield return new WaitForSeconds(tailCooldown);
+        yield return new WaitForSeconds(tailCooldown - 2);
         // Reattach tail after cooldown
         tailScaleAnim = StartCoroutine(ScaleTail(initTailScale));
         tailObj.parent = transform;
         tailObj.localPosition = initTailPos;
         tailObj.localRotation = initTailRot;
-        hasTail = true;
     }
 
     IEnumerator ScaleTail(Vector3 newScale)
     {
-        while (tailObj.localScale.magnitude < newScale.magnitude)
+        while (Mathf.Abs(tailObj.localScale.magnitude - newScale.magnitude) > 0.1f)
         {
             tailObj.localScale = Vector3.MoveTowards(tailObj.localScale, newScale, scaleSpeed * Time.deltaTime);
             yield return null;
         }
         tailObj.localScale = newScale;
         tailScaleAnim = null;
+        if (newScale != Vector3.zero)
+            hasTail = true;
     }
 
     private void ShootTongue(InputAction.CallbackContext ctx)

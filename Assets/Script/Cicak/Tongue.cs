@@ -1,13 +1,11 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class Tongue : MonoBehaviour
 {
     bool hitWall, hitObject, startedAnim;
     LineRenderer line;
-    [SerializeField] Transform cicak;
+    [SerializeField] Transform cicak, headPos;
     [SerializeField] CicakCam cicakCam;
     CicakMovement cicakMove;
     Transform heldObj;
@@ -31,14 +29,14 @@ public class Tongue : MonoBehaviour
 
     public IEnumerator ShootTongue(Vector3 dest)
     {
-        line.SetPosition(0, cicak.position);
-        line.SetPosition(1, cicak.position);
-        transform.position = cicak.position;
+        line.SetPosition(0, headPos.position);
+        line.SetPosition(1, headPos.position);
+        transform.position = headPos.position;
         while (true)
         {
-            line.SetPosition(0, cicak.position);
+            line.SetPosition(0, headPos.position);
             Vector3 tongueEndPos = line.GetPosition(1);
-            if (Vector3.Distance(cicak.position, tongueEndPos) > maxTongueLength)
+            if (Vector3.Distance(headPos.position, tongueEndPos) > maxTongueLength)
             {
                 // Kalau lidah terlalu panjang, tarik kembali
                 StartCoroutine(RetractTongue());
@@ -51,10 +49,10 @@ public class Tongue : MonoBehaviour
             {
                 if (hitWall)
                 {
-                    cicakRB.velocity = (hitPos - cicak.position).normalized * boostFactor;
+                    cicakRB.velocity = (hitPos - headPos.position).normalized * boostFactor;
                     if (!startedAnim)
                     {
-                        Vector3 dir = (hitPos - cicak.position).normalized;
+                        Vector3 dir = (hitPos - headPos.position).normalized;
                         dir = Vector3.ProjectOnPlane(dir, cicak.up);
                         Quaternion newRot = Quaternion.LookRotation(dir, cicak.up);
                         cicakMove.StartRotateAnim(cicakRB.rotation, newRot);
@@ -74,8 +72,8 @@ public class Tongue : MonoBehaviour
     {
         while (line.GetPosition(1) != line.GetPosition(0))
         {
-            line.SetPosition(0, cicak.position);
-            line.SetPosition(1, Vector3.MoveTowards(line.GetPosition(1), cicak.position, 10 * Time.deltaTime));
+            line.SetPosition(0, headPos.position);
+            line.SetPosition(1, Vector3.MoveTowards(line.GetPosition(1), headPos.position, 10 * Time.deltaTime));
             transform.position = line.GetPosition(1);
             cicakCam.ResetFOV();
             yield return null;
