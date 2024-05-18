@@ -12,12 +12,10 @@ public class CicakCam : MonoBehaviour
     const float lookSpeed = 0.5f;
     float verticalAngle;
     const float initCamFOV = 80, boostCamFOV = 100;
-    [SerializeField] Texture2D cursorTex;
 
     private void Awake()
     {
         Cursor.lockState = CursorLockMode.Locked;
-        Cursor.SetCursor(cursorTex, new Vector2(0,0), CursorMode.Auto);
         input = new PInput();
         verticalAngle = 0;
         cam = GetComponent<Camera>();
