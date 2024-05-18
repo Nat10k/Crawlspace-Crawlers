@@ -18,6 +18,7 @@ public class Tutorial : MonoBehaviour
         if (targets[currIdx] != null)
         {
             targets[currIdx].enabled = true;
+            targets[currIdx].OutlineMode = Outline.Mode.OutlineAndSilhouette;
         }
         instructionText.text = instructions[currIdx];
     }
