@@ -60,6 +60,7 @@ public class Tongue : MonoBehaviour
                     }
                 } else if (hitObject)
                 {
+                    cicakRB.constraints = RigidbodyConstraints.FreezeRotation;
                     line.SetPosition(1, heldObj.TransformPoint(hitPos));
                 }
             }
@@ -70,6 +71,7 @@ public class Tongue : MonoBehaviour
 
     public IEnumerator RetractTongue()
     {
+        cicakRB.constraints = RigidbodyConstraints.None;
         while (line.GetPosition(1) != line.GetPosition(0))
         {
             line.SetPosition(0, headPos.position);

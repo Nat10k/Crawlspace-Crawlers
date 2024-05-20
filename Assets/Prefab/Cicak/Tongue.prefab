@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1628208588865581269}
   - component: {fileID: 5607315441914408443}
   - component: {fileID: 1325224159043904918}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Tongue
   m_TagString: Tongue
   m_Icon: {fileID: 0}
@@ -175,6 +175,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cicak: {fileID: 0}
+  headPos: {fileID: 0}
   cicakCam: {fileID: 0}
 --- !u!54 &1325224159043904918
 Rigidbody:

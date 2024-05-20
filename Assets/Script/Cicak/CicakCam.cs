@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 public class CicakCam : MonoBehaviour
 {
-    InputAction look, rightClick;
+    InputAction look;
     Camera cam;
     Coroutine camRoutine;
     const float lookSpeed = 0.5f;
@@ -22,15 +22,12 @@ public class CicakCam : MonoBehaviour
     private void OnEnable()
     {
         look = InputHandler.inputs.Player.Look;
-        rightClick = InputHandler.inputs.Player.RightClick;
         look.Enable();
-        rightClick.Enable();
     }
 
     private void OnDisable()
     {
         look.Disable();
-        rightClick.Disable();
     }
 
     public void BoostCam()
