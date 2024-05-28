@@ -177,7 +177,8 @@ public class CicakMovement : MonoBehaviour
                     }
                 }
                 else if (Physics.Raycast(transform.position, transform.right, out hit, wallDetectDist) ||
-                    Physics.Raycast(transform.position, -transform.right, out hit, wallDetectDist)) 
+                    Physics.Raycast(transform.position, -transform.right, out hit, wallDetectDist) ||
+                    Physics.Raycast(transform.position, transform.up, out hit, wallDetectDist)) 
                 {
                     if (Vector3.Angle(transform.up, hit.normal) > 60 && (hit.collider.CompareTag("Wall") || hit.collider.CompareTag("Floor")))
                     {
@@ -209,7 +210,7 @@ public class CicakMovement : MonoBehaviour
                 rb.velocity = transform.forward * moveInput.y + transform.right * moveInput.x;
             }
         }
-        if (Physics.Raycast(transform.position, -transform.up, out hit, wallDetectDist))
+        if (Physics.Raycast(transform.position, -transform.up, out hit, wallDetectDist) && (hit.collider.CompareTag("Wall") || hit.collider.CompareTag("Floor")))
         {
             gravityDir = -hit.normal.normalized;
             if (hit.distance < wallDetectDist/5)
@@ -217,7 +218,7 @@ public class CicakMovement : MonoBehaviour
                 moveSpeed = 2f;
             }
         }
-        else if (Physics.SphereCast(transform.position, 5, -transform.up, out hit))
+        else if (Physics.SphereCast(transform.position, 2, -transform.up, out hit) && (hit.collider.CompareTag("Wall") || hit.collider.CompareTag("Floor")))
         {
             gravityDir = -hit.normal.normalized;
             moveSpeed = 0.1f;

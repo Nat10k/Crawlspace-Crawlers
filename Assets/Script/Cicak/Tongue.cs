@@ -33,7 +33,8 @@ public class Tongue : MonoBehaviour
     private void Update()
     {
         tongueRay = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
-        if (Physics.Raycast(tongueRay, out hit) && (hit.collider.CompareTag("Wall") || hit.collider.CompareTag("Movable")) && Vector3.Distance(hit.point, headPos.position) < maxTongueLength)
+        if (Physics.Raycast(tongueRay, out hit) && (hit.collider.CompareTag("Wall") || hit.collider.CompareTag("Movable")
+            || hit.collider.CompareTag("Finish")) && Vector3.Distance(hit.point, headPos.position) < maxTongueLength)
         {
             hitSomething = true;
             cursor.color = Color.green;
@@ -129,7 +130,7 @@ public class Tongue : MonoBehaviour
                 hitWall = true;
                 StartCoroutine(TongueBoost());
             }
-            else if (other.gameObject.CompareTag("Movable") && !hitWall)
+            else if ((other.gameObject.CompareTag("Movable") || other.gameObject.CompareTag("Finish")) && !hitWall)
             {
                 cicakRB.constraints = RigidbodyConstraints.FreezeRotation;
                 heldObj = other.transform;
