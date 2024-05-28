@@ -47,7 +47,7 @@ public class CicakCam : MonoBehaviour
         camRoutine = StartCoroutine(ResetFOVRoutine());
     }
 
-    public IEnumerator BoostCamRoutine()
+    private IEnumerator BoostCamRoutine()
     {
         while (cam.fieldOfView < boostCamFOV)
         {
@@ -56,7 +56,7 @@ public class CicakCam : MonoBehaviour
         }
     }
 
-    public IEnumerator ResetFOVRoutine()
+    private IEnumerator ResetFOVRoutine()
     {
         while (cam.fieldOfView > initCamFOV)
         {
