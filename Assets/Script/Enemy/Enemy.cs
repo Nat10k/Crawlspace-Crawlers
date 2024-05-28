@@ -10,7 +10,7 @@ public abstract class Enemy : MonoBehaviour
     [HideInInspector] public Transform target;
     [HideInInspector] public NavMeshAgent agent;
 
-    private bool cicakVisible;
+    public bool cicakVisible;
 
     void Awake()
     {
@@ -32,7 +32,7 @@ public abstract class Enemy : MonoBehaviour
         cicakVisible = false;
         if (Physics.Raycast(cicakRay, out RaycastHit hit, detectRange))
         {
-            if (hit.collider.CompareTag("Player"))
+            if (hit.collider.CompareTag("Player") && Vector3.Angle(transform.forward, target.position-transform.position) < 70) // Detect only when in front
             {
                 cicakVisible = true;
             }

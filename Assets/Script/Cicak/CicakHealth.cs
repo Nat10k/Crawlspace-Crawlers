@@ -9,18 +9,16 @@ public class CicakHealth : MonoBehaviour
     private bool isInvulnerable;
     private const float InvulnerabilityPeriod = 5f; // Invulnerability in seconds
     [SerializeField] private Material cicakMaterial;
+    [SerializeField] private Transform model;
     CicakMovement cm;
-    private Color[] invulColors;
+    [SerializeField] private Color[] invulColors;
 
     private void Awake()
     {
         cm = GetComponent<CicakMovement>();
-
+        cicakMaterial.color = invulColors[0];
         isInvulnerable = false;
         lives = 3;
-        invulColors = new Color[2];
-        invulColors[0] = cicakMaterial.color;
-        invulColors[1] = Color.red;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -55,9 +53,9 @@ public class CicakHealth : MonoBehaviour
     {
         cm.StopMove();
         Camera.main.transform.parent = null;
-        while (transform.localScale.y > 0)
+        while (model.localScale.y > 0)
         {
-            transform.localScale -= new Vector3(0, 0.005f * Time.deltaTime, 0);
+            model.localScale -= new Vector3(0, Time.deltaTime, 0);
             yield return null;
         }
         death.Invoke();

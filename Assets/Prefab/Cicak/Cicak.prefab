@@ -569,7 +569,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8653232974178101492}
   - component: {fileID: 3223841379846241116}
-  m_Layer: 2
+  m_Layer: 0
   m_Name: LookAtTarget
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -991,7 +991,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3259839667481744677}
-  m_Layer: 2
+  m_Layer: 0
   m_Name: Cicak
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2468,7 +2468,7 @@ GameObject:
   - component: {fileID: 2000500745646144514}
   - component: {fileID: 8710551103294998779}
   - component: {fileID: 8588055536995680649}
-  m_Layer: 2
+  m_Layer: 0
   m_Name: CicakModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2594,7 +2594,7 @@ GameObject:
   - component: {fileID: 4850306942033023782}
   - component: {fileID: 5834795706153591028}
   - component: {fileID: 7436375040842978320}
-  m_Layer: 2
+  m_Layer: 0
   m_Name: CicakCtrl
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -2728,6 +2728,10 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   cicakMaterial: {fileID: 2100000, guid: ba377fe24cd1ec745b01f229652ce07f, type: 2}
+  model: {fileID: 7729805153865875933}
+  invulColors:
+  - {r: 0.9245283, g: 0.8981879, b: 0.13431823, a: 1}
+  - {r: 1, g: 0, b: 0, a: 1}
 --- !u!114 &5834795706153591028
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3411,6 +3415,10 @@ PrefabInstance:
     - target: {fileID: 871328299369487794, guid: 00c0a6698d45f3a49a02e31b24458ed8, type: 3}
       propertyPath: m_Name
       value: Tongue
+      objectReference: {fileID: 0}
+    - target: {fileID: 871328299369487794, guid: 00c0a6698d45f3a49a02e31b24458ed8, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5607315441914408443, guid: 00c0a6698d45f3a49a02e31b24458ed8, type: 3}
       propertyPath: cicak

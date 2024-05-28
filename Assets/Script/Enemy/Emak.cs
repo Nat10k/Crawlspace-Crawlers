@@ -1,17 +1,21 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Animations;
 using UnityEngine;
 
 public class Emak : Enemy
 {
     [SerializeField] private GameObject sandal;
     [SerializeField] List<Transform> patrolPos;
+    [SerializeField] Transform sandalSpawn;
+    Animator anim;
     private Coroutine shootSandal;
     public int currPatrolIdx;
 
     private void Start()
     {
+        anim = GetComponentInChildren<Animator>();
         currPatrolIdx = 0;
         agent.destination = patrolPos[currPatrolIdx].position;
     }
@@ -59,7 +63,9 @@ public class Emak : Enemy
         yield return new WaitForSeconds(3);
         while (true)
         {
-            GameObject currSandal = Instantiate(sandal, transform.position, Quaternion.identity);
+            anim.SetTrigger("Attack");
+            yield return new WaitForSeconds(2.5f);
+            GameObject currSandal = Instantiate(sandal, sandalSpawn.position, Quaternion.identity);
             Rigidbody sandalBody = currSandal.GetComponent<Rigidbody>();
             sandalBody.velocity = (target.position - currSandal.transform.position).normalized * 5;
             sandalBody.angularVelocity = sandalBody.transform.forward * 5;
