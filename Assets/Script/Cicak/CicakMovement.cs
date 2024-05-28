@@ -218,7 +218,7 @@ public class CicakMovement : MonoBehaviour
                 moveSpeed = 2f;
             }
         }
-        else if (Physics.SphereCast(transform.position, 2, -transform.up, out hit) && (hit.collider.CompareTag("Wall") || hit.collider.CompareTag("Floor")))
+        else if (Physics.SphereCast(transform.position, 3, -transform.up, out hit) && (hit.collider.CompareTag("Wall") || hit.collider.CompareTag("Floor")))
         {
             gravityDir = -hit.normal.normalized;
             moveSpeed = 0.1f;
