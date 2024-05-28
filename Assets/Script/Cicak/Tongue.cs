@@ -1,5 +1,7 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class Tongue : MonoBehaviour
 {
@@ -7,10 +9,14 @@ public class Tongue : MonoBehaviour
     LineRenderer line;
     [SerializeField] Transform cicak, headPos;
     [SerializeField] CicakCam cicakCam;
+    [SerializeField] Image cursor;
     CicakMovement cicakMove;
     Transform heldObj;
     Rigidbody cicakRB;
     Vector3 hitPos;
+    Ray tongueRay;
+    RaycastHit hit;
+    bool hitSomething, isShooting;
     float maxTongueLength = 5 ,boostFactor = 2;
 
     private void Awake()
@@ -18,17 +24,37 @@ public class Tongue : MonoBehaviour
         line = GetComponent<LineRenderer>();
         cicakRB = cicak.GetComponent<Rigidbody>();
         cicakMove = cicak.GetComponent<CicakMovement>();
-        startedAnim = false;
-    }
-
-    private void OnDisable()
-    {
         hitWall = false;
         hitObject = false;
+        startedAnim = false;
+        isShooting = false;
     }
 
-    public IEnumerator ShootTongue(Vector3 dest)
+    private void Update()
     {
+        tongueRay = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
+        if (Physics.Raycast(tongueRay, out hit) && (hit.collider.CompareTag("Wall") || hit.collider.CompareTag("Movable")) && Vector3.Distance(hit.point, headPos.position) < maxTongueLength)
+        {
+            hitSomething = true;
+            cursor.color = Color.green;
+        } else
+        {
+            hitSomething = false;
+            cursor.color = Color.white;
+        }
+    }
+
+    public IEnumerator ShootTongue()
+    {
+        isShooting = true;
+        Vector3 dest;
+        if (hitSomething)
+        {
+            dest = hit.point;
+        } else
+        {
+            dest = tongueRay.origin + tongueRay.direction * maxTongueLength;
+        }
         line.SetPosition(0, headPos.position);
         line.SetPosition(1, headPos.position);
         transform.position = headPos.position;
@@ -60,7 +86,6 @@ public class Tongue : MonoBehaviour
                     }
                 } else if (hitObject)
                 {
-                    cicakRB.constraints = RigidbodyConstraints.FreezeRotation;
                     line.SetPosition(1, heldObj.TransformPoint(hitPos));
                 }
             }
@@ -71,18 +96,19 @@ public class Tongue : MonoBehaviour
 
     public IEnumerator RetractTongue()
     {
+        isShooting = false;
+        hitWall = false;
+        hitObject = false;
+        cicakCam.ResetFOV();
         cicakRB.constraints = RigidbodyConstraints.None;
         while (line.GetPosition(1) != line.GetPosition(0))
         {
             line.SetPosition(0, headPos.position);
             line.SetPosition(1, Vector3.MoveTowards(line.GetPosition(1), headPos.position, 10 * Time.deltaTime));
             transform.position = line.GetPosition(1);
-            cicakCam.ResetFOV();
             yield return null;
         }
         boostFactor = 2;
-        gameObject.SetActive(false);
-        enabled = false;
         startedAnim = false;
     }
 
@@ -95,17 +121,22 @@ public class Tongue : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        hitPos = other.ClosestPoint(line.GetPosition(1));
-        if ((other.gameObject.CompareTag("Wall") || other.gameObject.CompareTag("Floor")) && !hitObject)
+        if (isShooting)
         {
-            hitWall = true;
-            StartCoroutine(TongueBoost());
-        } else if (other.gameObject.CompareTag("Movable") && !hitWall)
-        {
-            heldObj = other.transform;
-            hitPos = heldObj.InverseTransformPoint(hitPos);
-            line.SetPosition(1, heldObj.TransformPoint(hitPos));
-            hitObject = true;
+            hitPos = other.ClosestPoint(line.GetPosition(1));
+            if ((other.gameObject.CompareTag("Wall") || other.gameObject.CompareTag("Floor")) && !hitObject)
+            {
+                hitWall = true;
+                StartCoroutine(TongueBoost());
+            }
+            else if (other.gameObject.CompareTag("Movable") && !hitWall)
+            {
+                cicakRB.constraints = RigidbodyConstraints.FreezeRotation;
+                heldObj = other.transform;
+                hitPos = heldObj.InverseTransformPoint(hitPos);
+                line.SetPosition(1, heldObj.TransformPoint(hitPos));
+                hitObject = true;
+            }
         }
     }
 

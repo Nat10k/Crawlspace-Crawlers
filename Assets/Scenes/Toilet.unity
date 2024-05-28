@@ -1415,7 +1415,7 @@ GameObject:
   - component: {fileID: 657108323}
   - component: {fileID: 657108324}
   - component: {fileID: 657108325}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: CicakCtrl
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -2751,7 +2751,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 1476136244}
     m_Modifications:
     - target: {fileID: 871328299369487794, guid: 00c0a6698d45f3a49a02e31b24458ed8, type: 3}
       propertyPath: m_Name
@@ -2762,6 +2762,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 657108319}
     - target: {fileID: 5607315441914408443, guid: 00c0a6698d45f3a49a02e31b24458ed8, type: 3}
+      propertyPath: cursor
+      value: 
+      objectReference: {fileID: 1883133702}
+    - target: {fileID: 5607315441914408443, guid: 00c0a6698d45f3a49a02e31b24458ed8, type: 3}
       propertyPath: headPos
       value: 
       objectReference: {fileID: 989480901287345701}
@@ -2770,16 +2774,28 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5138370809990304973}
     - target: {fileID: 6073864876719595285, guid: 00c0a6698d45f3a49a02e31b24458ed8, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6073864876719595285, guid: 00c0a6698d45f3a49a02e31b24458ed8, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6073864876719595285, guid: 00c0a6698d45f3a49a02e31b24458ed8, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6073864876719595285, guid: 00c0a6698d45f3a49a02e31b24458ed8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.68000054
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6073864876719595285, guid: 00c0a6698d45f3a49a02e31b24458ed8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.527
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6073864876719595285, guid: 00c0a6698d45f3a49a02e31b24458ed8, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3.52
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6073864876719595285, guid: 00c0a6698d45f3a49a02e31b24458ed8, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2787,15 +2803,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6073864876719595285, guid: 00c0a6698d45f3a49a02e31b24458ed8, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6073864876719595285, guid: 00c0a6698d45f3a49a02e31b24458ed8, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6073864876719595285, guid: 00c0a6698d45f3a49a02e31b24458ed8, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6073864876719595285, guid: 00c0a6698d45f3a49a02e31b24458ed8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2886,7 +2902,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1476136244}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: CicakPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2909,6 +2925,7 @@ Transform:
   - {fileID: 543450652033216358}
   - {fileID: 657108319}
   - {fileID: 1606886149}
+  - {fileID: 1726963348}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1508570728
@@ -3164,7 +3181,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1606886149}
   - component: {fileID: 1606886150}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: LookAtTarget
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3373,6 +3390,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1969839628}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &1726963348 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6073864876719595285, guid: 00c0a6698d45f3a49a02e31b24458ed8, type: 3}
+  m_PrefabInstance: {fileID: 1277337623}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1733442056
 GameObject:
   m_ObjectHideFlags: 0
@@ -4272,7 +4294,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8550271231275829339}
   - component: {fileID: 5807059205525948248}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: FisheyeDistortion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4415,7 +4437,7 @@ GameObject:
   - component: {fileID: 6123839395181317623}
   - component: {fileID: 5138370809990304973}
   - component: {fileID: 5073367308545473609}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -7535,6 +7557,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1596948263704142281, guid: f3b2822b3b1d53043aae5debf4454950, type: 3}
+      propertyPath: m_Mass
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 3806929355229266051, guid: f3b2822b3b1d53043aae5debf4454950, type: 3}
       propertyPath: m_Name
       value: shampoo
@@ -7806,7 +7832,6 @@ Transform:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 1277337623}
   - {fileID: 1476136244}
   - {fileID: 834636287}
   - {fileID: 1616569162}
