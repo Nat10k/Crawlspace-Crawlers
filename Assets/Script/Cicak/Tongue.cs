@@ -101,7 +101,6 @@ public class Tongue : MonoBehaviour
         hitWall = false;
         hitObject = false;
         cicakCam.ResetFOV();
-        cicakRB.constraints = RigidbodyConstraints.None;
         while (line.GetPosition(1) != line.GetPosition(0))
         {
             line.SetPosition(0, headPos.position);
@@ -132,7 +131,6 @@ public class Tongue : MonoBehaviour
             }
             else if ((other.gameObject.CompareTag("Movable") || other.gameObject.CompareTag("Finish")) && !hitWall)
             {
-                cicakRB.constraints = RigidbodyConstraints.FreezeRotation;
                 heldObj = other.transform;
                 hitPos = heldObj.InverseTransformPoint(hitPos);
                 line.SetPosition(1, heldObj.TransformPoint(hitPos));

@@ -6,9 +6,9 @@ public class CicakMovement : MonoBehaviour
 {
     InputAction move, tongueAction, tailInput, look, rightClick;
     Rigidbody rb;
-    const float lookSpeed = 1f, gravityForce = 17f, wallDetectDist = 0.2f;
+    const float lookSpeed = 1f, gravityForce = 15f, wallDetectDist = 0.2f;
     float moveSpeed = 2f, tailCooldown = 15f, scaleSpeed;
-    bool justClimbed, hasTail, isGrounded, canMove, justHit;
+    bool justClimbed, hasTail, isGrounded, canMove, justHit, hitUp;
     [SerializeField] Tongue tongue;
     [SerializeField] Transform tailObj, headBone, spine;
     [SerializeField] Material cicakMaterial;
@@ -26,6 +26,7 @@ public class CicakMovement : MonoBehaviour
 
         gravityDir = transform.up * -1;
         justClimbed = false;
+        hitUp = false;
         justHit = false;
         hasTail = true;
         isGrounded = true;
@@ -162,6 +163,10 @@ public class CicakMovement : MonoBehaviour
                 {
                     StopCoroutine(tongueFire);
                     StartCoroutine(tongue.RetractTongue());
+                    if (hitUp)
+                    {
+                        ClimbWall(-transform.up, transform.forward);
+                    }
                 }
             }
 
@@ -177,8 +182,7 @@ public class CicakMovement : MonoBehaviour
                     }
                 }
                 else if (Physics.Raycast(transform.position, transform.right, out hit, wallDetectDist) ||
-                    Physics.Raycast(transform.position, -transform.right, out hit, wallDetectDist) ||
-                    Physics.Raycast(transform.position, transform.up, out hit, wallDetectDist)) 
+                    Physics.Raycast(transform.position, -transform.right, out hit, wallDetectDist)) 
                 {
                     if (Vector3.Angle(transform.up, hit.normal) > 60 && (hit.collider.CompareTag("Wall") || hit.collider.CompareTag("Floor")))
                     {
@@ -193,10 +197,16 @@ public class CicakMovement : MonoBehaviour
                         justHit = true;
                         ClimbWall(hit.normal, -transform.up);
                     }
+                } else if (Physics.Raycast(transform.position, transform.up, out hit, wallDetectDist))
+                {
+                    justClimbed = false;
+                    justHit = true;
+                    hitUp = true;
                 }
                 else
                 {
                     justHit = false;
+                    hitUp = false;
                     justClimbed = false;
                 }
             }
@@ -218,7 +228,8 @@ public class CicakMovement : MonoBehaviour
                 moveSpeed = 2f;
             }
         }
-        else if (Physics.SphereCast(transform.position, 3, -transform.up, out hit) && (hit.collider.CompareTag("Wall") || hit.collider.CompareTag("Floor")))
+        else if (Physics.SphereCast(transform.position, 3, -transform.up, out hit, 10) 
+            && (hit.collider.CompareTag("Wall") || hit.collider.CompareTag("Floor")))
         {
             gravityDir = -hit.normal.normalized;
             moveSpeed = 0.1f;
@@ -226,7 +237,7 @@ public class CicakMovement : MonoBehaviour
         else if (!tongue.GetHitWall())
         {
             gravityDir = Vector3.down;
-            moveSpeed = 2f;
+            moveSpeed = 0.1f;
         }
         rb.AddForce(gravityForce * gravityDir, ForceMode.Acceleration);
     }
