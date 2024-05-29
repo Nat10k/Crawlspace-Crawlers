@@ -978,22 +978,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0739f097664cbe849887ce88fa5c3855, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  assignedEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 822383133}
-        m_TargetAssemblyTypeName: Tutorial, Assembly-CSharp
-        m_MethodName: NextInstruction
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  nextTrigger: {fileID: 1746170432}
   checkPlayer: 0
   checkTongue: 1
   isActive: 0
@@ -2222,22 +2206,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0739f097664cbe849887ce88fa5c3855, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  assignedEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 822383133}
-        m_TargetAssemblyTypeName: Tutorial, Assembly-CSharp
-        m_MethodName: NextInstruction
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  nextTrigger: {fileID: 0}
   checkPlayer: 0
   checkTongue: 1
   isActive: 0
@@ -2355,22 +2323,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0739f097664cbe849887ce88fa5c3855, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  assignedEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 822383133}
-        m_TargetAssemblyTypeName: Tutorial, Assembly-CSharp
-        m_MethodName: NextInstruction
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  nextTrigger: {fileID: 407441699}
   checkPlayer: 1
   checkTongue: 0
   isActive: 0
@@ -2383,6 +2335,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2095202333}
+  - component: {fileID: 2095202334}
   m_Layer: 5
   m_Name: Health
   m_TagString: Untagged
@@ -2412,6 +2365,26 @@ RectTransform:
   m_AnchoredPosition: {x: 167.12, y: -55.694}
   m_SizeDelta: {x: 231.21, y: 69.988}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2095202334
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2095202332}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26617e6fd63884a4fb0c5817ed6b5872, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hearts:
+  - {fileID: 45002875}
+  - {fileID: 746821713}
+  - {fileID: 974145448}
+  damagedGif: {fileID: 21300000, guid: ef85a372c4412ef43b03083c10ac0371, type: 3}
+  damagedStill: {fileID: 21300000, guid: 410639e6aaa9608438579733a611235c, type: 3}
+  fullStill: {fileID: 21300000, guid: 8d712320465c9834988bc8f5fc743e4c, type: 3}
+  fullGif: {fileID: 21300000, guid: 16e9f61ffb740034bbbb59ec526f0720, type: 3}
 --- !u!1 &899897589950331517 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4086176963853392603, guid: 3cf6ce0975d4c5f40abf1b0813a6d576, type: 3}

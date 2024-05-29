@@ -24,20 +24,25 @@ public class CicakHealth : MonoBehaviour
     {
         if (other.CompareTag("Enemy") && !isInvulnerable)
         {
-            lives--;
-            if (lives <= 0)
-            {
-                StartCoroutine(Death());
-                return;
-            }
-            isInvulnerable = true;
-            StartCoroutine(Invulnerability());
+            Damaged();
         }
+    }
+
+    private void Damaged()
+    {
+        lives--;
+        EventManagers.InvokeEvent("Damaged");
+        if (lives <= 0)
+        {
+            StartCoroutine(Death());
+            return;
+        }
+        isInvulnerable = true;
+        StartCoroutine(Invulnerability());
     }
 
     private IEnumerator Invulnerability()
     {
-        float timer = 0;
         int colorIdx = 1;
         for (int i=0; i<6; i++)
         {
@@ -69,14 +74,7 @@ public class CicakHealth : MonoBehaviour
             EventManagers.InvokeEvent("Finish");
         } else if (collision.collider.CompareTag("Enemy") && !isInvulnerable)
         {
-            lives--;
-            if (lives <= 0)
-            {
-                StartCoroutine(Death());
-                return;
-            }
-            isInvulnerable = true;
-            StartCoroutine(Invulnerability());
+            Damaged();
         }
     }
 }
