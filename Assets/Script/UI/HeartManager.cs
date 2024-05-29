@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class HeartManager : MonoBehaviour
 {
     [SerializeField] List<Image> hearts;
-    [SerializeField] Sprite damagedGif, damagedStill, fullStill, fullGif;
+    [SerializeField] Sprite damagedStill, fullStill;
     Listener damagedListener;
     const float InvulnerabilityPeriod = 3f;
     int currHealthyIdx;
@@ -32,27 +32,15 @@ public class HeartManager : MonoBehaviour
     private IEnumerator DamageAnim()
     {
         hearts[currHealthyIdx].sprite = damagedStill;
-        foreach (var heart in hearts)
+        int mult = -1;
+        for (int i = 0; i < 6; i++)
         {
-            if (heart.sprite == damagedStill)
+            foreach (var heart in hearts)
             {
-                heart.sprite = damagedGif;
-            } else
-            {
-                heart.sprite = fullGif;
+                heart.color = new Color(heart.color.r, heart.color.g, heart.color.b, heart.color.a + mult * 127.5f);
             }
-        }
-        yield return new WaitForSeconds(InvulnerabilityPeriod);
-        foreach (var heart in hearts)
-        {
-            if (heart.sprite == damagedGif)
-            {
-                heart.sprite = damagedStill;
-            }
-            else
-            {
-                heart.sprite = fullStill;
-            }
+            mult *= -1;
+            yield return new WaitForSeconds(InvulnerabilityPeriod / 6);
         }
         currHealthyIdx++;
     }
