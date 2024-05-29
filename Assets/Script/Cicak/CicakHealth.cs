@@ -7,7 +7,7 @@ public class CicakHealth : MonoBehaviour
     private int lives;
     public UnityEvent levelFinished, death;
     private bool isInvulnerable;
-    private const float InvulnerabilityPeriod = 5f; // Invulnerability in seconds
+    private const float InvulnerabilityPeriod = 3f; // Invulnerability in seconds
     [SerializeField] private Material cicakMaterial;
     [SerializeField] private Transform model;
     CicakMovement cm;
@@ -39,11 +39,13 @@ public class CicakHealth : MonoBehaviour
     private IEnumerator Invulnerability()
     {
         float timer = 0;
-        cicakMaterial.color = invulColors[1];
-        while (timer < InvulnerabilityPeriod)
+        int colorIdx = 1;
+        for (int i=0; i<6; i++)
         {
-            timer += Time.deltaTime;
-            yield return null;
+            cicakMaterial.color = invulColors[colorIdx];
+            colorIdx++;
+            colorIdx %= invulColors.Length;
+            yield return new WaitForSeconds(InvulnerabilityPeriod/6);
         }
         cicakMaterial.color = invulColors[0];
         isInvulnerable = false;
