@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 3653255914011531483}
   - component: {fileID: 3725085435173862599}
   - component: {fileID: 2110093876168019231}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: TUTUP.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}

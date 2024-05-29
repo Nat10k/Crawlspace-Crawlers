@@ -10,17 +10,40 @@ public class Tutorial : MonoBehaviour
     [SerializeField] List<Outline> targets;
     [SerializeField] TMP_Text instructionText;
     [SerializeField] FinishObject finish;
+    public List<TutorialTrigger> triggers;
+    Listener tutorEventListener;
     int currIdx;
 
     private void Awake()
     {
+        tutorEventListener = new Listener();
+        tutorEventListener.invoke = NextInstruction;
+        EventManagers.Register("Tutorial", tutorEventListener);
+        triggers = new List<TutorialTrigger>();
+        // Get all tutorial triggers
+        foreach (Outline target in targets)
+        {
+            if (target != null)
+            {
+                TutorialTrigger currTrigger = target.gameObject.GetComponent<TutorialTrigger>();
+                triggers.Add(currTrigger);
+            } else
+            {
+                triggers.Add(null);
+            }
+        }
         currIdx = 0;
         if (targets[currIdx] != null)
         {
             targets[currIdx].enabled = true;
-            targets[currIdx].OutlineMode = Outline.Mode.OutlineAndSilhouette;
+            triggers[currIdx].isActive = true;
         }
         instructionText.text = instructions[currIdx];
+    }
+
+    private void OnDestroy()
+    {
+        EventManagers.Unregister("Tutorial", tutorEventListener);
     }
 
     public void NextInstruction()
@@ -34,6 +57,7 @@ public class Tutorial : MonoBehaviour
         if (targets[currIdx] != null)
         {
             targets[currIdx].enabled = true;
+            triggers[currIdx].isActive = true;
         }
         if (currIdx == instructions.Count-1)
         {

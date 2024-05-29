@@ -1,21 +1,14 @@
 using UnityEngine;
-using UnityEngine.Events;
 
 public class TutorialTrigger : MonoBehaviour
 {
-    [SerializeField] UnityEvent assignedEvent;
-    [SerializeField] TutorialTrigger nextTrigger;
     public bool checkPlayer, checkTongue, isActive;
 
     public void TriggerEvent()
     {
         if (isActive)
         {
-            assignedEvent.Invoke();
-            if (nextTrigger != null)
-            {
-                nextTrigger.isActive = true;
-            }
+            EventManagers.InvokeEvent("Tutorial");
             Destroy(this);
         }
     }

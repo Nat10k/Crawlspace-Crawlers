@@ -5,7 +5,6 @@ using UnityEngine.Events;
 public class CicakHealth : MonoBehaviour
 {
     private int lives;
-    public UnityEvent levelFinished, death;
     private bool isInvulnerable;
     private const float InvulnerabilityPeriod = 3f; // Invulnerability in seconds
     [SerializeField] private Material cicakMaterial;
@@ -60,14 +59,24 @@ public class CicakHealth : MonoBehaviour
             model.localScale -= new Vector3(0, Time.deltaTime, 0);
             yield return null;
         }
-        death.Invoke();
+        EventManagers.InvokeEvent("GameOver");
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Finish"))
         {
-            levelFinished.Invoke();
+            EventManagers.InvokeEvent("Finish");
+        } else if (collision.collider.CompareTag("Enemy") && !isInvulnerable)
+        {
+            lives--;
+            if (lives <= 0)
+            {
+                StartCoroutine(Death());
+                return;
+            }
+            isInvulnerable = true;
+            StartCoroutine(Invulnerability());
         }
     }
 }

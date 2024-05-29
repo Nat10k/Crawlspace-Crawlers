@@ -63,10 +63,14 @@ public class Emak : Enemy
         yield return new WaitForSeconds(3);
         while (true)
         {
-            anim.SetTrigger("Attack");
-            yield return new WaitForSeconds(2.3f);
             GameObject currSandal = Instantiate(sandal, sandalSpawn.position, Quaternion.identity);
+            currSandal.transform.SetParent(sandalSpawn);
             Rigidbody sandalBody = currSandal.GetComponent<Rigidbody>();
+            sandalBody.constraints = RigidbodyConstraints.FreezeAll;
+            anim.SetTrigger("Attack");
+            yield return new WaitForSeconds(2.36f);
+            currSandal.transform.SetParent(null);
+            sandalBody.constraints = RigidbodyConstraints.None;
             sandalBody.velocity = (target.position - currSandal.transform.position).normalized * 5;
             sandalBody.angularVelocity = sandalBody.transform.forward * 5;
             yield return new WaitForSeconds(0.5f);
