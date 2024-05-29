@@ -10,7 +10,7 @@ public class Tutorial : MonoBehaviour
     [SerializeField] List<Outline> targets;
     [SerializeField] TMP_Text instructionText;
     [SerializeField] FinishObject finish;
-    public List<TutorialTrigger> triggers;
+    private List<TutorialTrigger> triggers;
     Listener tutorEventListener;
     int currIdx;
 
