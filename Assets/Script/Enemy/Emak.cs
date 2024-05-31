@@ -1,7 +1,5 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Animations;
 using UnityEngine;
 
 public class Emak : Enemy
@@ -68,7 +66,7 @@ public class Emak : Enemy
             Rigidbody sandalBody = currSandal.GetComponent<Rigidbody>();
             sandalBody.constraints = RigidbodyConstraints.FreezeAll;
             anim.SetTrigger("Attack");
-            yield return new WaitForSeconds(2.36f);
+            yield return new WaitForSeconds(2.5f);
             currSandal.transform.SetParent(null);
             sandalBody.constraints = RigidbodyConstraints.None;
             sandalBody.velocity = (target.position - currSandal.transform.position).normalized * 5;

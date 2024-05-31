@@ -421,7 +421,7 @@ PrefabInstance:
     - target: {fileID: 4616841093310589688, guid: 0bb62220a1614fb4795f8bb6fd3f110b, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 9d3df1cd700bf9a4d9876bb105bdff5b, type: 2}
+      objectReference: {fileID: 2100000, guid: f83489311e0cca14586e0974f43de348, type: 2}
     - target: {fileID: 7339903060812514156, guid: 0bb62220a1614fb4795f8bb6fd3f110b, type: 3}
       propertyPath: m_LocalScale.z
       value: 11.316527
@@ -2381,10 +2381,8 @@ MonoBehaviour:
   - {fileID: 45002875}
   - {fileID: 746821713}
   - {fileID: 974145448}
-  damagedGif: {fileID: 21300000, guid: ef85a372c4412ef43b03083c10ac0371, type: 3}
   damagedStill: {fileID: 21300000, guid: 410639e6aaa9608438579733a611235c, type: 3}
   fullStill: {fileID: 21300000, guid: 8d712320465c9834988bc8f5fc743e4c, type: 3}
-  fullGif: {fileID: 21300000, guid: 16e9f61ffb740034bbbb59ec526f0720, type: 3}
 --- !u!1 &899897589950331517 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4086176963853392603, guid: 3cf6ce0975d4c5f40abf1b0813a6d576, type: 3}
@@ -3027,8 +3025,8 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -3137814258639490539, guid: 97c8ab269494c2a449d24d7d47a81d5d, type: 3}
-  - {fileID: 2100000, guid: 9d3df1cd700bf9a4d9876bb105bdff5b, type: 2}
+  - {fileID: 2100000, guid: 67bcfadbc2cc7e14ab50ca1e1c5f0bbd, type: 2}
+  - {fileID: 2100000, guid: 67bcfadbc2cc7e14ab50ca1e1c5f0bbd, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3283,6 +3281,34 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4850306942033023782, guid: e3978e74ea07ba64db304278a2831127, type: 3}
+      propertyPath: invulColors.Array.data[0].b
+      value: 0.41960788
+      objectReference: {fileID: 0}
+    - target: {fileID: 4850306942033023782, guid: e3978e74ea07ba64db304278a2831127, type: 3}
+      propertyPath: invulColors.Array.data[0].g
+      value: 0.23529413
+      objectReference: {fileID: 0}
+    - target: {fileID: 4850306942033023782, guid: e3978e74ea07ba64db304278a2831127, type: 3}
+      propertyPath: invulColors.Array.data[0].r
+      value: 0.8941177
+      objectReference: {fileID: 0}
+    - target: {fileID: 4850306942033023782, guid: e3978e74ea07ba64db304278a2831127, type: 3}
+      propertyPath: invulColors.Array.data[1].a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4850306942033023782, guid: e3978e74ea07ba64db304278a2831127, type: 3}
+      propertyPath: invulColors.Array.data[1].b
+      value: 0.049898148
+      objectReference: {fileID: 0}
+    - target: {fileID: 4850306942033023782, guid: e3978e74ea07ba64db304278a2831127, type: 3}
+      propertyPath: invulColors.Array.data[1].g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4850306942033023782, guid: e3978e74ea07ba64db304278a2831127, type: 3}
+      propertyPath: invulColors.Array.data[1].r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4850306942033023782, guid: e3978e74ea07ba64db304278a2831127, type: 3}
       propertyPath: death.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1587045446}
@@ -3454,7 +3480,7 @@ PrefabInstance:
     - target: {fileID: 2379405475100615649, guid: 1012906a6b3e19444a36e4e0cb9bda99, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: cb734478ef6f9b240adc248fd921fd49, type: 2}
+      objectReference: {fileID: 2100000, guid: c442584aa57d8ad49a1aa4a79397dcfe, type: 2}
     - target: {fileID: 3498383979411236400, guid: 1012906a6b3e19444a36e4e0cb9bda99, type: 3}
       propertyPath: m_Name
       value: LANTAI
@@ -3765,9 +3791,13 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4429903802656255521, guid: 93eda3bef818b074e9df35530e27b0c8, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 30e704a618792ea4da7fea3fe8d2c318, type: 2}
+    - target: {fileID: 4429903802656255521, guid: 93eda3bef818b074e9df35530e27b0c8, type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
-      objectReference: {fileID: 2100000, guid: 9d3df1cd700bf9a4d9876bb105bdff5b, type: 2}
+      objectReference: {fileID: 2100000, guid: 30e704a618792ea4da7fea3fe8d2c318, type: 2}
     - target: {fileID: 6725450090785260079, guid: 93eda3bef818b074e9df35530e27b0c8, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.07565306
@@ -3784,6 +3814,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 0.00399
       objectReference: {fileID: 0}
+    - target: {fileID: 9001974834430635731, guid: 93eda3bef818b074e9df35530e27b0c8, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 30e704a618792ea4da7fea3fe8d2c318, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
