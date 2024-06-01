@@ -1,8 +1,7 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class FinishObject : MonoBehaviour
+public class TargetObject : MonoBehaviour
 {
     Outline outline;
     ParticleSystem particleSystem;
@@ -18,7 +17,7 @@ public class FinishObject : MonoBehaviour
     
     public void TurnOnFinish()
     {
-        gameObject.tag = "Finish";
+        gameObject.tag = "Target";
         outline.enabled = true;
         particleSystem.enableEmission = true;
         StartCoroutine(Blink());

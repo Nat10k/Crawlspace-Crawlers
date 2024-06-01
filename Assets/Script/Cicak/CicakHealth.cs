@@ -69,9 +69,9 @@ public class CicakHealth : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Finish"))
+        if (collision.gameObject.CompareTag("Target"))
         {
-            EventManagers.InvokeEvent("Finish");
+            EventManagers.InvokeEvent("AddObject");
         } else if (collision.collider.CompareTag("Enemy") && !isInvulnerable)
         {
             Damaged();

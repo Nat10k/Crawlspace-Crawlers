@@ -9,6 +9,7 @@ TagManager:
   - Movable
   - Tongue
   - Enemy
+  - Target
   layers:
   - Default
   - TransparentFX
