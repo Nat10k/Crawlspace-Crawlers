@@ -4925,6 +4925,7 @@ GameObject:
   - component: {fileID: 2674383706821113096}
   - component: {fileID: 4885840928607377344}
   - component: {fileID: 3006719070419436613}
+  - component: {fileID: -7949055811507544431}
   m_Layer: 3
   m_Name: gelas kumur
   m_TagString: Movable
@@ -5471,3 +5472,24 @@ MonoBehaviour:
     - {x: 0.53985846, y: -0.31168747, z: 0.78192306}
     - {x: 0.6233749, y: 0.000000028320702, z: 0.78192306}
     - {x: 0.76909435, y: -0.44403702, z: 0.45970088}
+--- !u!95 &-7949055811507544431
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8428653186806474157}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7c782e22a1bfc0d48b080b20964d051c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

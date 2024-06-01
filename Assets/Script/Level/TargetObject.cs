@@ -5,10 +5,12 @@ public class TargetObject : MonoBehaviour
 {
     Outline outline;
     ParticleSystem particleSystem;
+    Animator animator;
 
     private void Awake()
     {
         outline = GetComponent<Outline>();
+        animator = GetComponent<Animator>();
         particleSystem = GetComponentInChildren<ParticleSystem>();
 
         outline.enabled = false;
@@ -21,6 +23,20 @@ public class TargetObject : MonoBehaviour
         outline.enabled = true;
         particleSystem.enableEmission = true;
         StartCoroutine(Blink());
+    }
+
+    public void Collect()
+    {
+        gameObject.tag = "Untagged";
+        outline.enabled = false;
+        particleSystem.enableEmission = false;
+        StopAllCoroutines();
+        animator.SetTrigger("Collected");
+    }
+
+    public void DestroyObject()
+    {
+        Destroy(gameObject);
     }
 
     IEnumerator Blink()

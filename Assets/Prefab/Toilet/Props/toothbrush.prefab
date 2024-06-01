@@ -4926,6 +4926,7 @@ GameObject:
   - component: {fileID: 8937288455511673631}
   - component: {fileID: -5234889167290580545}
   - component: {fileID: -7776087938789525080}
+  - component: {fileID: -6165777365200734526}
   m_Layer: 3
   m_Name: toothbrush
   m_TagString: Movable
@@ -5472,3 +5473,24 @@ MonoBehaviour:
     - {x: 0.53985846, y: -0.31168747, z: 0.78192306}
     - {x: 0.6233749, y: 0.000000028320702, z: 0.78192306}
     - {x: 0.76909435, y: -0.44403702, z: 0.45970088}
+--- !u!95 &-6165777365200734526
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7338110639071931607}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7c782e22a1bfc0d48b080b20964d051c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

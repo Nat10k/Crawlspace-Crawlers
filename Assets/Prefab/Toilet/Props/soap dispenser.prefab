@@ -4927,6 +4927,7 @@ GameObject:
   - component: {fileID: 4166613083469061643}
   - component: {fileID: 1852516422813298833}
   - component: {fileID: 3668931243793502105}
+  - component: {fileID: 7864922423844619936}
   m_Layer: 3
   m_Name: soap dispenser
   m_TagString: Movable
@@ -5494,3 +5495,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87da1cd0eb76c134eb52440b3684cb08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &7864922423844619936
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6818853190218533366}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7c782e22a1bfc0d48b080b20964d051c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

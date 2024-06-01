@@ -34,7 +34,7 @@ public class Tongue : MonoBehaviour
     {
         tongueRay = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
         if (Physics.Raycast(tongueRay, out hit) && (hit.collider.CompareTag("Wall") || hit.collider.CompareTag("Movable")
-            || hit.collider.CompareTag("Finish")) && Vector3.Distance(hit.point, headPos.position) < maxTongueLength)
+            || hit.collider.CompareTag("Target")) && Vector3.Distance(hit.point, headPos.position) < maxTongueLength)
         {
             hitSomething = true;
             cursor.color = Color.green;
@@ -129,7 +129,7 @@ public class Tongue : MonoBehaviour
                 hitWall = true;
                 StartCoroutine(TongueBoost());
             }
-            else if ((other.gameObject.CompareTag("Movable") || other.gameObject.CompareTag("Finish")) && !hitWall)
+            else if ((other.gameObject.CompareTag("Movable") || other.gameObject.CompareTag("Target")) && !hitWall)
             {
                 heldObj = other.transform;
                 hitPos = heldObj.InverseTransformPoint(hitPos);

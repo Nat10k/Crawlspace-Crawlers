@@ -71,6 +71,7 @@ public class CicakHealth : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Target"))
         {
+            collision.gameObject.GetComponent<TargetObject>().Collect();
             EventManagers.InvokeEvent("AddObject");
         } else if (collision.collider.CompareTag("Enemy") && !isInvulnerable)
         {
