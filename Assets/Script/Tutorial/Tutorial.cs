@@ -19,12 +19,12 @@ public class Tutorial : MonoBehaviour
     private Listener tutorEventListener;
     private int currIdx;
     private Coroutine instructionCoroutine;
-    private InputAction uiClick;
+    private InputAction leftClick;
 
     private void Awake()
     {
         // Set up skip instruction
-        uiClick = InputHandler.inputs.UI.Click;
+        leftClick = InputHandler.inputs.Player.Fire;
 
         tutorEventListener = new Listener();
         tutorEventListener.invoke = NextInstruction;
@@ -60,14 +60,12 @@ public class Tutorial : MonoBehaviour
 
     private void OnEnable()
     {
-        uiClick.performed += SkipInstruction;
-        uiClick.Enable();
+        leftClick.performed += SkipInstruction;
     }
 
     private void OnDisable()
     {
-        uiClick.performed -= SkipInstruction;
-        uiClick.Disable();
+        leftClick.performed -= SkipInstruction;
     }
 
     private void OnDestroy()
@@ -133,14 +131,18 @@ public class Tutorial : MonoBehaviour
 
     private void SkipInstruction(InputAction.CallbackContext ctx)
     {
-        if (instructionCoroutine != null)
+        if (ctx.performed)
         {
-            StopAllCoroutines();
-            currInstructionText.text = instructions[currIdx];
-            instructionCoroutine = null;
-        } else if (currIdx < instructions.Count && isBig[currIdx])
-        {
-            NextInstruction();
+            if (instructionCoroutine != null)
+            {
+                StopAllCoroutines();
+                currInstructionText.text = instructions[currIdx];
+                instructionCoroutine = null;
+            }
+            else if (currIdx < instructions.Count && isBig[currIdx])
+            {
+                NextInstruction();
+            }
         }
     }
 
