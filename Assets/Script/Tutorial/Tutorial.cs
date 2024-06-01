@@ -1,18 +1,21 @@
 using System.Collections;
+using System;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor.Rendering;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class Tutorial : MonoBehaviour
 {
-    [SerializeField] List<string> instructions;
-    [SerializeField] List<Outline> targets;
-    [SerializeField] TMP_Text instructionText;
-    [SerializeField] TargetObject finish;
+    [SerializeField] private List<string> instructions;
+    [SerializeField] private List<Outline> targets;
+    [SerializeField] private TMP_Text instructionText;
+    [SerializeField] private TargetObject finish;
     private List<TutorialTrigger> triggers;
-    Listener tutorEventListener;
-    int currIdx;
+    private const float instructionSpeed = 0.03f;
+    private Listener tutorEventListener;
+    private int currIdx;
+    private Coroutine instructionCoroutine;
 
     private void Awake()
     {
@@ -38,7 +41,7 @@ public class Tutorial : MonoBehaviour
             targets[currIdx].enabled = true;
             triggers[currIdx].isActive = true;
         }
-        instructionText.text = instructions[currIdx];
+        instructionCoroutine = StartCoroutine(PlayInstruction());
     }
 
     private void OnDestroy()
@@ -48,12 +51,16 @@ public class Tutorial : MonoBehaviour
 
     public void NextInstruction()
     {
+        if (instructionCoroutine != null)
+        {
+            StopAllCoroutines();
+        }
         if (targets[currIdx] != null)
         {
             targets[currIdx].enabled = false;
         }
         currIdx++;
-        instructionText.text = instructions[currIdx];
+        instructionCoroutine = StartCoroutine(PlayInstruction());
         if (targets[currIdx] != null)
         {
             targets[currIdx].enabled = true;
@@ -63,5 +70,26 @@ public class Tutorial : MonoBehaviour
         {
             finish.TurnOnTarget();
         }
+    }
+
+    private void WholeInstruction()
+    {
+        //if (instructionCoroutine != null)
+        //{
+        //    StopAllCoroutines();
+        //    instructionText.text = instructions[currIdx];
+        //    dialogueCoroutine = null;
+        //}
+    }
+
+    private IEnumerator PlayInstruction()
+    {
+        instructionText.text = "";
+        foreach (char c in instructions[currIdx].ToCharArray())
+        {
+            instructionText.text += c;
+            yield return new WaitForSecondsRealtime(instructionSpeed);
+        }
+        instructionCoroutine = null;
     }
 }
