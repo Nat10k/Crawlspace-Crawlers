@@ -199,7 +199,6 @@ public class CicakMovement : MonoBehaviour
                     }
                 } else if (Physics.Raycast(transform.position, transform.up, out hit, wallDetectDist))
                 {
-                    justClimbed = false;
                     justHit = true;
                     hitUp = true;
                 }
