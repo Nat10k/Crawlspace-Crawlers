@@ -2,14 +2,22 @@ using UnityEngine;
 
 public class TutorialTrigger : MonoBehaviour
 {
-    public bool checkPlayer, checkTongue, isActive;
+    public bool checkPlayer, checkTongue, isActive, isFinish;
 
     public void TriggerEvent()
     {
         if (isActive)
         {
             EventManagers.InvokeEvent("Tutorial");
-            Destroy(this);
+            if (!isFinish)
+            {
+                Destroy(this);
+            } else
+            {
+                isFinish = false;
+                checkTongue = false;
+                checkPlayer = true;
+            }
         }
     }
 

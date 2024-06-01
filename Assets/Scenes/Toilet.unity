@@ -242,21 +242,25 @@ MonoBehaviour:
   - Dekati tembok untuk memanjat
   - Klik untuk menembak lidah. Tembakkan lidah ke bak air.
   - Tarik tempat sabun keluar dari gayung menggunakan lidah.
-  - Dekati tempat sabun untuk menyelesaikan tutorial.
+  - Dekati tempat sabun untuk mengambilnya.
+  - Dalam permainan kamu akan diminta mengumpulkan barang dalam waktu yang terbatas.
+    Barang yang dikumpulkan akan memiliki highlight warna kuning. Ambil sebanyak
+    mungkin barang yang kamu bisa. Selamat bermain !
   targets:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 2073690351}
-  - {fileID: 407441698}
-  - {fileID: 1746170437}
+  - {fileID: 1670364084}
+  - {fileID: 407441690}
+  - {fileID: 1746170424}
   - {fileID: 0}
+  - {fileID: 822383128}
   smallInstructionText: {fileID: 1275843189}
   bigInstructionText: {fileID: 1337159601}
   finish: {fileID: 1746170442}
   bigInstruction: {fileID: 2100713623}
   mainHUD: {fileID: 822383128}
-  isBig: 01010000000000
+  isBig: 0101000000000001
 --- !u!114 &91225174
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1245,6 +1249,7 @@ MonoBehaviour:
   checkPlayer: 0
   checkTongue: 1
   isActive: 0
+  isFinish: 0
 --- !u!1 &603284442
 GameObject:
   m_ObjectHideFlags: 0
@@ -1591,7 +1596,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &822383129
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2399,8 +2404,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 350984715}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -2881,7 +2886,7 @@ RectTransform:
   m_Father: {fileID: 785535136}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -3061,17 +3066,7 @@ MonoBehaviour:
   checkPlayer: 0
   checkTongue: 1
   isActive: 0
---- !u!114 &1746170437 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1852516422813298833, guid: 7fd87c2189dd62442aa5cc5ffc808b58, type: 3}
-  m_PrefabInstance: {fileID: 5636996964129266832}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1746170424}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  isFinish: 1
 --- !u!114 &1746170442 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3668931243793502105, guid: 7fd87c2189dd62442aa5cc5ffc808b58, type: 3}
@@ -3297,17 +3292,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1215272689717416468, guid: 005c1a19efc07854280b238ce796f06a, type: 3}
   m_PrefabInstance: {fileID: 9131310675292410500}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2073690351 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2110093876168019231, guid: 005c1a19efc07854280b238ce796f06a, type: 3}
-  m_PrefabInstance: {fileID: 9131310675292410500}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1670364084}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &2073690352
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3323,6 +3307,7 @@ MonoBehaviour:
   checkPlayer: 1
   checkTongue: 0
   isActive: 0
+  isFinish: 0
 --- !u!1 &2095202332
 GameObject:
   m_ObjectHideFlags: 0

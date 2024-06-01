@@ -9,13 +9,14 @@ using UnityEngine.InputSystem;
 public class Tutorial : MonoBehaviour
 {
     [SerializeField] private List<string> instructions;
-    [SerializeField] private List<Outline> targets;
+    [SerializeField] private List<GameObject> targets;
     [SerializeField] private TMP_Text smallInstructionText, bigInstructionText;
     [SerializeField] private TargetObject finish;
     [SerializeField] private GameObject bigInstruction, mainHUD;
     [SerializeField] private List<bool> isBig;
     private TMP_Text currInstructionText;
     private List<TutorialTrigger> triggers;
+    private List<Outline> outlines;
     private const float instructionSpeed = 0.03f;
     private Listener tutorEventListener;
     private int currIdx;
@@ -31,15 +32,17 @@ public class Tutorial : MonoBehaviour
         tutorEventListener.invoke = NextInstruction;
         EventManagers.Register("Tutorial", tutorEventListener);
         triggers = new List<TutorialTrigger>();
+        outlines = new List<Outline>();
         // Get all tutorial triggers
-        foreach (Outline target in targets)
+        foreach (GameObject target in targets)
         {
             if (target != null)
             {
-                TutorialTrigger currTrigger = target.gameObject.GetComponent<TutorialTrigger>();
-                triggers.Add(currTrigger);
+                triggers.Add(target.GetComponent<TutorialTrigger>());
+                outlines.Add(target.GetComponent<Outline>());
             } else
             {
+                outlines.Add(null);
                 triggers.Add(null);
             }
         }
@@ -48,8 +51,11 @@ public class Tutorial : MonoBehaviour
         ChooseInstructionType();
         if (targets[currIdx] != null)
         {
-            targets[currIdx].enabled = true;
-            triggers[currIdx].isActive = true;
+            targets[currIdx].SetActive(true);
+            if (outlines[currIdx] != null)
+                outlines[currIdx].enabled = true;
+            if (triggers[currIdx] != null)
+                triggers[currIdx].isActive = true;
         }
         instructionCoroutine = StartCoroutine(PlayInstruction());
     }
@@ -77,23 +83,32 @@ public class Tutorial : MonoBehaviour
         {
             StopAllCoroutines();
         }
-        if (targets[currIdx] != null)
+        if (outlines[currIdx] != null && !triggers[currIdx].isFinish)
         {
-            targets[currIdx].enabled = false;
+            outlines[currIdx].enabled = false;
         }
         currIdx++;
-        ChooseInstructionType();
-        instructionCoroutine = StartCoroutine(PlayInstruction());
-        if (targets[currIdx] != null)
+        if (currIdx < instructions.Count)
         {
-            targets[currIdx].enabled = true;
-            triggers[currIdx].isActive = true;
-        }
-        if (currIdx == instructions.Count-1)
+            ChooseInstructionType();
+            instructionCoroutine = StartCoroutine(PlayInstruction());
+            if (targets[currIdx] != null)
+            {
+                targets[currIdx].SetActive(true);
+                if (outlines[currIdx] != null)
+                    outlines[currIdx].enabled = true;
+                if (triggers[currIdx] != null)
+                    triggers[currIdx].isActive = true;
+            }
+            if (triggers[currIdx] != null && triggers[currIdx].isFinish)
+            {
+                finish.TurnOnTarget();
+            }
+        } else
         {
-            finish.TurnOnTarget();
             // Disable big instruction and resume time
             bigInstruction.SetActive(false);
+            EventManagers.InvokeEvent("TutorialFinish");
             GameManager.ResumeGame();
         }
     }
@@ -125,7 +140,7 @@ public class Tutorial : MonoBehaviour
             StopAllCoroutines();
             currInstructionText.text = instructions[currIdx];
             instructionCoroutine = null;
-        } else if (isBig[currIdx])
+        } else if (currIdx < instructions.Count && isBig[currIdx])
         {
             NextInstruction();
         }

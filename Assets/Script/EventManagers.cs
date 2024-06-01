@@ -22,10 +22,10 @@ public static class EventManagers
             if (eventDict[name].Contains(listener))
             {
                 eventDict[name].Remove(listener);
-            }
-            if (eventDict[name].Count == 0)
-            {
-                eventDict.Remove(name);
+                if (eventDict[name].Count == 0)
+                {
+                    eventDict.Remove(name);
+                }
             }
         }
     }
