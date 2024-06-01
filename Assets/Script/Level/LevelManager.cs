@@ -83,12 +83,13 @@ public class LevelManager : MonoBehaviour
         targetObjects.RemoveAt(0);
         if (targetObjects.Count > 0)
         {
-            if (!isInTutorial)
+            timer += timeAddition;
+            if (timer > maxTime)
             {
-                timer += timeAddition;
-                timeAddition /= 2;
+                timer = maxTime;
             }
             targetObjects[0].TurnOnTarget();
+            timeAddition /= 2;
         } else
         {
             LevelFinish();
