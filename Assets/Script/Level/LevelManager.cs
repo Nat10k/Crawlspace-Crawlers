@@ -7,7 +7,6 @@ using UnityEngine.UI;
 
 public class LevelManager : MonoBehaviour
 {
-    InputAction reset;
     [SerializeField] GameObject levelFinishedCanvas, gameOverCanvas;
     [SerializeField] Slider timerSlider;
     [SerializeField] List<Color> sliderColors;
@@ -45,13 +44,6 @@ public class LevelManager : MonoBehaviour
         EventManagers.Unregister("GameOver", overListener);
     }
 
-    private void OnEnable()
-    {
-        reset = InputHandler.inputs.Player.Reset;
-        reset.performed += ResetLevel;
-        reset.Enable();
-    }
-
     private void LevelFinish()
     {
         levelFinishedCanvas.SetActive(true);
@@ -62,11 +54,6 @@ public class LevelManager : MonoBehaviour
     {
         gameOverCanvas.SetActive(true);
         Time .timeScale = 0;
-    }
-
-    private void ResetLevel(InputAction.CallbackContext ctx)
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     private void Update()
