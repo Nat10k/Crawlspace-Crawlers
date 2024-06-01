@@ -68,6 +68,10 @@ public class CicakCam : MonoBehaviour
 
     private void Update()
     {
+        if (GameManager.isPaused)
+        {
+            return;
+        }
         verticalAngle -= look.ReadValue<Vector2>().y * lookSpeed;
         verticalAngle = Mathf.Clamp(verticalAngle, -90, 90);
         transform.localEulerAngles = new Vector3(verticalAngle, transform.localEulerAngles.y, transform.localEulerAngles.z);
