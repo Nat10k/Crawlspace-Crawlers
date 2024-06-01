@@ -5,10 +5,12 @@ public class ScoreManager : MonoBehaviour
 {
     private Listener addObjListener;
     private float objectCount;
+    private Animator animator;
     [SerializeField] private TMP_Text objCounterText;
 
     private void Awake()
     {
+        animator = GetComponent<Animator>();
         addObjListener = new Listener();
         addObjListener.invoke = AddObject;
         EventManagers.Register("AddObject", addObjListener);
@@ -25,5 +27,6 @@ public class ScoreManager : MonoBehaviour
     {
         objectCount++;
         objCounterText.text = objectCount.ToString();
+        animator.SetTrigger("Collect");
     }
 }
