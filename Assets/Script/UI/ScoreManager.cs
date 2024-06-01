@@ -13,14 +13,14 @@ public class ScoreManager : MonoBehaviour
         animator = GetComponent<Animator>();
         addObjListener = new Listener();
         addObjListener.invoke = AddObject;
-        EventManagers.Register("AddObject", addObjListener);
+        EventManagers.Register("CollectObj", addObjListener);
 
         objectCount = 0;
     }
 
     private void OnDestroy()
     {
-        EventManagers.Unregister("AddObject", addObjListener);
+        EventManagers.Unregister("CollectObj", addObjListener);
     }
 
     private void AddObject()

@@ -61,7 +61,7 @@ public class Tutorial : MonoBehaviour
         }
         if (currIdx == instructions.Count-1)
         {
-            finish.TurnOnFinish();
+            finish.TurnOnTarget();
         }
     }
 }

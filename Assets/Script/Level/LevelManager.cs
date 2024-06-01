@@ -12,30 +12,34 @@ public class LevelManager : MonoBehaviour
     [SerializeField] List<Color> sliderColors;
     [SerializeField] Image timerSliderFill;
     [SerializeField] Transform propsParent;
-    TargetObject[] targetObjects;
+    List<TargetObject> targetObjects;
 
     int objectCount;
-    float timer;
+    float timer, timeAddition;
     const float maxTime = 60f;
-    Listener finishListener, overListener;
+    Listener finishListener, overListener, collectObjListener;
     private void Awake()
     {
         finishListener = new Listener();
         overListener = new Listener();
+        collectObjListener = new Listener();
         finishListener.invoke = LevelFinish;
         overListener.invoke = GameOver;
+        collectObjListener.invoke = NextTarget;
 
         EventManagers.Register("Finish", finishListener);
         EventManagers.Register("GameOver", overListener);
+        EventManagers.Register("CollectObj", collectObjListener);
 
         // Setup timer
         timer = maxTime;
+        timeAddition = 15f;
 
         // Setup object counter
         objectCount = 0;
 
         // Setup target objects
-        targetObjects = propsParent.GetComponentsInChildren<TargetObject>();
+        targetObjects = new List<TargetObject>(propsParent.GetComponentsInChildren<TargetObject>());
     }
 
     private void OnDestroy()
@@ -54,6 +58,20 @@ public class LevelManager : MonoBehaviour
     {
         gameOverCanvas.SetActive(true);
         Time .timeScale = 0;
+    }
+
+    private void NextTarget()
+    {
+        targetObjects.RemoveAt(0);
+        if (targetObjects.Count > 0)
+        {
+            timer += timeAddition;
+            targetObjects[0].TurnOnTarget();
+            timeAddition /= 2;
+        } else
+        {
+            LevelFinish();
+        }
     }
 
     private void Update()

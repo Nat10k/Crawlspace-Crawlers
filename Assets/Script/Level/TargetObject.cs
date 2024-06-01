@@ -17,7 +17,7 @@ public class TargetObject : MonoBehaviour
         particleSystem.enableEmission = false;
     }
     
-    public void TurnOnFinish()
+    public void TurnOnTarget()
     {
         gameObject.tag = "Target";
         outline.enabled = true;
