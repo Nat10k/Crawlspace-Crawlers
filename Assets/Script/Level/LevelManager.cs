@@ -13,9 +13,9 @@ public class LevelManager : MonoBehaviour
     List<TargetObject> targetObjects;
 
     int objectCount;
-    float timer, timeAddition;
+    float timer;
     bool isInTutorial;
-    const float maxTime = 60f;
+    const float maxTime = 60f, timeAddition = 5f;
     Listener finishListener, overListener, collectObjListener, tutorialFinishListener;
     private void Awake()
     {
@@ -35,7 +35,6 @@ public class LevelManager : MonoBehaviour
 
         // Setup timer
         timer = maxTime;
-        timeAddition = 15f;
 
         // Setup object counter
         objectCount = 0;
@@ -102,10 +101,10 @@ public class LevelManager : MonoBehaviour
                 timer = maxTime;
             }
             //targetObjects[0].TurnOnTarget();
-            if (timeAddition > 1)
-            {
-                timeAddition /= 2;
-            }
+            //if (timeAddition > 1)
+            //{
+            //    timeAddition /= 2;
+            //}
         }
         else
         {
