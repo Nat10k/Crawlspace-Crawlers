@@ -77,6 +77,9 @@ public class CicakHealth : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Target"))
         {
+            Rigidbody colRb = collision.gameObject.GetComponent<Rigidbody>();
+            colRb.isKinematic = true;
+            colRb.useGravity = false;
             collision.gameObject.GetComponent<TargetObject>().Collect();
             EventManagers.InvokeEvent("CollectObj");
         } else if (collision.collider.CompareTag("Enemy") && !isInvulnerable)

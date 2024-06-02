@@ -299,6 +299,7 @@ GameObject:
   - component: {fileID: 2560928736416802577}
   - component: {fileID: 2274085718363486662}
   - component: {fileID: 1257950055061429389}
+  - component: {fileID: 1909834588655858122}
   m_Layer: 5
   m_Name: Tutorial
   m_TagString: Untagged
@@ -428,6 +429,18 @@ MonoBehaviour:
   bigInstruction: {fileID: 5122430978941997938}
   mainHUD: {fileID: 0}
   isBig: 0101000000000001
+--- !u!114 &1909834588655858122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8401348009452148984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c29bc9b00d3e564fa75ee3d91156638, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &9215098191767690775
 GameObject:
   m_ObjectHideFlags: 0

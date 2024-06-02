@@ -25,7 +25,7 @@ public class LevelManager : MonoBehaviour
         tutorialFinishListener = new Listener();
         finishListener.invoke = LevelFinish;
         overListener.invoke = GameOver;
-        collectObjListener.invoke = NextTarget;
+        collectObjListener.invoke = CollectedTarget;
         tutorialFinishListener.invoke = TutorialFinished;
 
         EventManagers.Register("Finish", finishListener);
@@ -52,9 +52,12 @@ public class LevelManager : MonoBehaviour
 
     private void Start()
     {
-        if (!isInTutorial)
+        if (!isInTutorial && targetObjects.Count > 0)
         {
-            targetObjects[0].TurnOnTarget();
+            foreach (TargetObject targetObject in targetObjects)
+            {
+                targetObject.TurnOnTarget();
+            }
         }
     }
 
@@ -62,6 +65,10 @@ public class LevelManager : MonoBehaviour
     {
         isInTutorial = false;
         timerSlider.gameObject.SetActive(true);
+        foreach (TargetObject targetObject in targetObjects)
+        {
+            targetObject.TurnOnTarget();
+        }
     }
 
     private void OnDestroy()
@@ -84,7 +91,7 @@ public class LevelManager : MonoBehaviour
         Time.timeScale = 0;
     }
 
-    private void NextTarget()
+    private void CollectedTarget()
     {
         targetObjects.RemoveAt(0);
         if (targetObjects.Count > 0)
@@ -94,9 +101,13 @@ public class LevelManager : MonoBehaviour
             {
                 timer = maxTime;
             }
-            targetObjects[0].TurnOnTarget();
-            timeAddition /= 2;
-        } else
+            //targetObjects[0].TurnOnTarget();
+            if (timeAddition > 1)
+            {
+                timeAddition /= 2;
+            }
+        }
+        else
         {
             LevelFinish();
         }
