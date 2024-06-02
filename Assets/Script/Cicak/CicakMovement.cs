@@ -6,11 +6,11 @@ public class CicakMovement : MonoBehaviour
 {
     InputAction move, tongueAction, tailInput, look, rightClick;
     Rigidbody rb;
-    const float lookSpeed = 1f, gravityForce = 15f, wallDetectDist = 0.2f;
+    const float lookSpeed = 1f, gravityForce = 15f, wallDetectDist = 0.2f, baseMoveSpeed = 2f;
     float moveSpeed = 2f, tailCooldown = 15f, scaleSpeed;
     bool justClimbed, hasTail, isGrounded, canMove, justHit, hitUp;
     [SerializeField] Tongue tongue;
-    [SerializeField] Transform tailObj, headBone, spine;
+    [SerializeField] Transform tailObj, tailParent, headBone, spine;
     [SerializeField] Material cicakMaterial;
     [SerializeField] TutorialTrigger trigger;
     CicakCam cicakCam;
@@ -35,6 +35,7 @@ public class CicakMovement : MonoBehaviour
         initTailPos = tailObj.localPosition;
         initTailScale = tailObj.localScale;
         initTailRot = tailObj.localRotation;
+        tailParent = tailObj.parent;
 
         scaleSpeed = initTailScale.magnitude / 2;
     }
@@ -93,18 +94,15 @@ public class CicakMovement : MonoBehaviour
         // Speed boost for 5 seconds after detaching tail
         cicakCam.BoostCam();
         moveSpeed *= 2;
-        cicakMaterial.color = new Color(cicakMaterial.color.r, cicakMaterial.color.g, cicakMaterial.color.b, 125);
         yield return new WaitForSeconds(5);
         cicakCam.ResetFOV();
         moveSpeed /= 2;
-        cicakMaterial.color = new Color(cicakMaterial.color.r, cicakMaterial.color.g, cicakMaterial.color.b, 255);
         tailScaleAnim = StartCoroutine(ScaleTail(Vector3.zero));
         yield return new WaitForSeconds(tailCooldown - 2);
         // Reattach tail after cooldown
         tailScaleAnim = StartCoroutine(ScaleTail(initTailScale));
-        tailObj.parent = transform;
-        tailObj.localPosition = initTailPos;
-        tailObj.localRotation = initTailRot;
+        tailObj.parent = tailParent;
+        tailObj.SetLocalPositionAndRotation(initTailPos, initTailRot);
     }
 
     IEnumerator ScaleTail(Vector3 newScale)
@@ -173,7 +171,7 @@ public class CicakMovement : MonoBehaviour
             if (!tongue.GetHitWall())
             {
                 // Climb forward
-                if (Physics.Raycast(transform.position, transform.forward, out hit, wallDetectDist))
+                if (Physics.Raycast(transform.position, transform.forward, out hit, wallDetectDist) && moveInput.y > 0)
                 {
                     if (Vector3.Angle(transform.up, hit.normal) > 60 && (hit.collider.CompareTag("Wall") || hit.collider.CompareTag("Floor")))
                     {
@@ -181,8 +179,8 @@ public class CicakMovement : MonoBehaviour
                         ClimbWall(hit.normal, transform.up);
                     }
                 }
-                else if (Physics.Raycast(transform.position, transform.right, out hit, wallDetectDist) ||
-                    Physics.Raycast(transform.position, -transform.right, out hit, wallDetectDist)) 
+                else if ((Physics.Raycast(transform.position, transform.right, out hit, wallDetectDist) && moveInput.x > 0) ||
+                    (Physics.Raycast(transform.position, -transform.right, out hit, wallDetectDist) && moveInput.x < 0)) 
                 {
                     if (Vector3.Angle(transform.up, hit.normal) > 60 && (hit.collider.CompareTag("Wall") || hit.collider.CompareTag("Floor")))
                     {
@@ -190,7 +188,8 @@ public class CicakMovement : MonoBehaviour
                         ClimbWall(hit.normal, transform.forward);
                     }
                 }
-                else if (Physics.Raycast(transform.position, -transform.forward, out hit, wallDetectDist + 0.1f))
+                else if (Physics.Raycast(transform.position, -transform.forward, out hit, wallDetectDist + 0.1f)
+                    && moveInput.y < 0)
                 {
                     if (Vector3.Angle(transform.up, hit.normal) > 60 && (hit.collider.CompareTag("Wall") || hit.collider.CompareTag("Floor")))
                     {
@@ -219,25 +218,30 @@ public class CicakMovement : MonoBehaviour
                 rb.velocity = transform.forward * moveInput.y + transform.right * moveInput.x;
             }
         }
-        if (Physics.Raycast(transform.position, -transform.up, out hit, wallDetectDist) && (hit.collider.CompareTag("Wall") || hit.collider.CompareTag("Floor")))
+        if (Physics.Raycast(transform.position, -transform.up, out hit, wallDetectDist) && 
+            (hit.collider.CompareTag("Wall") || hit.collider.CompareTag("Floor")))
         {
             gravityDir = -hit.normal.normalized;
-            if (hit.distance < wallDetectDist/5)
+            if (hit.distance < wallDetectDist/7)
             {
-                moveSpeed = 2f;
+                moveSpeed = baseMoveSpeed;
             }
         }
-        else if (Physics.SphereCast(transform.position, 3, -transform.up, out hit, 10) 
-            && (hit.collider.CompareTag("Wall") || hit.collider.CompareTag("Floor")))
+        else
         {
-            gravityDir = -hit.normal.normalized;
-            moveSpeed = 0.1f;
+            moveSpeed = 0.17f;
         }
-        else if (!tongue.GetHitWall())
-        {
-            gravityDir = Vector3.down;
-            moveSpeed = 0.1f;
-        }
+        //else if (Physics.SphereCast(transform.position, 3, -transform.up, out hit, 10) 
+        //    && (hit.collider.CompareTag("Wall") || hit.collider.CompareTag("Floor")))
+        //{
+        //    gravi
+        //    moveSpeed = 0.1f;
+        //}
+        //else if (!tongue.GetHitWall())
+        //{
+        //    gravityDir = Vector3.down;
+        //    moveSpeed = 0.3f;
+        //}
         rb.AddForce(gravityForce * gravityDir, ForceMode.Acceleration);
     }
 
@@ -262,21 +266,21 @@ public class CicakMovement : MonoBehaviour
         rotateAnim = null;
     }
 
-    private Vector3 SearchAxis(Vector3 v)
-    {
-        // Search current rotation axis
-        Vector3 axis = Vector3.up;
-        float minAngle = Vector3.Angle(v, axis);
-        foreach(Vector3 u in allAxis)
-        {
-            if (Vector3.Angle(v, u) < minAngle)
-            {
-                axis = u;
-                minAngle = Vector3.Angle(v, u);
-            }
-        }
-        return axis;
-    }
+    //private Vector3 SearchAxis(Vector3 v)
+    //{
+    //    // Search current rotation axis
+    //    Vector3 axis = Vector3.up;
+    //    float minAngle = Vector3.Angle(v, axis);
+    //    foreach(Vector3 u in allAxis)
+    //    {
+    //        if (Vector3.Angle(v, u) < minAngle)
+    //        {
+    //            axis = u;
+    //            minAngle = Vector3.Angle(v, u);
+    //        }
+    //    }
+    //    return axis;
+    //}
 
     public void StartRotateAnim(Quaternion initRotation, Quaternion endRotation)
     {

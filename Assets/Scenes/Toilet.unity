@@ -4338,6 +4338,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3985997533580718788, guid: e3978e74ea07ba64db304278a2831127, type: 3}
+      propertyPath: m_RigLayers.Array.data[0].m_Rig
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 4850306942033023782, guid: e3978e74ea07ba64db304278a2831127, type: 3}
       propertyPath: invulColors.Array.data[0].b
       value: 0.41960788
@@ -4386,8 +4390,13 @@ PrefabInstance:
       propertyPath: assignedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 8588055536995680649, guid: e3978e74ea07ba64db304278a2831127, type: 3}
+      propertyPath: m_RigLayers.Array.data[1].m_Rig
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 2212688576116968182, guid: e3978e74ea07ba64db304278a2831127, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e3978e74ea07ba64db304278a2831127, type: 3}
