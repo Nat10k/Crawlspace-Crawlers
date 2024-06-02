@@ -2357,7 +2357,7 @@ MonoBehaviour:
   cicakMaterial: {fileID: 2100000, guid: ba377fe24cd1ec745b01f229652ce07f, type: 2}
   model: {fileID: 7729805153865875933}
   invulColors:
-  - {r: 0.9245283, g: 0.8981879, b: 0.13431823, a: 1}
+  - {r: 0.89411765, g: 0.23529412, b: 0.41960785, a: 1}
   - {r: 1, g: 0, b: 0, a: 1}
 --- !u!114 &5834795706153591028
 MonoBehaviour:

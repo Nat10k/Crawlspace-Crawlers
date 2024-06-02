@@ -105,6 +105,7 @@ public class Tutorial : MonoBehaviour
             // Disable big instruction and resume time
             bigInstruction.SetActive(false);
             EventManagers.InvokeEvent("TutorialFinish");
+            PlayerPrefs.SetInt("TutorialFinish", 1);
             GameManager.ResumeGame();
         }
     }

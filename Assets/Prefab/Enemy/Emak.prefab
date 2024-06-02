@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3790313378995796310}
   - component: {fileID: 4539654060534724690}
   - component: {fileID: 7163762649926425145}
+  - component: {fileID: -6800330088646572923}
   m_Layer: 2
   m_Name: Emak
   m_TagString: Enemy
@@ -122,8 +123,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cicak: {fileID: 0}
   tail: {fileID: 0}
-  detectRange: 10
-  stopDistance: 5
+  detectRange: 20
+  stopDistance: 0
   target: {fileID: 0}
   agent: {fileID: 0}
   cicakVisible: 0
@@ -135,6 +136,24 @@ MonoBehaviour:
   - {fileID: 0}
   sandalSpawn: {fileID: 1491601713325404651}
   currPatrolIdx: 0
+--- !u!114 &-6800330088646572923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1257000128473049952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 3
+  outlineColor: {r: 1, g: 0, b: 0, a: 1}
+  outlineWidth: 10
+  precomputeOutline: 1
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &5216909402954632112
 GameObject:
   m_ObjectHideFlags: 0

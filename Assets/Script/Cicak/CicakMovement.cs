@@ -221,7 +221,7 @@ public class CicakMovement : MonoBehaviour
         {
             gravityDir = -hit.normal.normalized;
             isGrounded = true;
-            if (hit.distance < wallDetectDist/7)
+            if (hit.distance < wallDetectDist/5)
             {
                 moveSpeed = baseMoveSpeed;
             }
