@@ -37,17 +37,25 @@ public class LevelManager : MonoBehaviour
         timer = maxTime;
         timeAddition = 15f;
 
-        isInTutorial = !PlayerPrefs.HasKey("TutorialFinish");
-        if (isInTutorial)
-        {
-            timerSlider.gameObject.SetActive(false);
-        }
-
         // Setup object counter
         objectCount = 0;
 
         // Setup target objects
         targetObjects = new List<TargetObject>(propsParent.GetComponentsInChildren<TargetObject>());
+
+        isInTutorial = !PlayerPrefs.HasKey("TutorialFinish");
+        if (isInTutorial)
+        {
+            timerSlider.gameObject.SetActive(false);
+        }
+    }
+
+    private void Start()
+    {
+        if (!isInTutorial)
+        {
+            targetObjects[0].TurnOnTarget();
+        }
     }
 
     private void TutorialFinished()
@@ -94,29 +102,29 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    //private void Update()
-    //{
-    //    if (!isInTutorial)
-    //    {
-    //        // Reduce timer
-    //        timer -= Time.deltaTime;
-    //        timerSlider.value = timer;
-    //        if (timer <= 0)
-    //        {
-    //            EventManagers.InvokeEvent("Finish");
-    //        }
-    //        else if (timer <= maxTime / 3)
-    //        {
-    //            timerSliderFill.color = sliderColors[0];
-    //        }
-    //        else if (timer <= maxTime / 2)
-    //        {
-    //            timerSliderFill.color = sliderColors[1];
-    //        }
-    //        else
-    //        {
-    //            timerSliderFill.color = sliderColors[2];
-    //        }
-    //    }
-    //}
+    private void Update()
+    {
+        if (!isInTutorial)
+        {
+            // Reduce timer
+            timer -= Time.deltaTime;
+            timerSlider.value = timer;
+            if (timer <= 0)
+            {
+                EventManagers.InvokeEvent("Finish");
+            }
+            else if (timer <= maxTime / 3)
+            {
+                timerSliderFill.color = sliderColors[0];
+            }
+            else if (timer <= maxTime / 2)
+            {
+                timerSliderFill.color = sliderColors[1];
+            }
+            else
+            {
+                timerSliderFill.color = sliderColors[2];
+            }
+        }
+    }
 }

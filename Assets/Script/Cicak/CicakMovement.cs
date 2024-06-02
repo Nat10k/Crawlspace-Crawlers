@@ -7,7 +7,7 @@ public class CicakMovement : MonoBehaviour
     InputAction move, tongueAction, tailInput, look, rightClick, reset;
     Rigidbody rb;
     const float lookSpeed = 1f, gravityForce = 15f, wallDetectDist = 0.2f, baseMoveSpeed = 2f, climbAngle = 50f;
-    float moveSpeed = 2f, tailCooldown = 15f, scaleSpeed;
+    float moveSpeed = 2f, tailCooldown = 25f, scaleSpeed;
     bool justClimbed, hasTail, isGrounded, isNearSurface, canMove, justHit, justTongue;
     [SerializeField] Tongue tongue;
     [SerializeField] Transform tailObj, tailParent, headBone, spine;
@@ -93,11 +93,21 @@ public class CicakMovement : MonoBehaviour
         }
     }
 
+    public void DisableMove()
+    {
+        canMove = false;
+    }
+
+    public void EnableMove()
+    {
+        canMove = true;
+    }
+
     private void ResetRotation(InputAction.CallbackContext ctx)
     {
         if (ctx.performed)
         {
-            ClimbWall(Vector3.up, transform.forward);
+            ClimbWall(Vector3.up, Vector3.forward);
         }
     }
 

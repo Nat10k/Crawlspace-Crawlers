@@ -6,15 +6,17 @@ public class CicakHealth : MonoBehaviour
 {
     private int lives;
     private bool isInvulnerable;
-    private const float InvulnerabilityPeriod = 3f; // Invulnerability in seconds
+    private const float InvulnerabilityPeriod = 3f, joltSpeed = 7f; // Invulnerability in seconds
     [SerializeField] private Material cicakMaterial;
     [SerializeField] private Transform model;
     CicakMovement cm;
     [SerializeField] private Color[] invulColors;
+    Rigidbody rb;
 
     private void Awake()
     {
         cm = GetComponent<CicakMovement>();
+        rb = GetComponent<Rigidbody>();
         cicakMaterial.color = invulColors[0];
         isInvulnerable = false;
         lives = 3;
@@ -38,6 +40,9 @@ public class CicakHealth : MonoBehaviour
             return;
         }
         isInvulnerable = true;
+        // Jolt when damaged
+        cm.DisableMove();
+        rb.velocity += (Vector3.up + Random.Range(-1, 1) * Vector3.right + Random.Range(-1, 1) * Vector3.forward) * joltSpeed;
         StartCoroutine(Invulnerability());
     }
 
@@ -50,6 +55,7 @@ public class CicakHealth : MonoBehaviour
             colorIdx++;
             colorIdx %= invulColors.Length;
             yield return new WaitForSeconds(InvulnerabilityPeriod/6);
+            cm.EnableMove();
         }
         cicakMaterial.color = invulColors[0];
         isInvulnerable = false;

@@ -23,7 +23,6 @@ public class MovableObject : MonoBehaviour
                 joint.connectedBody = cicak.GetComponent<Rigidbody>();
                 joint.spring = 60;
                 joint.tolerance = 0;
-                joint.massScale = 5;
                 joint.connectedMassScale = 0.0001f;
             }
         }

@@ -25,6 +25,11 @@ public class Tutorial : MonoBehaviour
     {
         // Set up skip instruction
         leftClick = InputHandler.inputs.Player.Fire;
+        if (PlayerPrefs.HasKey("TutorialFinish"))
+        {
+            enabled = false;
+            return;
+        }
 
         tutorEventListener = new Listener();
         tutorEventListener.invoke = NextInstruction;
