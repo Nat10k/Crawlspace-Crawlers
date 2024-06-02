@@ -2293,8 +2293,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 34.01796, y: 14.936839, z: 77.966225}
-  m_Center: {x: 0, y: -0.8301362, z: 0}
+  m_Size: {x: 34.01796, y: 13.348443, z: 77.966225}
+  m_Center: {x: 0, y: -0.035937876, z: -0.0000000011407512}
 --- !u!114 &6158669025808587241
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2309,6 +2309,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tongue: {fileID: 1158339864660306948}
   tailObj: {fileID: 4186250155010230149}
+  tailParent: {fileID: 0}
   headBone: {fileID: 4114881521055977663}
   spine: {fileID: 695485544638777188}
   cicakMaterial: {fileID: 2100000, guid: ba377fe24cd1ec745b01f229652ce07f, type: 2}
