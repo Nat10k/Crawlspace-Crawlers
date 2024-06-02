@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -23,7 +21,7 @@ public class MovableObject : MonoBehaviour
                 joint = this.AddComponent<SpringJoint>();
                 Transform cicak = tongueScript.GetCicak();
                 joint.connectedBody = cicak.GetComponent<Rigidbody>();
-                joint.spring = 30;
+                joint.spring = 60;
                 joint.tolerance = 0;
                 joint.connectedMassScale = 0.0001f;
             }
@@ -43,6 +41,7 @@ public class MovableObject : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
+        gameObject.layer = 3;
         if (other.gameObject.CompareTag("Tongue"))
         {
             Destroy(joint);
