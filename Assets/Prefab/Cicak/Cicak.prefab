@@ -2249,6 +2249,7 @@ GameObject:
   - component: {fileID: 4850306942033023782}
   - component: {fileID: 5834795706153591028}
   - component: {fileID: 7436375040842978320}
+  - component: {fileID: 9180488256049861257}
   m_Layer: 0
   m_Name: CicakCtrl
   m_TagString: Player
@@ -2396,6 +2397,27 @@ MonoBehaviour:
   - {fileID: 3928060581568553614}
   - {fileID: 1585845207131509324}
   - {fileID: 4704062313221800855}
+--- !u!135 &9180488256049861257
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7430534863179964286}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 55
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7519567749895880165
 GameObject:
   m_ObjectHideFlags: 0

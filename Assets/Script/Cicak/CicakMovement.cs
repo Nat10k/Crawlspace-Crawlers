@@ -6,9 +6,9 @@ public class CicakMovement : MonoBehaviour
 {
     InputAction move, tongueAction, tailInput, look, rightClick;
     Rigidbody rb;
-    const float lookSpeed = 1f, gravityForce = 15f, wallDetectDist = 0.2f, baseMoveSpeed = 2f;
+    const float lookSpeed = 1f, gravityForce = 15f, wallDetectDist = 0.2f, baseMoveSpeed = 2f, climbAngle = 50f;
     float moveSpeed = 2f, tailCooldown = 15f, scaleSpeed;
-    bool justClimbed, hasTail, isGrounded, canMove, justHit, justTongue;
+    bool justClimbed, hasTail, isGrounded, isNearSurface, canMove, justHit, justTongue;
     [SerializeField] Tongue tongue;
     [SerializeField] Transform tailObj, tailParent, headBone, spine;
     [SerializeField] Material cicakMaterial;
@@ -30,6 +30,7 @@ public class CicakMovement : MonoBehaviour
         justHit = false;
         hasTail = true;
         isGrounded = true;
+        isNearSurface = true;
         canMove = true;
 
         initTailPos = tailObj.localPosition;
@@ -146,9 +147,9 @@ public class CicakMovement : MonoBehaviour
     private void FixedUpdate()
     {
         RaycastHit hit;
+        Vector2 moveInput = move.ReadValue<Vector2>() * moveSpeed;
         if (canMove)
         {
-            Vector2 moveInput = move.ReadValue<Vector2>() * moveSpeed;
             if (trigger != null && moveInput != Vector2.zero)
             {
                 trigger.TriggerEvent();
@@ -170,7 +171,7 @@ public class CicakMovement : MonoBehaviour
                 // Climb forward
                 if (Physics.Raycast(transform.position, transform.forward, out hit, wallDetectDist) && (moveInput.y > 0 || justTongue))
                 {
-                    if (Vector3.Angle(transform.up, hit.normal) > 60 && (hit.collider.CompareTag("Wall") || hit.collider.CompareTag("Floor")))
+                    if (Vector3.Angle(transform.up, hit.normal) > climbAngle && (hit.collider.CompareTag("Wall") || hit.collider.CompareTag("Floor")))
                     {
                         justHit = true;
                         ClimbWall(hit.normal, transform.up);
@@ -179,7 +180,7 @@ public class CicakMovement : MonoBehaviour
                 else if ((Physics.Raycast(transform.position, transform.right, out hit, wallDetectDist) && (moveInput.x > 0 || justTongue)) ||
                     (Physics.Raycast(transform.position, -transform.right, out hit, wallDetectDist) && (moveInput.x < 0 || justTongue))) 
                 {
-                    if (Vector3.Angle(transform.up, hit.normal) > 60 && (hit.collider.CompareTag("Wall") || hit.collider.CompareTag("Floor")))
+                    if (Vector3.Angle(transform.up, hit.normal) > climbAngle && (hit.collider.CompareTag("Wall") || hit.collider.CompareTag("Floor")))
                     {
                         justHit = true;
                         ClimbWall(hit.normal, transform.forward);
@@ -188,7 +189,7 @@ public class CicakMovement : MonoBehaviour
                 else if (Physics.Raycast(transform.position, -transform.forward, out hit, wallDetectDist + 0.1f)
                     && (moveInput.y < 0 || justTongue))
                 {
-                    if (Vector3.Angle(transform.up, hit.normal) > 60 && (hit.collider.CompareTag("Wall") || hit.collider.CompareTag("Floor")))
+                    if (Vector3.Angle(transform.up, hit.normal) > climbAngle && (hit.collider.CompareTag("Wall") || hit.collider.CompareTag("Floor")))
                     {
                         justHit = true;
                         ClimbWall(hit.normal, -transform.up);
@@ -219,6 +220,7 @@ public class CicakMovement : MonoBehaviour
             (hit.collider.CompareTag("Wall") || hit.collider.CompareTag("Floor")))
         {
             gravityDir = -hit.normal.normalized;
+            isGrounded = true;
             if (hit.distance < wallDetectDist/7)
             {
                 moveSpeed = baseMoveSpeed;
@@ -227,6 +229,22 @@ public class CicakMovement : MonoBehaviour
         else
         {
             moveSpeed = 0.17f;
+            if (isGrounded)
+            {
+                if (moveInput.y != 0)
+                {
+                    ClimbWall(transform.forward * moveInput.y, -transform.up * moveInput.y);
+                }
+                else if (moveInput.x != 0)
+                {
+                    ClimbWall(transform.right * moveInput.x, transform.forward);
+                }
+            }
+            else if (!isNearSurface)
+            {
+                gravityDir = Vector3.down;
+            }
+            isGrounded = false;
         }
         //else if (Physics.SphereCast(transform.position, 3, -transform.up, out hit, 10) 
         //    && (hit.collider.CompareTag("Wall") || hit.collider.CompareTag("Floor")))
@@ -298,6 +316,16 @@ public class CicakMovement : MonoBehaviour
         Quaternion newRot = Quaternion.LookRotation(newForward, hitNormal);
         rotateAnim = StartCoroutine(RotateAnim(rb.rotation, newRot));
         gravityDir = hitNormal * -1;
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        isNearSurface = true;
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        isNearSurface = false;
     }
 
     private void OnCollisionEnter(Collision collision)
