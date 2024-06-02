@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 
 public class CicakMovement : MonoBehaviour
 {
-    InputAction move, tongueAction, tailInput, look, rightClick;
+    InputAction move, tongueAction, tailInput, look, rightClick, reset;
     Rigidbody rb;
     const float lookSpeed = 1f, gravityForce = 15f, wallDetectDist = 0.2f, baseMoveSpeed = 2f, climbAngle = 50f;
     float moveSpeed = 2f, tailCooldown = 15f, scaleSpeed;
@@ -48,17 +48,20 @@ public class CicakMovement : MonoBehaviour
         look = InputHandler.inputs.Player.Look;
         rightClick = InputHandler.inputs.Player.RightClick;
         tailInput = InputHandler.inputs.Player.Tail;
+        reset = InputHandler.inputs.Player.Reset;
 
         rightClick.performed += LockCursor;
         rightClick.canceled += ReleaseCursor;
         tongueAction.performed += ShootTongue;
         tongueAction.canceled += ReleaseTongue;
         tailInput.performed += SeparateTail;
+        reset.performed += ResetRotation;
         move.Enable();
         tongueAction.Enable();
         look.Enable();
         rightClick.Enable();
         tailInput.Enable();
+        reset.Enable();
     }
 
     private void OnDisable()
@@ -87,6 +90,14 @@ public class CicakMovement : MonoBehaviour
             hasTail = false;
             tailObj.parent = null;
             StartCoroutine(TailBoost());
+        }
+    }
+
+    private void ResetRotation(InputAction.CallbackContext ctx)
+    {
+        if (ctx.performed)
+        {
+            ClimbWall(Vector3.up, transform.forward);
         }
     }
 

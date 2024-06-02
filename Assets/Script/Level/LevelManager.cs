@@ -96,29 +96,29 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        if (!isInTutorial)
-        {
-            // Reduce timer
-            timer -= Time.deltaTime;
-            timerSlider.value = timer;
-            if (timer <= 0)
-            {
-                EventManagers.InvokeEvent("Finish");
-            }
-            else if (timer <= maxTime / 3)
-            {
-                timerSliderFill.color = sliderColors[0];
-            }
-            else if (timer <= maxTime / 2)
-            {
-                timerSliderFill.color = sliderColors[1];
-            }
-            else
-            {
-                timerSliderFill.color = sliderColors[2];
-            }
-        }
-    }
+    //private void Update()
+    //{
+    //    if (!isInTutorial)
+    //    {
+    //        // Reduce timer
+    //        timer -= Time.deltaTime;
+    //        timerSlider.value = timer;
+    //        if (timer <= 0)
+    //        {
+    //            EventManagers.InvokeEvent("Finish");
+    //        }
+    //        else if (timer <= maxTime / 3)
+    //        {
+    //            timerSliderFill.color = sliderColors[0];
+    //        }
+    //        else if (timer <= maxTime / 2)
+    //        {
+    //            timerSliderFill.color = sliderColors[1];
+    //        }
+    //        else
+    //        {
+    //            timerSliderFill.color = sliderColors[2];
+    //        }
+    //    }
+    //}
 }
