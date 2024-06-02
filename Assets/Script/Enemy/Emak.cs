@@ -46,7 +46,7 @@ public class Emak : Enemy
         }
     }
 
-    public override void Patrol()
+    public override void NextPatrol()
     {
         if (Vector3.Distance(transform.position, patrolPos[currPatrolIdx].position) < 2f)
         {

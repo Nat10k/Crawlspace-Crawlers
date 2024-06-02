@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4539654060534724690}
   - component: {fileID: 7163762649926425145}
   - component: {fileID: -6800330088646572923}
-  m_Layer: 2
+  m_Layer: 6
   m_Name: Emak
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -123,7 +123,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cicak: {fileID: 0}
   tail: {fileID: 0}
-  detectRange: 20
+  detectRange: 15
   stopDistance: 0
   target: {fileID: 0}
   agent: {fileID: 0}

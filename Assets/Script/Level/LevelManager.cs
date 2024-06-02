@@ -15,7 +15,7 @@ public class LevelManager : MonoBehaviour
     int objectCount;
     float timer;
     bool isInTutorial;
-    const float maxTime = 60f, timeAddition = 5f;
+    const float maxTime = 60f, timeAddition = 3f;
     Listener finishListener, overListener, collectObjListener, tutorialFinishListener;
     private void Awake()
     {
