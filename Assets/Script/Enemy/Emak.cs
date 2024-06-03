@@ -74,7 +74,6 @@ public class Emak : Enemy
             yield return new WaitForSeconds(0.5f);
             sandalBody.velocity += (target.position - currSandal.transform.position).normalized * 8;
             yield return new WaitForSeconds(6);
-            Destroy(currSandal);
         }
     }
 }
