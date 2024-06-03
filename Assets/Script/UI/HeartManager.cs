@@ -26,7 +26,10 @@ public class HeartManager : MonoBehaviour
 
     private void DamagedHeart()
     {
-        StartCoroutine(DamageAnim());
+        if (currHealthyIdx <= 2)
+        {
+            StartCoroutine(DamageAnim());
+        }
     }
 
     private IEnumerator DamageAnim()

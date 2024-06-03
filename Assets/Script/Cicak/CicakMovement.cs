@@ -8,7 +8,8 @@ public class CicakMovement : MonoBehaviour
     Rigidbody rb;
     const float lookSpeed = 1f, gravityForce = 15f, wallDetectDist = 0.2f, baseMoveSpeed = 2f, climbAngle = 50f;
     float moveSpeed = 2f, tailCooldown = 25f, scaleSpeed;
-    bool justClimbed, hasTail, isGrounded, isNearSurface, canMove, justHit, justTongue;
+    bool justClimbed, hasTail, isGrounded, isNearSurface, justHit, justTongue;
+    [HideInInspector] public bool canMove;
     [SerializeField] Tongue tongue;
     [SerializeField] Transform tailObj, tailParent, headBone, spine;
     [SerializeField] Material cicakMaterial;
@@ -18,6 +19,7 @@ public class CicakMovement : MonoBehaviour
     Vector3 gravityDir, initTailPos, initTailScale;
     readonly Vector3[] allAxis = { Vector3.forward, Vector3.back, Vector3.right, Vector3.left, Vector3.up, Vector3.down };
     Quaternion initTailRot;
+    Listener stopMoveListener, resumeMoveListener;
 
     private void Awake()
     {
@@ -39,6 +41,13 @@ public class CicakMovement : MonoBehaviour
         tailParent = tailObj.parent;
 
         scaleSpeed = initTailScale.magnitude / 2;
+
+        stopMoveListener = new Listener();
+        resumeMoveListener = new Listener();
+        stopMoveListener.invoke = DisableMove;
+        resumeMoveListener.invoke = EnableMove;
+        EventManagers.Register("StopMove", stopMoveListener);
+        EventManagers.Register("ResumeMove", resumeMoveListener);
     }
 
     private void OnEnable()
@@ -76,6 +85,12 @@ public class CicakMovement : MonoBehaviour
         look.Disable();
         rightClick.Disable();
         tailInput.Disable();
+    }
+
+    private void OnDestroy()
+    {
+        EventManagers.Unregister("StopMove", stopMoveListener);
+        EventManagers.Unregister("ResumeMove", resumeMoveListener);
     }
 
     private void SeparateTail(InputAction.CallbackContext ctx)
@@ -279,11 +294,6 @@ public class CicakMovement : MonoBehaviour
         //    moveSpeed = 0.3f;
         //}
         rb.AddForce(gravityForce * gravityDir, ForceMode.Acceleration);
-    }
-
-    public void StopMove()
-    {
-        canMove = false;
     }
 
     private IEnumerator RotateAnim(Quaternion initRotation, Quaternion endRotation)

@@ -31,6 +31,7 @@ public class Tutorial : MonoBehaviour
             return;
         }
 
+        mainHUD.SetActive(false);
         tutorEventListener = new Listener();
         tutorEventListener.invoke = NextInstruction;
         EventManagers.Register("Tutorial", tutorEventListener);

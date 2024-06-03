@@ -1787,6 +1787,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44492c4042f4a3440b0613923f7f6e95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cm: {fileID: 6158669025808587241}
 --- !u!114 &492427525358180624
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2287,6 +2288,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 374bda0e607ade8409ed78f80c98e21b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canMove: 0
   tongue: {fileID: 1158339864660306948}
   tailObj: {fileID: 4186250155010230149}
   tailParent: {fileID: 0}

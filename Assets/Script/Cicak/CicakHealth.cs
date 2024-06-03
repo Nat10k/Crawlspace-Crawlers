@@ -33,12 +33,12 @@ public class CicakHealth : MonoBehaviour
     private void Damaged()
     {
         lives--;
-        EventManagers.InvokeEvent("Damaged");
-        if (lives <= 0)
+        if (lives == 0)
         {
             StartCoroutine(Death());
             return;
         }
+        EventManagers.InvokeEvent("Damaged");
         isInvulnerable = true;
         // Jolt when damaged
         cm.DisableMove();
@@ -63,7 +63,7 @@ public class CicakHealth : MonoBehaviour
 
     private IEnumerator Death()
     {
-        cm.StopMove();
+        cm.DisableMove();
         Camera.main.transform.parent = null;
         while (model.localScale.y > 0)
         {

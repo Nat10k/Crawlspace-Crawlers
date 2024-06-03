@@ -7,6 +7,7 @@ public class CicakCam : MonoBehaviour
     InputAction look;
     Camera cam;
     Coroutine camRoutine;
+    [SerializeField] CicakMovement cm;
     const float lookSpeed = 0.5f;
     float verticalAngle;
     const float initCamFOV = 80, boostCamFOV = 100;
@@ -68,7 +69,7 @@ public class CicakCam : MonoBehaviour
 
     private void Update()
     {
-        if (GameManager.isPaused)
+        if (GameManager.isPaused || !cm.canMove)
         {
             return;
         }
