@@ -270,22 +270,22 @@ public class CicakMovement : MonoBehaviour
         else
         {
             moveSpeed = 0.17f;
-            if (isGrounded)
-            {
-                if (moveInput.y != 0)
-                {
-                    ClimbWall(transform.forward * moveInput.y, -transform.up * moveInput.y);
-                }
-                else if (moveInput.x != 0)
-                {
-                    ClimbWall(transform.right * moveInput.x, transform.forward);
-                }
-            }
-            else if (!isNearSurface)
+            //if (isGrounded)
+            //{
+            //    if (moveInput.y != 0)
+            //    {
+            //        ClimbWall(transform.forward * moveInput.y, -transform.up * moveInput.y);
+            //    }
+            //    else if (moveInput.x != 0)
+            //    {
+            //        ClimbWall(transform.right * moveInput.x, transform.forward);
+            //    }
+            //}
+            /*else*/ if (!isNearSurface)
             {
                 gravityDir = Vector3.down;
             }
-            isGrounded = !Physics.SphereCast(transform.position, 3, -transform.up, out hit, wallDetectDist + 2);
+            //isGrounded = !Physics.SphereCast(transform.position, 3, -transform.up, out hit, wallDetectDist + 2);
         }
         //else if (Physics.SphereCast(transform.position, 3, -transform.up, out hit, 10) 
         //    && (hit.collider.CompareTag("Wall") || hit.collider.CompareTag("Floor")))
