@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7339903060812514156}
   - component: {fileID: 9100761604295708219}
   - component: {fileID: 4616841093310589688}
+  - component: {fileID: 1730544702147578087}
   m_Layer: 3
   m_Name: Bak Air
   m_TagString: Wall
@@ -83,3 +84,25 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &1730544702147578087
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2763660749228256917}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -7348767885834377016, guid: 7b0a856581da3fd449f8c1805c4ebd4f, type: 3}

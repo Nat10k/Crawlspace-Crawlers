@@ -13,7 +13,7 @@ public class CicakMovement : MonoBehaviour
     [SerializeField] Tongue tongue;
     [SerializeField] Transform tailObj, tailParent, headBone, spine;
     [SerializeField] Material cicakMaterial;
-    [SerializeField] TutorialTrigger trigger;
+    [SerializeField] TutorialTrigger trigger, tailTrigger;
     CicakCam cicakCam;
     Coroutine tongueFire, rotateAnim, tailScaleAnim;
     Vector3 gravityDir, initTailPos, initTailScale;
@@ -97,6 +97,11 @@ public class CicakMovement : MonoBehaviour
     {
         if (hasTail)
         {
+            if (tailTrigger != null)
+            {
+                tailTrigger.TriggerEvent();
+                tailTrigger = null;
+            }
             if (tailScaleAnim != null)
             {
                 StopCoroutine(tailScaleAnim);

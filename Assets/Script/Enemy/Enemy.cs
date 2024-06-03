@@ -9,6 +9,7 @@ public abstract class Enemy : MonoBehaviour
     public float detectRange, stopDistance;
     [HideInInspector] public Transform target;
     [HideInInspector] public NavMeshAgent agent;
+    [SerializeField] TutorialTrigger trigger;
     private Coroutine attentionFallOff;
 
     public bool cicakVisible;
@@ -35,6 +36,11 @@ public abstract class Enemy : MonoBehaviour
             hit.collider.CompareTag("Player") && 
             Vector3.Angle(transform.forward, target.position - transform.position) < 90)
         {
+            if (trigger != null)
+            {
+                trigger.TriggerEvent();
+                trigger = null;
+            }
             cicakVisible = true;
             if (attentionFallOff != null)
             {

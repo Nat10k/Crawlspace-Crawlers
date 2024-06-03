@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class LevelManager : MonoBehaviour
@@ -12,13 +13,14 @@ public class LevelManager : MonoBehaviour
     [SerializeField] List<Color> sliderColors;
     [SerializeField] Image timerSliderFill;
     [SerializeField] Transform propsParent;
+    [SerializeField] bool isInTutorial;
     List<TargetObject> targetObjects;
     List<TMP_Text> statsText;
 
     int objectCount, score, livesLost, totalObjectsCount;
     const int objScoreMult = 100, livesLostMult = 200;
     float timer;
-    bool isInTutorial, stopTimer;
+    bool stopTimer;
     const float maxTime = 60f, timeAddition = 3f;
     Listener finishListener, overListener, collectObjListener, tutorialFinishListener, damagedListener;
     private void Awake()
@@ -57,8 +59,6 @@ public class LevelManager : MonoBehaviour
 
         // Setup stats text
         statsText = new(statsCanvas.GetComponentsInChildren<TMP_Text>());
-
-        isInTutorial = !PlayerPrefs.HasKey("TutorialFinish");
         if (isInTutorial)
         {
             stopTimer = true;
@@ -142,6 +142,7 @@ public class LevelManager : MonoBehaviour
 
     IEnumerator ShowStats()
     {
+        Cursor.lockState = CursorLockMode.None;
         statsText[1].text = "Items collected : " + objectCount.ToString();
         statsText[2].text = "Live lost : " + livesLost.ToString();
         statsText[3].text = "Score : " + score.ToString();
@@ -169,6 +170,16 @@ public class LevelManager : MonoBehaviour
         levelFinishedCanvas.SetActive(false);
         gameOverCanvas.SetActive(false);
         statsCanvas.SetActive(true);
+    }
+
+    public void BackToMain()
+    {
+        SceneManager.LoadScene(0);
+    }
+
+    public void ToNextTutorial()
+    {
+        SceneManager.LoadScene("Dapur Tutorial");
     }
 
     private void Update()

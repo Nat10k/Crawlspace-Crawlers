@@ -25,13 +25,6 @@ public class Tutorial : MonoBehaviour
     {
         // Set up skip instruction
         leftClick = InputHandler.inputs.Player.Fire;
-        if (PlayerPrefs.HasKey("TutorialFinish"))
-        {
-            enabled = false;
-            return;
-        }
-
-        mainHUD.SetActive(false);
         tutorEventListener = new Listener();
         tutorEventListener.invoke = NextInstruction;
         EventManagers.Register("Tutorial", tutorEventListener);
@@ -110,6 +103,7 @@ public class Tutorial : MonoBehaviour
         {
             // Disable big instruction and resume time
             bigInstruction.SetActive(false);
+            mainHUD.SetActive(true);
             EventManagers.InvokeEvent("TutorialFinish");
             PlayerPrefs.SetInt("TutorialFinish", 1);
             GameManager.ResumeGame();
