@@ -68,12 +68,6 @@ public class LevelManager : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(ActivateTargets());
-    }
-
-    IEnumerator ActivateTargets()
-    {
-        yield return new WaitForSeconds(1);
         if (!isInTutorial && targetObjects.Count > 0)
         {
             foreach (TargetObject targetObject in targetObjects)

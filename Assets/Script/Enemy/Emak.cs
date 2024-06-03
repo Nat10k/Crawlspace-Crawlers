@@ -66,7 +66,7 @@ public class Emak : Enemy
             Rigidbody sandalBody = currSandal.GetComponent<Rigidbody>();
             sandalBody.constraints = RigidbodyConstraints.FreezeAll;
             anim.SetTrigger("Attack");
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(2.5f);
             currSandal.transform.SetParent(null);
             sandalBody.constraints = RigidbodyConstraints.None;
             sandalBody.velocity = (target.position - currSandal.transform.position).normalized * 5;

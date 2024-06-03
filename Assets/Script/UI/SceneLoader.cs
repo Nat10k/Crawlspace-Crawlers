@@ -24,6 +24,18 @@ public class SceneLoader : MonoBehaviour
             Destroy(loadingScreen);
             Destroy(gameObject);
         }
+
+        SceneManager.sceneLoaded += DeactivateLoadScreen;
+    }
+
+    private void OnDestroy()
+    {
+        SceneManager.sceneLoaded -= DeactivateLoadScreen;
+    }
+
+    private void DeactivateLoadScreen(Scene scene, LoadSceneMode mode)
+    {
+        loadingScreen.SetActive(false);
     }
 
     public IEnumerator LoadNewScene(string sceneName)
@@ -38,6 +50,5 @@ public class SceneLoader : MonoBehaviour
             currIdx %= loadSequence.Count;
             loadingImage.sprite = loadSequence[currIdx];
         }
-        loadingScreen.SetActive(false);
     }
 }

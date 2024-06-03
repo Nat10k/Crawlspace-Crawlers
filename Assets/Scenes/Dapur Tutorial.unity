@@ -280,6 +280,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: piring fix (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 6611920231719419545, guid: 9bfa6a734dbabfa49a36ce66dc469dba, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -452,6 +456,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: piring fix (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 6611920231719419545, guid: 9bfa6a734dbabfa49a36ce66dc469dba, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -597,6 +605,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: bumbu (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 9167092631931417883, guid: 911195126d1f1c3428b82832a40fe0a4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -658,6 +670,10 @@ PrefabInstance:
     - target: {fileID: 9167092631931417883, guid: 911195126d1f1c3428b82832a40fe0a4, type: 3}
       propertyPath: m_Name
       value: bumbu
+      objectReference: {fileID: 0}
+    - target: {fileID: 9167092631931417883, guid: 911195126d1f1c3428b82832a40fe0a4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1111,6 +1127,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: piring fix (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 6611920231719419545, guid: 9bfa6a734dbabfa49a36ce66dc469dba, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1232,6 +1252,10 @@ PrefabInstance:
     - target: {fileID: 6611920231719419545, guid: 9bfa6a734dbabfa49a36ce66dc469dba, type: 3}
       propertyPath: m_Name
       value: piring fix (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6611920231719419545, guid: 9bfa6a734dbabfa49a36ce66dc469dba, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1434,6 +1458,10 @@ PrefabInstance:
     - target: {fileID: 6611920231719419545, guid: 9bfa6a734dbabfa49a36ce66dc469dba, type: 3}
       propertyPath: m_Name
       value: piring fix (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6611920231719419545, guid: 9bfa6a734dbabfa49a36ce66dc469dba, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2221,6 +2249,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: sendok (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 3990322134336118190, guid: fb8b5514519bd6d46b8b9383d3ac0969, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4359619866701246061, guid: fb8b5514519bd6d46b8b9383d3ac0969, type: 3}
       propertyPath: m_LocalPosition.x
       value: -7.769
@@ -2282,6 +2314,10 @@ PrefabInstance:
     - target: {fileID: 6380728548665795587, guid: 62f8e8cc4f8cd9846884a70507acdc81, type: 3}
       propertyPath: m_Name
       value: garpu (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6380728548665795587, guid: 62f8e8cc4f8cd9846884a70507acdc81, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7981660109388039924, guid: 62f8e8cc4f8cd9846884a70507acdc81, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2781,6 +2817,10 @@ PrefabInstance:
     - target: {fileID: 7182584190314412172, guid: 5d4549a4788a31d4a845de169be80b66, type: 3}
       propertyPath: m_Name
       value: pisau (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7182584190314412172, guid: 5d4549a4788a31d4a845de169be80b66, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3419,6 +3459,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: pisau (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 7182584190314412172, guid: 5d4549a4788a31d4a845de169be80b66, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3541,6 +3585,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: piring fix (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 6611920231719419545, guid: 9bfa6a734dbabfa49a36ce66dc469dba, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3562,6 +3610,10 @@ PrefabInstance:
     - target: {fileID: 3990322134336118190, guid: fb8b5514519bd6d46b8b9383d3ac0969, type: 3}
       propertyPath: m_Name
       value: sendok (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3990322134336118190, guid: fb8b5514519bd6d46b8b9383d3ac0969, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4359619866701246061, guid: fb8b5514519bd6d46b8b9383d3ac0969, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3833,6 +3885,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: piring fix (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 6611920231719419545, guid: 9bfa6a734dbabfa49a36ce66dc469dba, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3894,6 +3950,10 @@ PrefabInstance:
     - target: {fileID: 7182584190314412172, guid: 5d4549a4788a31d4a845de169be80b66, type: 3}
       propertyPath: m_Name
       value: pisau
+      objectReference: {fileID: 0}
+    - target: {fileID: 7182584190314412172, guid: 5d4549a4788a31d4a845de169be80b66, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4506,6 +4566,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: piring fix (10)
       objectReference: {fileID: 0}
+    - target: {fileID: 6611920231719419545, guid: 9bfa6a734dbabfa49a36ce66dc469dba, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4790,6 +4854,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: garpu (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 6380728548665795587, guid: 62f8e8cc4f8cd9846884a70507acdc81, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7981660109388039924, guid: 62f8e8cc4f8cd9846884a70507acdc81, type: 3}
       propertyPath: m_LocalPosition.x
       value: -20.57
@@ -4851,6 +4919,10 @@ PrefabInstance:
     - target: {fileID: 3990322134336118190, guid: fb8b5514519bd6d46b8b9383d3ac0969, type: 3}
       propertyPath: m_Name
       value: sendok (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3990322134336118190, guid: fb8b5514519bd6d46b8b9383d3ac0969, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4359619866701246061, guid: fb8b5514519bd6d46b8b9383d3ac0969, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5289,6 +5361,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: piring fix (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 6611920231719419545, guid: 9bfa6a734dbabfa49a36ce66dc469dba, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5529,6 +5605,10 @@ PrefabInstance:
     - target: {fileID: 9167092631931417883, guid: 911195126d1f1c3428b82832a40fe0a4, type: 3}
       propertyPath: m_Name
       value: bumbu (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9167092631931417883, guid: 911195126d1f1c3428b82832a40fe0a4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6922,6 +7002,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: garpu (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 6380728548665795587, guid: 62f8e8cc4f8cd9846884a70507acdc81, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7981660109388039924, guid: 62f8e8cc4f8cd9846884a70507acdc81, type: 3}
       propertyPath: m_LocalPosition.x
       value: -24.368
@@ -7191,6 +7275,10 @@ PrefabInstance:
     - target: {fileID: 6380728548665795587, guid: 62f8e8cc4f8cd9846884a70507acdc81, type: 3}
       propertyPath: m_Name
       value: garpu
+      objectReference: {fileID: 0}
+    - target: {fileID: 6380728548665795587, guid: 62f8e8cc4f8cd9846884a70507acdc81, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7981660109388039924, guid: 62f8e8cc4f8cd9846884a70507acdc81, type: 3}
       propertyPath: m_LocalPosition.x
@@ -7848,6 +7936,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: bumbu (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 9167092631931417883, guid: 911195126d1f1c3428b82832a40fe0a4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7909,6 +8001,10 @@ PrefabInstance:
     - target: {fileID: 7182584190314412172, guid: 5d4549a4788a31d4a845de169be80b66, type: 3}
       propertyPath: m_Name
       value: pisau (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7182584190314412172, guid: 5d4549a4788a31d4a845de169be80b66, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8245,6 +8341,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: pisau (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 7182584190314412172, guid: 5d4549a4788a31d4a845de169be80b66, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8306,6 +8406,10 @@ PrefabInstance:
     - target: {fileID: 9167092631931417883, guid: 911195126d1f1c3428b82832a40fe0a4, type: 3}
       propertyPath: m_Name
       value: bumbu (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9167092631931417883, guid: 911195126d1f1c3428b82832a40fe0a4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8435,6 +8539,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: garpu (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 6380728548665795587, guid: 62f8e8cc4f8cd9846884a70507acdc81, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7981660109388039924, guid: 62f8e8cc4f8cd9846884a70507acdc81, type: 3}
       propertyPath: m_LocalPosition.x
       value: -24.368
@@ -8496,6 +8604,10 @@ PrefabInstance:
     - target: {fileID: 3990322134336118190, guid: fb8b5514519bd6d46b8b9383d3ac0969, type: 3}
       propertyPath: m_Name
       value: sendok (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3990322134336118190, guid: fb8b5514519bd6d46b8b9383d3ac0969, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4359619866701246061, guid: fb8b5514519bd6d46b8b9383d3ac0969, type: 3}
       propertyPath: m_LocalPosition.x
@@ -9064,6 +9176,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: bumbu (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 9167092631931417883, guid: 911195126d1f1c3428b82832a40fe0a4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -9310,6 +9426,10 @@ PrefabInstance:
     - target: {fileID: 7182584190314412172, guid: 5d4549a4788a31d4a845de169be80b66, type: 3}
       propertyPath: m_Name
       value: pisau (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7182584190314412172, guid: 5d4549a4788a31d4a845de169be80b66, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -10304,6 +10424,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: garpu (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 6380728548665795587, guid: 62f8e8cc4f8cd9846884a70507acdc81, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7981660109388039924, guid: 62f8e8cc4f8cd9846884a70507acdc81, type: 3}
       propertyPath: m_LocalPosition.x
       value: -6.421
@@ -10779,6 +10903,10 @@ PrefabInstance:
     - target: {fileID: 6611920231719419545, guid: 9bfa6a734dbabfa49a36ce66dc469dba, type: 3}
       propertyPath: m_Name
       value: piring fix
+      objectReference: {fileID: 0}
+    - target: {fileID: 6611920231719419545, guid: 9bfa6a734dbabfa49a36ce66dc469dba, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -11463,6 +11591,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: piring fix (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 6611920231719419545, guid: 9bfa6a734dbabfa49a36ce66dc469dba, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -11524,6 +11656,10 @@ PrefabInstance:
     - target: {fileID: 9167092631931417883, guid: 911195126d1f1c3428b82832a40fe0a4, type: 3}
       propertyPath: m_Name
       value: bumbu (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9167092631931417883, guid: 911195126d1f1c3428b82832a40fe0a4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -12253,6 +12389,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: bumbu (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 9167092631931417883, guid: 911195126d1f1c3428b82832a40fe0a4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -12419,6 +12559,10 @@ PrefabInstance:
     - target: {fileID: 9167092631931417883, guid: 911195126d1f1c3428b82832a40fe0a4, type: 3}
       propertyPath: m_Name
       value: bumbu (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9167092631931417883, guid: 911195126d1f1c3428b82832a40fe0a4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -12970,6 +13114,10 @@ PrefabInstance:
     - target: {fileID: 3990322134336118190, guid: fb8b5514519bd6d46b8b9383d3ac0969, type: 3}
       propertyPath: m_Name
       value: sendok
+      objectReference: {fileID: 0}
+    - target: {fileID: 3990322134336118190, guid: fb8b5514519bd6d46b8b9383d3ac0969, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4359619866701246061, guid: fb8b5514519bd6d46b8b9383d3ac0969, type: 3}
       propertyPath: m_LocalPosition.x
@@ -13604,6 +13752,10 @@ PrefabInstance:
     - target: {fileID: 3990322134336118190, guid: fb8b5514519bd6d46b8b9383d3ac0969, type: 3}
       propertyPath: m_Name
       value: sendok (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3990322134336118190, guid: fb8b5514519bd6d46b8b9383d3ac0969, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4359619866701246061, guid: fb8b5514519bd6d46b8b9383d3ac0969, type: 3}
       propertyPath: m_LocalPosition.x
