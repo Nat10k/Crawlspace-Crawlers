@@ -285,7 +285,7 @@ public class CicakMovement : MonoBehaviour
             {
                 gravityDir = Vector3.down;
             }
-            isGrounded = false;
+            isGrounded = !Physics.SphereCast(transform.position, 3, -transform.up, out hit, wallDetectDist + 2);
         }
         //else if (Physics.SphereCast(transform.position, 3, -transform.up, out hit, 10) 
         //    && (hit.collider.CompareTag("Wall") || hit.collider.CompareTag("Floor")))

@@ -123,10 +123,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cicak: {fileID: 0}
   tail: {fileID: 0}
-  detectRange: 15
+  detectRange: 25
   stopDistance: 0
   target: {fileID: 0}
   agent: {fileID: 0}
+  trigger: {fileID: 0}
   cicakVisible: 0
   sandal: {fileID: 7998690324726398476, guid: 11da8759f71012248a751af617452bad, type: 3}
   patrolPos:
