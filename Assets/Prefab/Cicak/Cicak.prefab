@@ -325,7 +325,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70b342d8ce5c2fd48b8fa3147d48d1d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Weight: 0.5
+  m_Weight: 0.6
   m_Effectors: []
 --- !u!1 &835290867970512719
 GameObject:
@@ -2296,6 +2296,7 @@ MonoBehaviour:
   spine: {fileID: 695485544638777188}
   cicakMaterial: {fileID: 2100000, guid: ba377fe24cd1ec745b01f229652ce07f, type: 2}
   trigger: {fileID: 5834795706153591028}
+  tailTrigger: {fileID: 0}
 --- !u!54 &3163797355454820540
 Rigidbody:
   m_ObjectHideFlags: 0

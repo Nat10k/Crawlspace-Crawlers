@@ -5,6 +5,7 @@ public class TargetObject : MonoBehaviour
 {
     Outline outline;
     ParticleSystem particleSystem;
+    Rigidbody rb;
     Animator animator;
 
     private void Awake()
@@ -12,6 +13,7 @@ public class TargetObject : MonoBehaviour
         outline = GetComponent<Outline>();
         animator = GetComponent<Animator>();
         particleSystem = GetComponentInChildren<ParticleSystem>();
+        rb = GetComponent<Rigidbody>();
 
         outline.enabled = false;
         particleSystem.enableEmission = false;
@@ -37,6 +39,25 @@ public class TargetObject : MonoBehaviour
     public void DestroyObject()
     {
         Destroy(gameObject);
+    }
+
+    public void Shrink()
+    {
+        StartCoroutine(StartShrink());
+    }
+
+    private IEnumerator StartShrink()
+    {
+        float timer = 0;
+        float initMagnitude = Mathf.Max(transform.localScale.x, transform.localScale.y, transform.localScale.z);
+        rb.isKinematic = true;
+        while (timer < 1)
+        {
+            timer += Time.deltaTime;
+            transform.Rotate(Vector3.down, 30);
+            transform.localScale = Vector3.MoveTowards(transform.localScale, Vector3.zero, initMagnitude/10);
+            yield return null;
+        }
     }
 
     IEnumerator Blink()

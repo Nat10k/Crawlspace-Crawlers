@@ -14,7 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Dapur.unity
     guid: 7e53ffd7e3d213b4ebd618d4201cb1e7
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Toilet.unity
     guid: 6d3deb871155c3348ad77b2e386a8fc8
   - enabled: 1

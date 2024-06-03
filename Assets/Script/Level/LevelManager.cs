@@ -21,7 +21,7 @@ public class LevelManager : MonoBehaviour
     const int objScoreMult = 100, livesLostMult = 200;
     float timer;
     bool stopTimer;
-    const float maxTime = 90f, timeAddition = 5f;
+    const float maxTime = 60f, timeAddition = 5f;
     Listener finishListener, overListener, collectObjListener, tutorialFinishListener, damagedListener;
     private void Awake()
     {

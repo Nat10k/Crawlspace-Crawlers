@@ -123,7 +123,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cicak: {fileID: 0}
   tail: {fileID: 0}
-  detectRange: 25
+  detectRange: 20
   stopDistance: 0
   target: {fileID: 0}
   agent: {fileID: 0}
