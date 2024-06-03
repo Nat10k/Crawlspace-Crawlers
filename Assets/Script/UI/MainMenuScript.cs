@@ -4,19 +4,22 @@ using UnityEngine.SceneManagement;
 public class MainMenuScript : MonoBehaviour
 {
     bool isInTutorial;
+    SceneLoader loader;
+
     private void Awake()
     {
         isInTutorial = !PlayerPrefs.HasKey("TutorialFinish");
+        loader = GameObject.Find("SceneLoader").GetComponent<SceneLoader>();
     }
 
     public void Play()
     {
         if (isInTutorial)
         {
-            SceneManager.LoadSceneAsync("Toilet Tutorial");
+            StartCoroutine(loader.LoadNewScene("Toilet Tutorial"));
         } else
         {
-            SceneManager.LoadSceneAsync("Dapur");
+            StartCoroutine(loader.LoadNewScene("Dapur"));
         }
     }
 

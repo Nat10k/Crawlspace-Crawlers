@@ -68,6 +68,12 @@ public class LevelManager : MonoBehaviour
 
     private void Start()
     {
+        StartCoroutine(ActivateTargets());
+    }
+
+    IEnumerator ActivateTargets()
+    {
+        yield return new WaitForSeconds(1);
         if (!isInTutorial && targetObjects.Count > 0)
         {
             foreach (TargetObject targetObject in targetObjects)
@@ -174,12 +180,14 @@ public class LevelManager : MonoBehaviour
 
     public void BackToMain()
     {
-        SceneManager.LoadScene(0);
+        SceneLoader loader = GameObject.Find("SceneLoader").GetComponent<SceneLoader>();
+        StartCoroutine(loader.LoadNewScene("MainMenu"));
     }
 
     public void ToNextTutorial()
     {
-        SceneManager.LoadScene("Dapur Tutorial");
+        SceneLoader loader = GameObject.Find("SceneLoader").GetComponent<SceneLoader>();
+        StartCoroutine(loader.LoadNewScene("Dapur Tutorial"));
     }
 
     private void Update()
