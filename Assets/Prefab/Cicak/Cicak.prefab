@@ -1607,7 +1607,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3c430f382484144e925c097c2d33cfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Weight: 1
+  m_Weight: 0.4
   m_Data:
     m_ConstrainedObject: {fileID: 4114881521055977663}
     m_SourceObjects:
@@ -1648,7 +1648,7 @@ MonoBehaviour:
     m_ConstrainedAxes:
       x: 1
       y: 1
-      z: 0
+      z: 1
 --- !u!1 &5933373989192345089
 GameObject:
   m_ObjectHideFlags: 0
@@ -2288,6 +2288,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 374bda0e607ade8409ed78f80c98e21b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isNearSurface: 0
   canMove: 0
   tongue: {fileID: 1158339864660306948}
   tailObj: {fileID: 4186250155010230149}

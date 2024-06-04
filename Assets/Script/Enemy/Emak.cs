@@ -10,6 +10,8 @@ public class Emak : Enemy
     Animator anim;
     private Coroutine shootSandal;
     public int currPatrolIdx;
+    private GameObject currSandal;
+    private Rigidbody sandalBody;
 
     private void Start()
     {
@@ -61,19 +63,27 @@ public class Emak : Enemy
         yield return new WaitForSeconds(3);
         while (true)
         {
-            GameObject currSandal = Instantiate(sandal, sandalSpawn.position, Quaternion.identity);
+            currSandal = Instantiate(sandal, sandalSpawn.position, Quaternion.identity);
             currSandal.transform.SetParent(sandalSpawn);
-            Rigidbody sandalBody = currSandal.GetComponent<Rigidbody>();
+            sandalBody = currSandal.GetComponent<Rigidbody>();
             sandalBody.constraints = RigidbodyConstraints.FreezeAll;
             anim.SetTrigger("Attack");
-            yield return new WaitForSeconds(2.5f);
-            currSandal.transform.SetParent(null);
-            sandalBody.constraints = RigidbodyConstraints.None;
-            sandalBody.velocity = (target.position - currSandal.transform.position).normalized * 5;
-            sandalBody.angularVelocity = sandalBody.transform.forward * 5;
-            yield return new WaitForSeconds(0.5f);
-            sandalBody.velocity += (target.position - currSandal.transform.position).normalized * 8;
-            yield return new WaitForSeconds(6);
+            yield return new WaitForSeconds(9);
         }
+    }
+
+    IEnumerator DetachSandal()
+    {
+        currSandal.transform.SetParent(null);
+        sandalBody.constraints = RigidbodyConstraints.None;
+        sandalBody.velocity = (target.position - currSandal.transform.position).normalized * 5;
+        sandalBody.angularVelocity = sandalBody.transform.forward * 5;
+        yield return new WaitForSeconds(0.5f);
+        sandalBody.velocity += (target.position - currSandal.transform.position).normalized * 8;
+    }
+
+    public void ThrowSandal()
+    {
+        StartCoroutine(DetachSandal());
     }
 }
