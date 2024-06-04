@@ -3,12 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class LevelManager : MonoBehaviour
 {
-    [SerializeField] GameObject levelFinishedCanvas, gameOverCanvas, statsCanvas;
+    [SerializeField] GameObject levelFinishedCanvas, gameOverCanvas, statsCanvas, pauseCanvas;
     [SerializeField] Slider timerSlider;
     [SerializeField] List<Color> sliderColors;
     [SerializeField] Image timerSliderFill;
@@ -23,6 +24,9 @@ public class LevelManager : MonoBehaviour
     bool stopTimer;
     const float maxTime = 60f, timeAddition = 5f;
     Listener finishListener, overListener, collectObjListener, tutorialFinishListener, damagedListener;
+
+    InputAction pause;
+
     private void Awake()
     {
         // Register listeners
@@ -64,6 +68,21 @@ public class LevelManager : MonoBehaviour
             stopTimer = true;
             timerSlider.gameObject.SetActive(false);
         }
+
+        // Setup pause button
+        pause = InputHandler.inputs.Player.Pause;
+    }
+
+    private void OnEnable()
+    {
+        pause.performed += Pause;
+        pause.Enable();
+    }
+
+    private void OnDisable()
+    {
+        pause.performed -= Pause;
+        pause.Disable();
     }
 
     private void Start()
@@ -182,6 +201,23 @@ public class LevelManager : MonoBehaviour
     {
         SceneLoader loader = GameObject.Find("SceneLoader").GetComponent<SceneLoader>();
         StartCoroutine(loader.LoadNewScene("Dapur Tutorial"));
+    }
+
+    public void Pause(InputAction.CallbackContext ctx)
+    {
+        if (GameManager.isPaused)
+        {
+            Resume();
+            return;
+        }
+        GameManager.PauseGame();
+        pauseCanvas.SetActive(true);
+    }
+
+    public void Resume()
+    {
+        GameManager.ResumeGame();
+        pauseCanvas.SetActive(false);
     }
 
     private void Update()
