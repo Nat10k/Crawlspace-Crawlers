@@ -536,10 +536,6 @@ PrefabInstance:
       propertyPath: m_MinValue
       value: 0.001
       objectReference: {fileID: 0}
-    - target: {fileID: 1103426181321290635, guid: b40eb086cbed8a34cb27802dcaa1b5c9, type: 3}
-      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 1638992259311120881, guid: b40eb086cbed8a34cb27802dcaa1b5c9, type: 3}
       propertyPath: m_SizeDelta.x
       value: 112.119
