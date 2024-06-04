@@ -9,6 +9,7 @@ public class CicakHealth : MonoBehaviour
     private const float InvulnerabilityPeriod = 3f, joltSpeed = 7f; // Invulnerability in seconds
     [SerializeField] private Material cicakMaterial;
     [SerializeField] private Transform model;
+    [SerializeField] private AudioSource collectSound;
     CicakMovement cm;
     [SerializeField] private Color[] invulColors;
     Rigidbody rb;
@@ -81,6 +82,8 @@ public class CicakHealth : MonoBehaviour
             colRb.isKinematic = true;
             colRb.useGravity = false;
             collision.gameObject.GetComponent<TargetObject>().Collect();
+            collectSound.pitch = Random.Range(1, 2);
+            collectSound.Play();
             EventManagers.InvokeEvent("CollectObj");
         } else if (collision.collider.CompareTag("Enemy") && !isInvulnerable)
         {
