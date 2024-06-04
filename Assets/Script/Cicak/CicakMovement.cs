@@ -8,7 +8,8 @@ public class CicakMovement : MonoBehaviour
     Rigidbody rb;
     const float lookSpeed = 1f, gravityForce = 15f, wallDetectDist = 0.2f, baseMoveSpeed = 2f, climbAngle = 50f;
     float moveSpeed = 2f, tailCooldown = 25f, scaleSpeed;
-    bool justClimbed, hasTail, isGrounded, isNearSurface, justHit, justTongue;
+    bool justClimbed, hasTail, isGrounded, justHit, justTongue;
+    public bool isNearSurface;
     [HideInInspector] public bool canMove;
     [SerializeField] Tongue tongue;
     [SerializeField] Transform tailObj, tailParent, headBone, spine;
@@ -248,7 +249,7 @@ public class CicakMovement : MonoBehaviour
                 }
             }
             transform.Rotate(new Vector3(0, look.ReadValue<Vector2>().x * lookSpeed, 0));
-            if (tongue.GetHitWall() || !isGrounded)
+            if (tongue.GetHitWall() || !isNearSurface)
             {
                 rb.velocity += transform.forward * moveInput.y + transform.right * moveInput.x;
             }
@@ -356,12 +357,14 @@ public class CicakMovement : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        isNearSurface = true;
+        if (other.CompareTag("Wall") || other.CompareTag("Floor"))
+            isNearSurface = true;
     }
 
     private void OnTriggerExit(Collider other)
     {
-        isNearSurface = false;
+        if (other.CompareTag("Wall") || other.CompareTag("Floor"))
+            isNearSurface = false;
     }
 
     private void OnCollisionEnter(Collision collision)
