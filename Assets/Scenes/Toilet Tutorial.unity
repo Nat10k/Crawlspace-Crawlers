@@ -1274,6 +1274,15 @@ PrefabInstance:
       propertyPath: targets.Array.data[7]
       value: 
       objectReference: {fileID: 822383128}
+    - target: {fileID: 1257950055061429389, guid: b186520dd8396e2409e9ab50ee614011, type: 3}
+      propertyPath: instructions.Array.data[0]
+      value: Halo ! Selamat datang di Crawlspace Crawlers.
+      objectReference: {fileID: 0}
+    - target: {fileID: 1257950055061429389, guid: b186520dd8396e2409e9ab50ee614011, type: 3}
+      propertyPath: instructions.Array.data[1]
+      value: Kamu adalah seekor cicak alien yang bertugas menyiapkan markas di bumi.
+        Sekarang, kamu akan mempelajari cara mengendalikan cicak alien.
+      objectReference: {fileID: 0}
     - target: {fileID: 8401348009452148984, guid: b186520dd8396e2409e9ab50ee614011, type: 3}
       propertyPath: m_Name
       value: Tutorial
