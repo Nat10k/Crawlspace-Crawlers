@@ -40,6 +40,7 @@ public class SceneLoader : MonoBehaviour
 
     public IEnumerator LoadNewScene(string sceneName)
     {
+        Time.timeScale = 1;
         AsyncOperation sceneLoad = SceneManager.LoadSceneAsync(sceneName);
         loadingScreen.SetActive(true);
         int currIdx = 0;
