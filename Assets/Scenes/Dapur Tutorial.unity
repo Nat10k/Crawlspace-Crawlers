@@ -920,7 +920,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 265543393}
-  - component: {fileID: 265543394}
   m_Layer: 3
   m_Name: Hinge bawah 1
   m_TagString: Wall
@@ -944,33 +943,6 @@ Transform:
   - {fileID: 1623834422}
   m_Father: {fileID: 454658451}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!54 &265543394
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 265543392}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 126
-  m_CollisionDetection: 0
 --- !u!1001 &277208059
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2981,7 +2953,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 603411571}
-  - component: {fileID: 603411572}
   m_Layer: 3
   m_Name: Hinge atas 1
   m_TagString: Wall
@@ -3005,33 +2976,6 @@ Transform:
   - {fileID: 1036244639}
   m_Father: {fileID: 454658451}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!54 &603411572
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 603411570}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 126
-  m_CollisionDetection: 0
 --- !u!114 &605024922 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4912738119455412331, guid: 9180ea23dea938f41baeec94050a3c20, type: 3}
@@ -3118,7 +3062,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 661469416}
-  - component: {fileID: 661469417}
   m_Layer: 3
   m_Name: Hinge kiri
   m_TagString: Wall
@@ -3142,33 +3085,6 @@ Transform:
   - {fileID: 1210831819}
   m_Father: {fileID: 1590679935}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!54 &661469417
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 661469415}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 126
-  m_CollisionDetection: 0
 --- !u!1001 &667050642
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6789,7 +6705,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1177811146}
-  - component: {fileID: 1177811147}
   m_Layer: 3
   m_Name: Hinge bawah 3
   m_TagString: Wall
@@ -6813,33 +6728,6 @@ Transform:
   - {fileID: 1203520758}
   m_Father: {fileID: 454658451}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!54 &1177811147
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1177811145}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 126
-  m_CollisionDetection: 0
 --- !u!1001 &1198392387
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7343,8 +7231,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1231290590}
-  - component: {fileID: 1231290591}
-  - component: {fileID: 1231290592}
   m_Layer: 3
   m_Name: Hinge kanan 02
   m_TagString: Wall
@@ -7368,48 +7254,6 @@ Transform:
   - {fileID: 1678107387}
   m_Father: {fileID: 547392835}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!54 &1231290591
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1231290589}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 62
-  m_CollisionDetection: 0
---- !u!138 &1231290592
-FixedJoint:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1231290589}
-  m_ConnectedBody: {fileID: 0}
-  m_ConnectedArticulationBody: {fileID: 0}
-  m_BreakForce: Infinity
-  m_BreakTorque: Infinity
-  m_EnableCollision: 0
-  m_EnablePreprocessing: 1
-  m_MassScale: 1
-  m_ConnectedMassScale: 1
 --- !u!1 &1241831213
 GameObject:
   m_ObjectHideFlags: 0
@@ -7419,8 +7263,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1241831214}
-  - component: {fileID: 1241831215}
-  - component: {fileID: 1241831216}
   m_Layer: 3
   m_Name: Hinge kiri 02
   m_TagString: Wall
@@ -7444,48 +7286,6 @@ Transform:
   - {fileID: 1228420903}
   m_Father: {fileID: 547392835}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!54 &1241831215
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1241831213}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 62
-  m_CollisionDetection: 0
---- !u!138 &1241831216
-FixedJoint:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1241831213}
-  m_ConnectedBody: {fileID: 0}
-  m_ConnectedArticulationBody: {fileID: 0}
-  m_BreakForce: Infinity
-  m_BreakTorque: Infinity
-  m_EnableCollision: 0
-  m_EnablePreprocessing: 1
-  m_MassScale: 1
-  m_ConnectedMassScale: 1
 --- !u!1001 &1297782743
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8323,7 +8123,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1446459477}
-  - component: {fileID: 1446459478}
   m_Layer: 3
   m_Name: Hinge atas 2
   m_TagString: Wall
@@ -8347,33 +8146,6 @@ Transform:
   - {fileID: 1489667109}
   m_Father: {fileID: 454658451}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!54 &1446459478
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1446459476}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 126
-  m_CollisionDetection: 0
 --- !u!1 &1489667108
 GameObject:
   m_ObjectHideFlags: 0
@@ -10376,7 +10148,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1698109769}
-  - component: {fileID: 1698109770}
   m_Layer: 3
   m_Name: Hinge kanan
   m_TagString: Wall
@@ -10400,33 +10171,6 @@ Transform:
   - {fileID: 863725019}
   m_Father: {fileID: 1590679935}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!54 &1698109770
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1698109768}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 126
-  m_CollisionDetection: 0
 --- !u!1 &1717936144
 GameObject:
   m_ObjectHideFlags: 0
@@ -11509,7 +11253,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1815018801}
-  - component: {fileID: 1815018802}
   m_Layer: 3
   m_Name: Hinge atas 3
   m_TagString: Wall
@@ -11533,33 +11276,6 @@ Transform:
   - {fileID: 1969447723}
   m_Father: {fileID: 454658451}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!54 &1815018802
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1815018800}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 126
-  m_CollisionDetection: 0
 --- !u!1 &1846701161
 GameObject:
   m_ObjectHideFlags: 0
@@ -12983,7 +12699,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2048598135}
-  - component: {fileID: 2048598136}
   m_Layer: 3
   m_Name: Hinge bawah 2
   m_TagString: Wall
@@ -13007,33 +12722,6 @@ Transform:
   - {fileID: 1640465924}
   m_Father: {fileID: 454658451}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!54 &2048598136
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2048598134}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 126
-  m_CollisionDetection: 0
 --- !u!1 &2061583790
 GameObject:
   m_ObjectHideFlags: 0
