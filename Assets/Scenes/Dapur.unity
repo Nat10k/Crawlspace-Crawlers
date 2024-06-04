@@ -172,7 +172,7 @@ GameObject:
   - component: {fileID: 25579587}
   m_Layer: 3
   m_Name: 03 pintu kiri
-  m_TagString: Movable
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1012,7 +1012,7 @@ GameObject:
   - component: {fileID: 92625249}
   m_Layer: 3
   m_Name: 02 rak 3
-  m_TagString: Movable
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1246,7 +1246,7 @@ GameObject:
   - component: {fileID: 92973845}
   m_Layer: 3
   m_Name: 02 rak 1
-  m_TagString: Movable
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9809,7 +9809,7 @@ GameObject:
   - component: {fileID: 1746654879}
   m_Layer: 3
   m_Name: 02 rak 2
-  m_TagString: Movable
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10918,7 +10918,7 @@ GameObject:
   - component: {fileID: 1883488345}
   m_Layer: 3
   m_Name: 02 rak 2
-  m_TagString: Movable
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11152,7 +11152,7 @@ GameObject:
   - component: {fileID: 1898928832}
   m_Layer: 3
   m_Name: 02 rak 3
-  m_TagString: Movable
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12288,7 +12288,7 @@ GameObject:
   - component: {fileID: 2066606151}
   m_Layer: 3
   m_Name: 03 pintu kanan
-  m_TagString: Movable
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12486,7 +12486,7 @@ GameObject:
   - component: {fileID: 2096728984}
   m_Layer: 3
   m_Name: 02 rak 1
-  m_TagString: Movable
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
