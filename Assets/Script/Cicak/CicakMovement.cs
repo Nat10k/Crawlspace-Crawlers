@@ -15,6 +15,7 @@ public class CicakMovement : MonoBehaviour
     [SerializeField] Transform tailObj, tailParent, headBone, spine;
     [SerializeField] Material cicakMaterial;
     [SerializeField] TutorialTrigger trigger, tailTrigger;
+    [SerializeField] AudioSource tongueSound;
     CicakCam cicakCam;
     Coroutine tongueFire, rotateAnim, tailScaleAnim;
     Vector3 gravityDir, initTailPos, initTailScale;
@@ -163,7 +164,11 @@ public class CicakMovement : MonoBehaviour
 
     private void ShootTongue(InputAction.CallbackContext ctx)
     {
-        tongueFire = StartCoroutine(tongue.ShootTongue());
+        if (!GameManager.isPaused)
+        {
+            tongueSound.Play();
+            tongueFire = StartCoroutine(tongue.ShootTongue());
+        }
     }
 
     private void ReleaseTongue(InputAction.CallbackContext ctx)
