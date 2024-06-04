@@ -218,6 +218,7 @@ public class LevelManager : MonoBehaviour
     {
         GameManager.ResumeGame();
         pauseCanvas.SetActive(false);
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     private void Update()
