@@ -5984,6 +5984,7 @@ GameObject:
   - component: {fileID: 1097699286}
   - component: {fileID: 1097699283}
   - component: {fileID: 1097699282}
+  - component: {fileID: 1097699288}
   m_Layer: 3
   m_Name: 03 pintu kiri
   m_TagString: Movable
@@ -6025,8 +6026,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.009101741, y: 0.0015336075, z: 0.018333124}
-  m_Center: {x: -0.0045508747, y: -0.000371177, z: -1.5400836e-10}
+  m_Size: {x: 0.009101742, y: 0.0010001484, z: 0.018333124}
+  m_Center: {x: -0.0045508766, y: -0.00010444753, z: 9.069948e-11}
 --- !u!114 &1097699283
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6089,6 +6090,27 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1097699280}
   m_Mesh: {fileID: 8812879187251833664, guid: 15ef854c3eadfd0418a265a34f511db9, type: 3}
+--- !u!65 &1097699288
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1097699280}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.0005914172, y: 0.0015336076, z: 0.0038912408}
+  m_Center: {x: -0.0073607406, y: -0.0003711763, z: 0.0059372354}
 --- !u!1 &1111252675
 GameObject:
   m_ObjectHideFlags: 0
@@ -7226,6 +7248,7 @@ GameObject:
   - component: {fileID: 1228420909}
   - component: {fileID: 1228420908}
   - component: {fileID: 1228420904}
+  - component: {fileID: 1228420910}
   m_Layer: 3
   m_Name: 02 pintu kiri
   m_TagString: Wall
@@ -7267,7 +7290,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.009101743, y: 0.0015336078, z: 0.018333124}
+  m_Size: {x: 0.009101742, y: 0.0010001484, z: 0.018333124}
   m_Center: {x: -0.0045508714, y: -0.00037117334, z: -1.5815621e-10}
 --- !u!23 &1228420908
 MeshRenderer:
@@ -7319,6 +7342,27 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1228420902}
   m_Mesh: {fileID: 109960987280194354, guid: 15ef854c3eadfd0418a265a34f511db9, type: 3}
+--- !u!65 &1228420910
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1228420902}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.0005914172, y: 0.0015336076, z: 0.0038912408}
+  m_Center: {x: -0.0073607406, y: -0.0003711763, z: 0.0059372354}
 --- !u!1 &1231290589
 GameObject:
   m_ObjectHideFlags: 0
@@ -10143,6 +10187,7 @@ GameObject:
   - component: {fileID: 1678107393}
   - component: {fileID: 1678107392}
   - component: {fileID: 1678107388}
+  - component: {fileID: 1678107394}
   m_Layer: 3
   m_Name: 02 pintu kanan
   m_TagString: Wall
@@ -10184,7 +10229,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.009101743, y: 0.0015316001, z: 0.018333122}
+  m_Size: {x: 0.009101742, y: 0.0010001484, z: 0.018333124}
   m_Center: {x: 0.0044905986, y: -0.00056798774, z: -0.0000000022249673}
 --- !u!23 &1678107392
 MeshRenderer:
@@ -10236,6 +10281,27 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1678107386}
   m_Mesh: {fileID: -3311098508289283489, guid: 15ef854c3eadfd0418a265a34f511db9, type: 3}
+--- !u!65 &1678107394
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1678107386}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.00060163677, y: 0.0015316003, z: 0.0038645102}
+  m_Center: {x: 0.0072994255, y: -0.0005679875, z: 0.0059596132}
 --- !u!1 &1698109768
 GameObject:
   m_ObjectHideFlags: 0
@@ -10281,6 +10347,7 @@ GameObject:
   - component: {fileID: 1717936150}
   - component: {fileID: 1717936147}
   - component: {fileID: 1717936146}
+  - component: {fileID: 1717936152}
   m_Layer: 3
   m_Name: 03 pintu kanan
   m_TagString: Movable
@@ -10322,7 +10389,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.009101742, y: 0.0015316001, z: 0.018333122}
+  m_Size: {x: 0.009101742, y: 0.0010001484, z: 0.018333124}
   m_Center: {x: 0.004490597, y: -0.00056798407, z: -3.6269587e-10}
 --- !u!114 &1717936147
 MonoBehaviour:
@@ -10386,6 +10453,27 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1717936144}
   m_Mesh: {fileID: -5986682126146874123, guid: 15ef854c3eadfd0418a265a34f511db9, type: 3}
+--- !u!65 &1717936152
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1717936144}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.00060163677, y: 0.0015316003, z: 0.0038645102}
+  m_Center: {x: 0.0072994255, y: -0.0005679875, z: 0.0059596132}
 --- !u!1 &1718194358
 GameObject:
   m_ObjectHideFlags: 0
